@@ -362,7 +362,7 @@
                 [POSTS.length, "Edições no site"],
                 [GLOSSARIO.length, "Termos no glossário"],
                 [CATEGORIAS.length, "Categorias de tema"],
-                [CONFIG.livro.topicos.length, "Tópicos no livro"]
+                [PLATES.length, "Cianótipos no site"]
               ].map(([v, t], i) => `<li class="rv" style="--d:${i * 90}ms"><p class="stat-n" data-v="${v}">${reduce ? v : 0}</p><p class="stat-l">${esc(t)}</p></li>`).join("")}
             </ul>
           </div>
@@ -566,9 +566,9 @@
   function observeReveals() {
     if (io) io.disconnect();
     const els = [...app.querySelectorAll(".rv, .io"), ...document.querySelectorAll(".foot .io")].filter((el) => !el.closest(".hero") && !el.classList.contains("in"));
-    if (!("IntersectionObserver" in window) || reduce) { els.forEach((el) => el.classList.add("in")); return; }
+    if (!("IntersectionObserver" in window) || reduce) { els.forEach((el) => el.classList.add("in", "done")); return; }
     io = new IntersectionObserver(
-      (entries) => entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }),
+      (entries) => entries.forEach((en) => { if (en.isIntersecting) { const alvo = en.target; alvo.classList.add("in"); setTimeout(() => alvo.classList.add("done"), 1000); io.unobserve(alvo); } }),
       { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
     );
     els.forEach((el) => io.observe(el));
@@ -872,6 +872,15 @@
     toTop();
     initLenis();
   }
+
+  // tocar na aba em que você já está leva ao topo dela
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-tab]");
+    if (!a) return;
+    const alvo = a.getAttribute("href");
+    const atual = location.hash || "#/";
+    if (alvo === atual) { e.preventDefault(); toTop(); }
+  });
 
   /* ---------- roteador por hash ---------- */
   function route() {

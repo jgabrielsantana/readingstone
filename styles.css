@@ -126,7 +126,7 @@ html.lenis, html.lenis body { height: auto; }
 .clock-t { min-width: 3rem; font-variant-numeric: tabular-nums; font-weight: 500; }
 .clock-sep { color: var(--on-blue-soft); }
 .clock-d { font-weight: 500; }
-.menu-btn { border-radius: var(--r-control); background: rgba(20, 38, 74, 0.62); transition: background-color 200ms ease, transform 240ms var(--ease); }
+.menu-btn { border-radius: var(--r-control); background: rgba(244, 246, 250, 0.14); transition: background-color 200ms ease, transform 240ms var(--ease); }
 .menu-btn:active { transform: scale(0.97); }
 .menu-btn-in { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1rem; font-size: 1rem; font-weight: 500; }
 .menu-btn-in .ico { font-size: 1rem; }
@@ -134,7 +134,7 @@ html.lenis, html.lenis body { height: auto; }
 @media (hover: hover) and (pointer: fine) {
   .brand:hover .brand-in { transform: scale(1.04); }
   .nav a:hover, .nav button:hover { opacity: 1; transform: translateY(-0.125rem); }
-  .menu-btn:hover { background: rgba(20, 38, 74, 0.82); }
+  .menu-btn:hover { background: rgba(244, 246, 250, 0.26); }
 }
 
 /* ---------- entradas ---------- */
@@ -589,5 +589,8 @@ section.tab-body[id="livro-tab"] { padding-top: 2rem; }
 .tabrow a:active { transform: scale(0.97); }
 .tabrow a[aria-current="page"] { background: var(--bg); color: var(--fg); }
 @media (min-width: 1024px) { .tabrow { display: none; } }
-@media (max-width: 1023px) { .hero-grid { padding-top: 10rem; } .post-band { height: 22rem; } }
-@media (max-width: 1279px) { .clock { display: none; } }
+@media (max-width: 1023px) { .hero-grid { padding-top: 10rem; } }
+@media (min-width: 1024px) and (max-width: 1279px) { .clock-sep, .clock-d { display: none; } }
+
+/* depois de entrar, os elementos revelados passam a responder rápido ao hover */
+.js .rv.done { transition: transform 280ms var(--ease), background-color 200ms ease, opacity 200ms ease; transition-delay: 0s; }
