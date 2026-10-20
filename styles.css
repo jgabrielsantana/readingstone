@@ -312,3 +312,28 @@ main:focus { outline: none; }
 @media (max-width: 720px) { .mast > :nth-child(4) { display: none; } .mast > .mast-def { grid-column: 1 / -1; } }
 @media (max-width: 860px) { .cover { width: min(100%, 240px); } .side-list, .back { display: none; } .post-meta { display: block; } }
 .list-head .lead { margin-top: 12px; }
+
+/* ---------- computador: a zona do eixo ganha imagem e o hero vira duas colunas ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--m); padding-right: var(--m); min-height: calc(100svh - 72px); }
+.hero-art { display: flex; flex-direction: column; min-height: 0; background: var(--blue); }
+.hero-plate { position: relative; flex: 1 1 0; min-height: 280px; overflow: hidden; background: var(--blue); }
+.hero-plate img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: luminosity; animation: drift 26s ease-in-out infinite alternate; }
+.hero-def { background: var(--blue); color: var(--on-blue); padding: clamp(18px, 2vw, 32px); font-size: var(--step-small); line-height: 1.4; }
+.hero-def p { max-width: 34ch; }
+.hero-def strong { display: block; font-size: var(--step-lead); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 6px; }
+.hero-copy { display: flex; flex-direction: column; justify-content: center; padding-block: clamp(32px, 5vw, 72px); min-width: 0; }
+.axis > .side.has-plate { max-width: none; padding-top: 0; }
+.side-plate { position: sticky; top: 92px; margin: 0; }
+.plate-box { background: var(--blue); overflow: hidden; isolation: isolate; }
+.side-plate img { width: 100%; aspect-ratio: var(--ratio, 5 / 6); max-height: calc(100svh - 190px); object-fit: cover; mix-blend-mode: luminosity; }
+.side-plate figcaption { margin-top: 10px; font-size: var(--step-small); color: var(--ink-soft); }
+.post-side { position: sticky; top: 92px; align-self: start; }
+.post-side .side-plate { position: static; margin-top: 28px; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; padding-right: 0; min-height: 0; }
+  .hero-plate { flex: none; height: 160px; min-height: 0; }
+  .hero-copy { padding: clamp(28px, 6vw, 48px) var(--m); }
+  .side-plate { display: none; }
+  .post-side { position: static; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-plate img { animation: none; } }

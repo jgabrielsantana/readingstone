@@ -18,15 +18,20 @@
 
   // Cianótipos de Anna Atkins (domínio público). Créditos no rodapé.
   const PLATES = [
-    { src: "assets/ferns-specimen-of-cyanotype.jpg", alt: "Cianótipo de samambaias em branco sobre fundo azul, por Anna Atkins" },
-    { src: "assets/carex-america.jpg", alt: "Cianótipo de uma planta com folhas em leque, por Anna Atkins" },
-    { src: "assets/anna-atkins-cystoseira-granulata.jpg", alt: "Cianótipo de uma alga ramificada, por Anna Atkins" },
-    { src: "assets/new-zealand.jpg", alt: "Cianótipo de uma folha de samambaia da Nova Zelândia, por Anna Atkins" }
+    { src: "assets/ferns-specimen-of-cyanotype.jpg", nome: "Ferns", alt: "Cianótipo de samambaias em branco sobre fundo azul, por Anna Atkins" },
+    { src: "assets/carex-america.jpg", nome: "Carex (America)", alt: "Cianótipo de uma planta com folhas em leque, por Anna Atkins" },
+    { src: "assets/anna-atkins-cystoseira-granulata.jpg", nome: "Cystoseira granulata", alt: "Cianótipo de uma alga ramificada, por Anna Atkins" },
+    { src: "assets/new-zealand.jpg", nome: "New Zealand", alt: "Cianótipo de uma folha de samambaia da Nova Zelândia, por Anna Atkins" }
   ];
   const plateFor = (slug) => {
     let h = 0;
     for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
     return PLATES[h % PLATES.length];
+  };
+
+  const sidePlate = (i, razao) => {
+    const q = PLATES[i];
+    return '<figure class="side-plate rv" style="--ratio:' + razao + '"><div class="plate-box"><img src="' + q.src + '" alt="' + esc(q.alt) + '" width="1600" height="2000" loading="lazy"></div><figcaption>' + esc(q.nome) + ', Anna Atkins</figcaption></figure>';
   };
 
   let filtro = "Todas";
@@ -75,29 +80,24 @@
 
     app.innerHTML = `
       <section class="hero" aria-labelledby="h1">
-        <div class="mast">
-          <div><img src="${PLATES[0].src}" alt="${esc(PLATES[0].alt)}" width="1920" height="2477" fetchpriority="high"></div>
-          <div><img src="${PLATES[1].src}" alt="${esc(PLATES[1].alt)}" width="1920" height="2417" fetchpriority="high"></div>
-          <div class="mast-def">
+        <div class="hero-art">
+          <div class="hero-plate"><img src="${PLATES[0].src}" alt="${esc(PLATES[0].alt)}" width="1920" height="2477" fetchpriority="high"></div>
+          <div class="hero-def">
             <p><strong>Pedra de leitura</strong>Lente de vidro ou cristal que, séculos atrás, ampliava as letras na página.</p>
           </div>
-          <div><img src="${PLATES[2].src}" alt="${esc(PLATES[2].alt)}" width="1792" height="2385" fetchpriority="high"></div>
         </div>
-        <div class="axis" style="margin-top:clamp(28px,4vw,56px)">
-          <div class="side"></div>
-          <div class="main">
-            <h1 class="display" id="h1"><span class="ln"><span>Leia a IA</span></span><span class="ln"><span>de perto.</span></span></h1>
-            <p class="standfirst rv" style="--i:3">Modelos, pesquisas e guias em linguagem simples. Entenda onde a IA acerta, onde erra e como usar sem abrir mão do seu raciocínio.</p>
-            <div class="actions rv" style="--i:4">
-              <a class="btn" href="#/#assine">Assinar grátis</a>
-              <a class="textlink" href="#/#livro">Conhecer o livro</a>
-            </div>
+        <div class="hero-copy">
+          <h1 class="display" id="h1"><span class="ln"><span>Leia a IA</span></span><span class="ln"><span>de perto.</span></span></h1>
+          <p class="standfirst rv" style="--i:3">Modelos, pesquisas e guias em linguagem simples. Entenda onde a IA acerta, onde erra e como usar sem abrir mão do seu raciocínio.</p>
+          <div class="actions rv" style="--i:4">
+            <a class="btn" href="#/#assine">Assinar grátis</a>
+            <a class="textlink" href="#/#livro">Conhecer o livro</a>
           </div>
         </div>
       </section>
 
       <section class="sec axis" id="pedra" aria-labelledby="h-pedra">
-        <div class="side"></div>
+        <div class="side has-plate">${sidePlate(1, "5 / 6")}</div>
         <div class="main">
           <h2 class="h2 rv" id="h-pedra">Passe a pedra sobre a resposta.</h2>
           <p class="lead rv" style="--i:1">Uma resposta fluente não é uma resposta conferida. A pedra mostra o que pedir de volta.</p>
@@ -127,7 +127,7 @@
       </section>
 
       <section class="sec axis" id="glossario" aria-labelledby="h-gl">
-        <div class="side"></div>
+        <div class="side has-plate">${sidePlate(2, "5 / 6")}</div>
         <div class="main">
           <h2 class="h2 rv" id="h-gl">Glossário rápido</h2>
           <p class="lead rv" style="--i:1">Os termos que mais aparecem nas notícias sobre IA.</p>
@@ -237,19 +237,21 @@
     }
     document.title = `${p.titulo} | ReadingStone`;
     const pl = plateFor(p.slug);
+    const pl2 = PLATES[(PLATES.indexOf(pl) + 1) % PLATES.length];
     const l = CONFIG.livro;
     const outros = sorted().filter((x) => x.slug !== slug).slice(0, 3);
 
     app.innerHTML = `
       <div class="post-mast"><img src="${pl.src}" alt="${esc(pl.alt)}" width="1600" height="2000" fetchpriority="high"></div>
       <article class="axis post-head">
-        <div class="side">
+        <div class="side has-plate post-side">
           <a class="back" href="#/#edicoes">Todas as edições</a>
           <dl class="side-list">
             <div><dt>Categoria</dt><dd>${esc(p.categoria)}</dd></div>
             <div><dt>Publicado em</dt><dd>${fmtData(p.data)}</dd></div>
             <div><dt>Leitura</dt><dd>${p.leitura} minutos</dd></div>
           </dl>
+          <figure class="side-plate" style="--ratio:4 / 3"><div class="plate-box"><img src="${pl2.src}" alt="${esc(pl2.alt)}" width="1600" height="2000" loading="lazy"></div><figcaption>${esc(pl2.nome)}, Anna Atkins</figcaption></figure>
         </div>
         <div class="main">
           <h1 class="post-title rv">${esc(p.titulo)}</h1>
