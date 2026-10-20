@@ -1,51 +1,300 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-20T00:00:00.000Z",
+  "generatedAt": "2026-10-20T12:00:00.000Z",
   "title": "Design System: ReadingStone",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Papel Azulado", "canonical": "#f4f6fa", "tonalRamp": ["#22262d", "#3c424d", "#5a6270", "#7e8695", "#a2aab8", "#c4cad6", "#e0e4ec", "#f4f6fa"] },
-      "paper-step-1": { "role": "neutral", "displayName": "Papel Degrau 1", "canonical": "#e8ecf3", "tonalRamp": ["#22262d", "#3c424d", "#5a6270", "#7e8695", "#a2aab8", "#c4cad6", "#dde2eb", "#e8ecf3"] },
-      "paper-step-2": { "role": "neutral", "displayName": "Papel Degrau 2", "canonical": "#dbe2ee", "tonalRamp": ["#22262d", "#3a4252", "#58637a", "#7a869d", "#9ba7bd", "#bac4d6", "#cfd8e6", "#dbe2ee"] },
-      "ink": { "role": "neutral", "displayName": "Preto Suave", "canonical": "#22201d", "tonalRamp": ["#22201d", "#3a3733", "#55514c", "#736e68", "#938d86", "#b3aea8", "#d3cfca", "#eeece9"] },
-      "ink-soft": { "role": "neutral", "displayName": "Cinza Azulado de Nota", "canonical": "#3f4655", "tonalRamp": ["#1f232b", "#2f3541", "#3f4655", "#586072", "#747c90", "#9299aa", "#b5bac7", "#d8dbe2"] },
-      "blue": { "role": "primary", "displayName": "Azul Cianótipo", "canonical": "#1c3a6b", "tonalRamp": ["#0c1930", "#14264a", "#1c3a6b", "#2c5290", "#3f6bb3", "#6a90c8", "#9fb7dd", "#d3dff0"] },
-      "blue-deep": { "role": "primary", "displayName": "Azul Cianótipo Fundo", "canonical": "#14264a", "tonalRamp": ["#080f1e", "#0e1a33", "#14264a", "#1c3a6b", "#31558f", "#5a7fb5", "#93aed4", "#cdd9ec"] },
-      "on-blue-soft": { "role": "neutral", "displayName": "Papel Sobre Azul", "canonical": "#c4d0e5", "tonalRamp": ["#3d4a63", "#58688a", "#7285a9", "#8d9fc2", "#a6b6d5", "#c4d0e5", "#dde4f0", "#f4f6fa"] },
-      "night": { "role": "neutral", "displayName": "Noite", "canonical": "#22201d", "tonalRamp": ["#0e0d0c", "#1a1816", "#22201d", "#33302c", "#4d4944", "#6e6a64", "#9a968f", "#cbc8c3"] },
-      "on-night-soft": { "role": "neutral", "displayName": "Cinza Sobre Noite", "canonical": "#b9bcc6", "tonalRamp": ["#3b3d44", "#52555e", "#6b6e79", "#868993", "#9fa2ad", "#b9bcc6", "#d3d5dc", "#eceef2"] },
-      "brick": { "role": "secondary", "displayName": "Tijolo", "canonical": "#a8442a", "tonalRamp": ["#3a170d", "#5e2819", "#82351f", "#a8442a", "#c4694f", "#d98d76", "#e8b5a5", "#f5dcd3"] },
-      "brick-on-dark": { "role": "secondary", "displayName": "Tijolo Claro Sobre Escuro", "canonical": "#e58a6e", "tonalRamp": ["#5a2a1b", "#7f3d29", "#a5523a", "#c76b4f", "#e58a6e", "#eca58d", "#f2c0ad", "#f8dcd0"] }
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel Azulado",
+        "canonical": "#f4f6fa",
+        "tonalRamp": [
+          "#22262d",
+          "#3c424d",
+          "#5a6270",
+          "#7e8695",
+          "#a2aab8",
+          "#c4cad6",
+          "#e0e4ec",
+          "#f4f6fa"
+        ]
+      },
+      "paper-step-1": {
+        "role": "neutral",
+        "displayName": "Papel Degrau 1",
+        "canonical": "#e8ecf3",
+        "tonalRamp": [
+          "#22262d",
+          "#3c424d",
+          "#5a6270",
+          "#7e8695",
+          "#a2aab8",
+          "#c4cad6",
+          "#dde2eb",
+          "#e8ecf3"
+        ]
+      },
+      "paper-step-2": {
+        "role": "neutral",
+        "displayName": "Papel Degrau 2",
+        "canonical": "#dbe2ee",
+        "tonalRamp": [
+          "#22262d",
+          "#3a4252",
+          "#58637a",
+          "#7a869d",
+          "#9ba7bd",
+          "#bac4d6",
+          "#cfd8e6",
+          "#dbe2ee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Preto Suave",
+        "canonical": "#22201d",
+        "tonalRamp": [
+          "#22201d",
+          "#3a3733",
+          "#55514c",
+          "#736e68",
+          "#938d86",
+          "#b3aea8",
+          "#d3cfca",
+          "#eeece9"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Cinza Azulado de Nota",
+        "canonical": "#3f4655",
+        "tonalRamp": [
+          "#1f232b",
+          "#2f3541",
+          "#3f4655",
+          "#586072",
+          "#747c90",
+          "#9299aa",
+          "#b5bac7",
+          "#d8dbe2"
+        ]
+      },
+      "blue": {
+        "role": "primary",
+        "displayName": "Azul Cianótipo",
+        "canonical": "#1c3a6b",
+        "tonalRamp": [
+          "#0c1930",
+          "#14264a",
+          "#1c3a6b",
+          "#2c5290",
+          "#3f6bb3",
+          "#6a90c8",
+          "#9fb7dd",
+          "#d3dff0"
+        ]
+      },
+      "blue-deep": {
+        "role": "primary",
+        "displayName": "Azul Cianótipo Fundo",
+        "canonical": "#14264a",
+        "tonalRamp": [
+          "#080f1e",
+          "#0e1a33",
+          "#14264a",
+          "#1c3a6b",
+          "#31558f",
+          "#5a7fb5",
+          "#93aed4",
+          "#cdd9ec"
+        ]
+      },
+      "on-blue-soft": {
+        "role": "neutral",
+        "displayName": "Papel Sobre Azul",
+        "canonical": "#c4d0e5",
+        "tonalRamp": [
+          "#3d4a63",
+          "#58688a",
+          "#7285a9",
+          "#8d9fc2",
+          "#a6b6d5",
+          "#c4d0e5",
+          "#dde4f0",
+          "#f4f6fa"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Noite",
+        "canonical": "#22201d",
+        "tonalRamp": [
+          "#0e0d0c",
+          "#1a1816",
+          "#22201d",
+          "#33302c",
+          "#4d4944",
+          "#6e6a64",
+          "#9a968f",
+          "#cbc8c3"
+        ]
+      },
+      "on-night-soft": {
+        "role": "neutral",
+        "displayName": "Cinza Sobre Noite",
+        "canonical": "#b9bcc6",
+        "tonalRamp": [
+          "#3b3d44",
+          "#52555e",
+          "#6b6e79",
+          "#868993",
+          "#9fa2ad",
+          "#b9bcc6",
+          "#d3d5dc",
+          "#eceef2"
+        ]
+      },
+      "brick": {
+        "role": "secondary",
+        "displayName": "Tijolo",
+        "canonical": "#a8442a",
+        "tonalRamp": [
+          "#3a170d",
+          "#5e2819",
+          "#82351f",
+          "#a8442a",
+          "#c4694f",
+          "#d98d76",
+          "#e8b5a5",
+          "#f5dcd3"
+        ]
+      },
+      "brick-on-dark": {
+        "role": "secondary",
+        "displayName": "Tijolo Claro Sobre Escuro",
+        "canonical": "#e58a6e",
+        "tonalRamp": [
+          "#5a2a1b",
+          "#7f3d29",
+          "#a5523a",
+          "#c76b4f",
+          "#e58a6e",
+          "#eca58d",
+          "#f2c0ad",
+          "#f8dcd0"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Título do hero em duas linhas e marca d'água; 700, tracking -0.035em." },
-      "headline": { "displayName": "Headline", "purpose": "Títulos de seção (h2), 600, tracking -0.03em." },
-      "title": { "displayName": "Title", "purpose": "Títulos de cartão, linhas de cobertura e artigo; 500 a 700." },
-      "lead": { "displayName": "Lead", "purpose": "Apoio do hero, standfirst, declaração e texto da lente." },
-      "body": { "displayName": "Body", "purpose": "Texto corrido em 1rem; artigo 1.125rem com 1.65 e 38rem de medida." },
-      "label": { "displayName": "Label", "purpose": "Navegação, botões, abas e metadados; 500, caixa de frase." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título do hero em duas linhas e marca d'água; 700, tracking -0.035em."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de seção (h2), 600, tracking -0.03em."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Títulos de cartão, linhas de cobertura e artigo; 500 a 700."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Apoio do hero, standfirst, declaração e texto da lente."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido em 1rem; artigo 1.125rem com 1.65 e 38rem de medida."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navegação, botões, abas e metadados; 500, caixa de frase."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "ease", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrada e saída de hover, pressionar e menu." },
-      { "name": "ease-soft", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Revelações de bloco, cabeçalho, loader e item de menu (aprox. mola 210/26)." },
-      { "name": "ease-line", "value": "cubic-bezier(0.215, 0.61, 0.355, 1)", "purpose": "Revelação de título por linha (900ms)." },
-      { "name": "ease-word", "value": "cubic-bezier(0.165, 0.84, 0.44, 1)", "purpose": "Revelação por palavra, 35ms de escalonamento." }
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Entrada e saída de hover, pressionar e menu."
+      },
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Revelações de bloco, cabeçalho, loader e item de menu (aprox. mola 210/26)."
+      },
+      {
+        "name": "ease-line",
+        "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "purpose": "Revelação de título por linha (900ms)."
+      },
+      {
+        "name": "ease-word",
+        "value": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+        "purpose": "Revelação por palavra, 35ms de escalonamento."
+      },
+      {
+        "name": "tabbar-hide",
+        "value": "translateY(100%) 250ms var(--ease)",
+        "purpose": "Barra de abas some ao rolar para baixo (após 160px) e volta ao subir ou no fim da página."
+      },
+      {
+        "name": "fmore-expand",
+        "value": "grid-template-rows 0fr to 1fr, 300ms var(--ease)",
+        "purpose": "Descrição do founder expande sem medir altura; texto sobe 0.5rem e aparece em 250ms."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "list", "value": "860px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "root-1440", "value": "1440px" },
-      { "name": "root-1920", "value": "1920px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "list",
+        "value": "860px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "root-1440",
+        "value": "1440px"
+      },
+      {
+        "name": "root-1920",
+        "value": "1920px"
+      },
+      {
+        "name": "founders-3col",
+        "value": "1100px"
+      }
     ],
     "rootScale": [
-      { "name": "acima de 1920px", "value": "16px" },
-      { "name": "ate 1920px", "value": "max(0.833333vw, 15px)" },
-      { "name": "ate 1440px", "value": "max(1.111111vw, 15px)" },
-      { "name": "ate 1024px", "value": "max(1.5625vw, 16px)" },
-      { "name": "ate 640px", "value": "clamp(15px, 4.444444vw, 19px)" }
+      {
+        "name": "acima de 1920px",
+        "value": "16px"
+      },
+      {
+        "name": "ate 1920px",
+        "value": "max(0.833333vw, 15px)"
+      },
+      {
+        "name": "ate 1440px",
+        "value": "max(1.111111vw, 15px)"
+      },
+      {
+        "name": "ate 1024px",
+        "value": "max(1.5625vw, 16px)"
+      },
+      {
+        "name": "ate 640px",
+        "value": "clamp(15px, 4.444444vw, 19px)"
+      }
     ]
   },
   "components": [
@@ -120,6 +369,30 @@
       "description": "Componente assinatura: parágrafo de exemplo com camada azul revelada por círculo (versão estática mostrada aqui).",
       "html": "<div class=\"ds-stone\"><p>A pesquisa citada foi publicada em <span class=\"ds-flag\">2019 pela universidade de Lisboa</span>, segundo o modelo.</p></div>",
       "css": ".ds-stone{padding:0.9375rem 1.125rem;border-radius:1.25rem;background:#1c3a6b;color:#f4f6fa;font-family:Onest,system-ui,sans-serif}.ds-stone p{font-size:1.375rem;line-height:1.32;letter-spacing:-0.01em;font-weight:500;max-width:24em}.ds-flag{text-decoration:underline;text-decoration-color:#e58a6e;text-decoration-thickness:0.25rem;text-underline-offset:0.375rem;text-decoration-skip-ink:none}"
+    },
+    {
+      "name": "Barra de Abas",
+      "kind": "nav",
+      "refersTo": "tabbar-item",
+      "description": "Barra inferior noite de largura total; aba atual em pílula papel. A fileira sob o cabeçalho usa as mesmas pílulas em on-blue a 16%.",
+      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\">Início</a><a href=\"#\">O livro</a><a href=\"#\">Founders</a></nav>",
+      "css": ".ds-tabbar{display:flex;justify-content:center;gap:0.25rem;padding:0.5rem 0.75rem;background:#22201d;font-family:Onest,system-ui,sans-serif}.ds-tabbar a{display:grid;place-items:center;min-height:2.75rem;padding:0 1.25rem;border-radius:9999px;color:#b9bcc6;font-size:1rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background-color 200ms ease,color 200ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-tabbar a:active{transform:scale(0.97)}.ds-tabbar a[aria-current=page]{background:#f4f6fa;color:#22201d}.ds-tabbar a:not([aria-current]):hover{color:#fff;background:rgba(255,255,255,0.12)}.ds-tabbar a:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
+    },
+    {
+      "name": "Cartão de Founder",
+      "kind": "card",
+      "refersTo": "founder-card",
+      "description": "Cartão azul com foto 4:5 (provisória: iniciais), nome, chips e descrição expansível por grid-rows; LinkedIn só com URL.",
+      "html": "<article class=\"ds-f\"><div class=\"ds-f-photo\"><span class=\"ds-f-ini\">AB</span><span class=\"ds-f-badge\">Foto provisória</span></div><h3 class=\"ds-f-name\">Nome Provisório</h3><div class=\"ds-f-chips\"><span>Cargo</span><span>Descrição provisória</span></div><div class=\"ds-f-more\"><div><p>Descrição provisória do founder.</p></div></div><button class=\"ds-f-btn\" aria-expanded=\"false\">Conhecer +</button></article>",
+      "css": ".ds-f{display:flex;flex-direction:column;gap:1.25rem;width:20rem;border-radius:2rem;background:#1c3a6b;color:#f4f6fa;padding:1.25rem 1.25rem 2rem;font-family:Onest,system-ui,sans-serif;transition:transform 280ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-f:hover{transform:translateY(-0.5rem);background:#14264a}.ds-f-photo{position:relative;aspect-ratio:4/5;display:grid;place-items:center;border-radius:1.25rem;background:#14264a}.ds-f-ini{font-size:5.5rem;font-weight:700;letter-spacing:-0.04em}.ds-f-badge{position:absolute;left:0.875rem;bottom:0.875rem;border-radius:9999px;background:rgba(244,246,250,0.16);padding:0.375rem 0.875rem;font-size:0.9375rem}.ds-f-name{font-size:1.625rem;font-weight:600;letter-spacing:-0.02em;line-height:1.1;margin:0}.ds-f-chips{display:flex;gap:0.5rem;flex-wrap:wrap}.ds-f-chips span{border-radius:9999px;background:rgba(244,246,250,0.14);padding:0.25rem 0.75rem;font-size:0.9375rem}.ds-f-more{display:grid;grid-template-rows:1fr}.ds-f-more>div{overflow:hidden}.ds-f-more p{margin:0;color:#c4d0e5}.ds-f-btn{align-self:flex-start;min-height:2.875rem;padding:0 1.25rem;border:0;border-radius:9999px;background:rgba(244,246,250,0.16);color:#f4f6fa;font:500 1rem Onest,system-ui,sans-serif;cursor:pointer;transition:background-color 200ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-f-btn:hover{background:rgba(244,246,250,0.28)}.ds-f-btn:active{transform:scale(0.97)}.ds-f-btn:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
+    },
+    {
+      "name": "Painel de História",
+      "kind": "card",
+      "refersTo": "story-panel",
+      "description": "Painel em papel degrau 1, raio 2rem, que fecha a grade de founders.",
+      "html": "<aside class=\"ds-s\"><h2 class=\"ds-s-h\">A história do jornal</h2><p>Texto provisório da história.</p><p class=\"ds-s-n\"><b>Conteúdo provisório.</b></p></aside>",
+      "css": ".ds-s{display:flex;flex-direction:column;gap:1rem;width:24rem;border-radius:2rem;background:#e8ecf3;color:#22201d;padding:1.75rem;font-family:Onest,system-ui,sans-serif}.ds-s-h{font-size:1.875rem;font-weight:600;letter-spacing:-0.02em;line-height:1.05;margin:0}.ds-s p{margin:0;font-size:1.0625rem;line-height:1.6}.ds-s-n{font-size:1rem}"
     }
   ],
   "narrative": {
@@ -130,15 +403,40 @@
       "Campos de azul profundo em cartões e faixas, com plates em mix-blend-mode: luminosity sobre o azul.",
       "Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.",
       "Véus são chapados (azul translúcido uniforme), nunca em degradê.",
-      "Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado."
+      "Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado.",
+      "Três abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer."
     ],
     "rules": [
-      { "name": "The Brick Stamp Rule", "body": "O tijolo nunca cobre área maior que uma marca de 2.75rem por 0.3125rem; nunca é fundo, botão ou texto corrido.", "section": "colors" },
-      { "name": "The Tone Step Rule", "body": "Separação entre faixas se faz trocando o tom (paper, step-1, step-2, blue, night) e espaço, nunca com linha.", "section": "colors" },
-      { "name": "The One Blue Rule", "body": "Todo plate é filtrado para o azul do campo por luminosity; nenhuma imagem aparece em cor própria.", "section": "colors" },
-      { "name": "The One Family Rule", "body": "Onest em tudo. Hierarquia por peso (400/500/600/700) e escala, não por segunda família.", "section": "typography" },
-      { "name": "The Sentence Case Rule", "body": "Rótulos e títulos em caixa de frase, sem caixa alta e sem tracking positivo. Piso de leitura de 1rem (0.9375rem só em legendas).", "section": "typography" },
-      { "name": "The Flat Plate Rule", "body": "Nenhuma sombra, vidro, filete ou degradê; separar com tom, véu chapado ou espaço.", "section": "elevation" }
+      {
+        "name": "The Brick Stamp Rule",
+        "body": "O tijolo nunca cobre área maior que uma marca de 2.75rem por 0.3125rem; nunca é fundo, botão ou texto corrido.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tone Step Rule",
+        "body": "Separação entre faixas se faz trocando o tom (paper, step-1, step-2, blue, night) e espaço, nunca com linha.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Blue Rule",
+        "body": "Todo plate é filtrado para o azul do campo por luminosity; nenhuma imagem aparece em cor própria.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Onest em tudo. Hierarquia por peso (400/500/600/700) e escala, não por segunda família.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Rótulos e títulos em caixa de frase, sem caixa alta e sem tracking positivo. Piso de leitura de 1rem (0.9375rem só em legendas).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Plate Rule",
+        "body": "Nenhuma sombra, vidro, filete ou degradê; separar com tom, véu chapado ou espaço.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do usar apenas os tokens de cor listados; texto sobre azul em on-blue, secundário em on-blue-soft; sobre noite, on-night-soft.",
@@ -147,7 +445,9 @@
       "Do separar faixas por troca de tom e espaço; véus sobre imagem são azul chapado a 55 a 70%.",
       "Do passar todo plate por mix-blend-mode: luminosity sobre fundo azul e creditar a proveniência.",
       "Do oferecer a lente estática em toque, teclado e movimento reduzido, e manter hover só para ponteiro fino.",
-      "Do rotular a demonstração da lente e o formulário sem endpoint como demonstração."
+      "Do rotular a demonstração da lente e o formulário sem endpoint como demonstração, e todo conteúdo de espaço reservado (foto, descrição, capa) como provisório.",
+      "Do manter a barra de abas como a única superfície noite fixa e dar a ela o mesmo vocabulário de pílula; esconder ao descer, mostrar ao subir.",
+      "Do renderizar o botão do LinkedIn só quando há URL."
     ],
     "donts": [
       "Don't usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.",

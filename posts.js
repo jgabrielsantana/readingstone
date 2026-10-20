@@ -32,6 +32,41 @@ const CONFIG = {
     link: "#/#assine", // ainda sem link de compra: leva para a assinatura da newsletter
     textoBotao: "Receber novidades do livro"
   },
+  // Aba Founders. Fotos e descrições PROVISÓRIAS: troque quando tiver os textos e as fotos reais.
+  // "foto" vazio = mostra o espaço provisório com as iniciais. "linkedin" vazio = o botão não aparece.
+  founders: [
+    {
+      nome: "João Gabriel Nunes Santana",
+      iniciais: "JG",
+      papel: "Cofundador",
+      foto: "",
+      linkedin: "",
+      descricao: "Cofundador da ReadingStone. Descrição provisória: aqui entram a formação, os interesses e o que João Gabriel faz na newsletter e no livro."
+    },
+    {
+      nome: "Mateus Costa Medeiros",
+      iniciais: "MM",
+      papel: "Cofundador",
+      foto: "",
+      linkedin: "",
+      descricao: "Cofundador da ReadingStone. Descrição provisória: aqui entram a formação, os interesses e o que Mateus faz na newsletter e no livro."
+    }
+  ],
+  historia: {
+    titulo: "A história do jornal",
+    provisorio: "Texto provisório: a história de como o projeto começou, com datas e pessoas, entra aqui.",
+    paragrafos: [
+      "A ReadingStone é uma newsletter e um site sobre inteligência artificial, aprendizagem e pensamento crítico, escritos para quem usa IA no estudo e no trabalho e quer entender o que ela faz.",
+      "O nome vem da pedra de leitura, a lente que ampliava as letras na página. A ideia é a mesma: chegar perto da IA, mostrar o que há de sólido nela e deixar a decisão com quem lê.",
+      "O livro A Máquina Resolve? continua essa conversa, com foco em como a IA muda o jeito de aprender e de saber."
+    ]
+  },
+  // Redes sociais do rodapé. Só aparecem as que têm "url"; preencha a do LinkedIn e a do X quando existirem.
+  redes: [
+    { nome: "Instagram", url: "https://www.instagram.com/reading.stone/", icone: "instagram" },
+    { nome: "LinkedIn", url: "", icone: "linkedin" },
+    { nome: "X", url: "", icone: "x" }
+  ],
   // Quando tiver um serviço de e-mail (Buttondown, Mailchimp, Substack...),
   // coloque aqui a URL de inscrição. Vazio = apenas simula o envio.
   newsletterEndpoint: ""

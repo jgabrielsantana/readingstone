@@ -119,6 +119,27 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
     padding: "0.9375rem 1rem"
+  tabbar-item:
+    backgroundColor: "{colors.night}"
+    textColor: "{colors.on-night-soft}"
+    rounded: "{rounded.pill}"
+    height: "2.75rem"
+    padding: "0 1.25rem"
+  tabbar-item-current:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+  founder-card:
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.on-blue}"
+    rounded: "{rounded.card}"
+    padding: "1.25rem 1.25rem 2rem"
+  founder-card-hover:
+    backgroundColor: "{colors.blue-deep}"
+  story-panel:
+    backgroundColor: "{colors.paper-step-1}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.card}"
+    padding: "1.75rem"
   modal-panel:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
@@ -147,6 +168,7 @@ A densidade é arejada e de movimento vivo: título grande em duas linhas, revel
 - Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.
 - Véus são chapados (azul translúcido uniforme), nunca em degradê.
 - Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado.
+- Três abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer.
 
 ## Colors
 
@@ -197,9 +219,11 @@ Paleta fixada pelo usuário: papel azulado, preto suave, azul profundo, tijolo m
 
 Contêiner `shell` de 88rem com margem lateral de 1.25rem (2rem a partir de 640px). Seções com 5rem de respiro vertical (7rem a partir de 1024px). Pares de conteúdo usam 5fr/7fr (sobre, pedra de leitura, livro, artigo), com nota ou plate sticky à esquerda; o hero usa 12 colunas, 7 para o texto e 5 para o cartão e os temas. Abaixo de 1024px tudo vira coluna única, a navegação some em favor do botão Menu, plate e lista lateral do artigo são ocultados. A lista de edições usa abas de 13rem (sticky) e linhas com data de 6.5rem, texto e meta; abaixo de 860px as abas viram linha corrida. O primeiro cartão de edição ocupa a largura toda a partir de 768px. Estatísticas em 4 colunas (2 abaixo de 1024px). Intervalos recorrentes: 0.25rem entre linhas empilhadas, 0.75rem e 1.5rem entre blocos, 3rem entre grandes grupos. O friso de três plates sangra até as bordas com cantos arredondados só nas pontas internas.
 
+Três abas por rota de hash (Início, O livro, Founders), sempre com a abertura e a primeira tela em Início. A navegação entre abas mora em três lugares conforme a largura: na navegação do cabeçalho a partir de 1024px (aba atual com sublinhado de 0.1875rem), numa fileira de pílulas sob o cabeçalho abaixo de 1024px e numa barra inferior fixa em noite, de largura total, que esconde ao rolar para baixo e volta ao rolar para cima ou no fim da página (some na abertura; recebe foco, reaparece). O rodapé reserva 6rem para a barra. Corpo das abas (`tab-body`) com 3rem de respiro vertical (2rem no topo do livro) e título de até 14ch. A grade de founders tem 1 coluna, 2 a partir de 768px e 3 (1fr 1fr 1.05fr) a partir de 1100px, com 1.5rem de intervalo; o painel de história ocupa a linha inteira entre 768 e 1099px e vira a terceira coluna a partir de 1100px.
+
 ## Elevation & Depth
 
-Sem sombras, sem vidro e sem degradês. A profundidade é tonal: papel, dois degraus de papel, azul, noite. Estados mudam o tom (cartão vira `blue-deep`, linha vira azul, botão azul escurece) e o movimento: cartões sobem 0.5rem e crescem 1.2% em hover, pílulas crescem 3% e o selo desliza na diagonal, o pressionar encolhe (scale 0.97 a 0.995). Véus sobre imagem são camadas planas de azul translúcido. Hover só existe com ponteiro fino. Movimento reduzido desliga transições e animações.
+Sem sombras, sem vidro e sem degradês. A profundidade é tonal: papel, dois degraus de papel, azul, noite. Estados mudam o tom (cartão vira `blue-deep`, linha vira azul, botão azul escurece) e o movimento: cartões sobem 0.5rem e crescem 1.2% em hover (cartão de founder sobe 0.5rem sem crescer, a foto cresce 4%), pílulas crescem 3% e o selo desliza na diagonal, o pressionar encolhe (scale 0.97 a 0.995). Véus sobre imagem são camadas planas de azul translúcido. Hover só existe com ponteiro fino. Movimento reduzido desliga transições e animações.
 
 ### Named Rules
 **The Flat Plate Rule.** Nenhuma sombra, vidro, filete ou degradê; separar com tom, véu chapado ou espaço.
@@ -224,6 +248,15 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 ### Linhas, abas e bandas
 - Linhas de cobertura: raio 1.25rem, `paper-step-1` alternando `paper-step-2`, título 1.5 a 2.25rem; hover vira azul, ganha recuo e desliza o selo. Abas: raio 0.9375rem, 3rem; selecionada azul. Bandas de edição: grade 6.5rem / texto / meta, hover e foco azul com texto secundário `on-blue-soft`.
 
+### Barra de abas e fileira de abas
+- Barra inferior fixa, fundo `night`, pílulas de 2.75rem (padding 0 1.25rem, 1rem 500) em `on-night-soft`; a aba atual (`aria-current="page"`) vira pílula `paper` com texto `ink`. Hover (ponteiro fino) leva a branco com fundo branco a 12%; pressionar scale 0.97. Esconde com `translateY(100%)` em 250ms; o JS esconde ao descer além de 160px, mostra ao subir mais de 6px ou perto do fim (80px), e mantém escondida acima de 160px. Foco em `on-blue`. A fileira sob o cabeçalho usa as mesmas pílulas com fundo `on-blue` a 16% sobre o hero azul, aba atual em `paper`.
+
+### Cartão de founder
+- Cartão azul de raio 2rem, padding 1.25rem 1.25rem 2rem (1rem 1rem 1.5rem no celular). Foto 4:5 de raio 1.25rem sobre `blue-deep`; sem foto, iniciais 700 em 5.5rem e a lente a 18% de opacidade, mais selo em pílula "Foto provisória" (`on-blue` a 16%, 0.9375rem). Nome 600 em 1.625rem, chips de papel e "Descrição provisória". A descrição expande por `grid-template-rows` de 0fr para 1fr (300ms) com texto em `on-blue-soft` que sobe e aparece; o botão Conhecer (pílula `on-blue` a 16%, 2.875rem) gira o ícone de mais 45 graus e vira Fechar, com `aria-expanded`. A pílula LinkedIn (mesmo estilo, abre em outra aba) só existe quando há URL. Hover: sobe 0.5rem e vira `blue-deep`.
+
+### Painel de história
+- Painel em `paper-step-1`, raio 2rem, padding 1.75rem (2rem em 1100px), título 600 em 1.875rem, prosa de 1.0625rem e nota de conteúdo provisório em 1rem, botão azul no fim. Fecha a grade de founders sem virar um terceiro cartão azul.
+
 ### Faixa de quatro ladrilhos
 - Pílulas grandes (6rem, 10rem a partir de 640px): claro, azul, escuro com seta e fantasma, em sequência Leia, Cheque, seta, Pense.
 
@@ -234,7 +267,7 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 - Painel azul de raio 2rem; quatro contagens (3 a 4.5rem, 600, numerais tabulares) que sobem ao rolar, calculadas a partir do conteúdo real do site, com rótulos em `on-blue-soft`.
 
 ### Livro
-- Cartão azul de raio 2rem com capa 3:4 em papel (lombada 0.5rem), título 700 e barra de tijolo de 2.75rem; marcadores quadrados `on-blue`; faixa 21/9 de plate em luminosity.
+- Na aba O livro, apenas o cartão do livro e a faixa de plate (mais o friso). Cartão azul de raio 2rem com capa 3:4 em papel (lombada 0.5rem), título 700 e barra de tijolo de 2.75rem; marcadores quadrados `on-blue`; faixa 21/9 de plate em luminosity.
 
 ### Campos e modal de assinatura
 - Campo: fundo `paper-step-1`, raio 0.9375rem, sem borda; foco sobe para o degrau 2 com contorno de 0.125rem azul. Rótulos 500 em `ink-soft`. Painel do modal em papel, raio 2rem, entra de baixo (celular alinhado ao rodapé); fundo escurecido por noite a 60%. Sem endpoint, o formulário opera em modo demonstração e diz isso. Mensagem de erro em tijolo; sucesso com selo circular noite e ícone `brick-on-dark`.
@@ -254,7 +287,9 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 - **Do** separar faixas por troca de tom e espaço; véus sobre imagem são azul chapado a 55 a 70%.
 - **Do** passar todo plate por `mix-blend-mode: luminosity` sobre fundo azul e creditar a proveniência.
 - **Do** oferecer a lente estática em toque, teclado e movimento reduzido, e manter hover só para ponteiro fino.
-- **Do** rotular a demonstração da lente e o formulário sem endpoint como demonstração.
+- **Do** rotular a demonstração da lente e o formulário sem endpoint como demonstração, e todo conteúdo de espaço reservado (foto, descrição, capa) como provisório.
+- **Do** manter a barra de abas como a única superfície noite fixa e dar a ela o mesmo vocabulário de pílula; esconder ao descer, mostrar ao subir.
+- **Do** renderizar o botão do LinkedIn só quando há URL.
 
 ### Don't:
 - **Don't** usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.

@@ -10,6 +10,10 @@ npx serve .
 
 e abra o endereço mostrado.
 
+## Abas
+
+O site tem três abas, em rotas por hash: `#/` (Início), `#/livro` (O livro) e `#/founders` (Founders). Os cartões e a história da aba Founders ficam em `posts.js` (`CONFIG.founders` e `CONFIG.historia`); fotos e descrições atuais são provisórias. Para pular a abertura 000 a 100 ao testar, use `?intro=0`.
+
 ## Conteúdo
 
 As edições, o glossário, a demonstração da "pedra de leitura" e os dados do livro ficam em `posts.js`. Para publicar uma edição, adicione um item no topo de `POSTS`. Os textos atuais são exemplos.

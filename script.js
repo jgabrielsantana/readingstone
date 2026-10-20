@@ -186,6 +186,8 @@
       </a>`;
   }
 
+  const friso = (inicio) => `<div class="frieze">${[0, 1, 2].map((k) => { const q = PLATES[(inicio + k) % PLATES.length]; return `<div><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div>`; }).join("")}</div>`;
+
   const sidePlate = (i, ratio) => {
     const q = PLATES[i];
     return `<figure class="side-plate rv" style="--ratio:${ratio}"><div class="plate-box"><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div><figcaption>${esc(q.nome)}, Anna Atkins</figcaption></figure>`;
@@ -269,7 +271,7 @@
             <p class="state io">${palavras("Ajudamos quem estuda e trabalha com IA a entender o que ela faz, onde erra e como usá-la com critério.", false)} ${palavras("Sem jargão.", true)}</p>
             <div class="about-foot rv" style="--d:200ms">
               <p class="facts"><span><b>Formato</b> newsletter e site</span><span><b>Idioma</b> português do Brasil</span></p>
-              ${pill("Conhecer o livro", { variant: "ghost", arrow: "right", tag: "a", href: "#/#livro" })}
+              ${pill("Conhecer o livro", { variant: "ghost", arrow: "right", tag: "a", href: "#/livro" })}
             </div>
           </div>
         </div>
@@ -348,26 +350,6 @@
               ${GLOSSARIO.map((g) => `<div><dt>${esc(g.termo)}</dt><dd>${esc(g.def)}</dd></div>`).join("")}
             </dl>
           </div>
-        </div>
-      </section>
-
-      <section id="livro" aria-labelledby="h-livro" class="on-dark">
-        <div class="shell">
-          <div class="book-card rv">
-            <div>
-              <div class="cover" aria-hidden="true"><i></i><b>${esc(l.titulo)}</b></div>
-              <p class="cover-note">Capa provisória, só para esta página.</p>
-            </div>
-            <div>
-              <h2 class="h2" id="h-livro">${esc(l.titulo)}</h2>
-              <p class="lead">${esc(l.subtitulo)}</p>
-              <p class="book-p">${esc(l.descricao)}</p>
-              <h3 class="btopics-h">O que o livro trata</h3>
-              <ul class="btopics">${l.topicos.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-              <div class="cta-row">${pill(l.textoBotao, { variant: "light", arrow: "up", attrs: "data-open-modal" })}</div>
-            </div>
-          </div>
-          <div class="book-plate rv"><img src="${PLATES[3].src}" alt="${esc(PLATES[3].alt)}" width="1920" height="2681" loading="lazy"></div>
         </div>
       </section>
 
@@ -592,6 +574,19 @@
     els.forEach((el) => io.observe(el));
   }
 
+  /* ---------- barra de abas: some ao descer, volta ao subir ---------- */
+  const tabbar = document.getElementById("tabbar");
+  let ultimoY = window.pageYOffset;
+  window.addEventListener("scroll", () => {
+    const y = window.pageYOffset;
+    const base = y + window.innerHeight >= document.documentElement.scrollHeight - 80;
+    const esconder = y > 160 && y > ultimoY + 6 && !base;
+    const mostrar = (y >= 160 && y < ultimoY - 6) || base;
+    if (esconder || y < 160) tabbar.classList.add("hide"); else if (mostrar) tabbar.classList.remove("hide");
+    ultimoY = y;
+  }, { passive: true });
+  tabbar.addEventListener("focusin", () => tabbar.classList.remove("hide"));
+
   /* ---------- artigo ---------- */
   function bloco(b, n) {
     const a = ` class="rv" style="--d:${(n % 3) * 70}ms"`;
@@ -638,7 +633,7 @@
       <section class="shell post-end" aria-labelledby="h-cta-livro">
         <h2 class="h2 io" id="h-cta-livro">${L("Quer ir além?", "Leia o livro.")}</h2>
         <p class="lead rv" style="--d:100ms"><b>${esc(l.titulo)}</b> aprofunda este e outros temas, passo a passo.</p>
-        <div class="cta-row rv" style="--d:160ms;margin-top:1.75rem">${pill("Conhecer o livro", { variant: "blue", arrow: "up", tag: "a", href: "#/#livro" })}</div>
+        <div class="cta-row rv" style="--d:160ms;margin-top:1.75rem">${pill("Conhecer o livro", { variant: "blue", arrow: "up", tag: "a", href: "#/livro" })}</div>
       </section>
 
       <div class="frieze" aria-hidden="false">${[1, 2, 3].map((k) => { const q = PLATES[(PLATES.indexOf(pl) + k) % PLATES.length]; return `<div><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div>`; }).join("")}</div>
@@ -660,7 +655,7 @@
   const menuBtn = document.getElementById("menu-open");
   let lastFocus = null;
 
-  const setInert = (on) => ["conteudo", "topo", "rodape"].forEach((id) => { const el = document.getElementById(id); if (el) el.inert = on; });
+  const setInert = (on) => ["conteudo", "topo", "rodape", "tabbar"].forEach((id) => { const el = document.getElementById(id); if (el) el.inert = on; });
   function trap(container, e) {
     if (e.key !== "Tab") return;
     const f = [...container.querySelectorAll('button, a[href], input, [tabindex]:not([tabindex="-1"])')].filter((x) => !x.hidden && x.offsetParent !== null);
@@ -731,6 +726,17 @@
     const t = e.target.closest("[data-open-modal]");
     if (t) { e.preventDefault(); openModal(); }
   });
+  // redes sociais no rodapé: só as que já têm endereço
+  const ICONES = {
+    instagram: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>',
+    linkedin: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5v5.5M8 7.8v.1M12 16v-5.5M12 12.8c0-1.4 1-2.3 2.2-2.3 1.3 0 1.9.9 1.9 2.2V16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    x: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+  };
+  const redes = (CONFIG.redes || []).filter((r) => r.url);
+  const footSocial = document.getElementById("foot-social");
+  footSocial.innerHTML = redes.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(r.nome)} da ReadingStone (abre em outra aba)">${ICONES[r.icone] || ""}${esc(r.nome)}</a></li>`).join("");
+  footSocial.hidden = !redes.length;
+
   // temas no rodapé
   const footTemas = document.getElementById("foot-temas");
   footTemas.innerHTML = CATEGORIAS.map((c) => `<li><button type="button" data-foot-filter="${esc(c)}">${esc(c)}</button></li>`).join("");
@@ -770,24 +776,125 @@
     }
   });
 
+
+  /* ---------- abas: livro e founders ---------- */
+  function setActiveTab(tab) {
+    document.querySelectorAll("[data-tab]").forEach((el) => {
+      if (el.dataset.tab === tab) el.setAttribute("aria-current", "page"); else el.removeAttribute("aria-current");
+    });
+  }
+  const toTop = () => { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); };
+
+  function renderLivro() {
+    if (liquidStop) { liquidStop(); liquidStop = null; }
+    const l = CONFIG.livro;
+    document.title = l.titulo + " | ReadingStone";
+    app.innerHTML = `
+      <div class="post-band on-dark"><img src="${PLATES[0].src}" alt="${esc(PLATES[0].alt)}" width="1920" height="2477" fetchpriority="high"><div class="post-band-scrim"></div></div>
+      <section id="livro-tab" class="on-dark tab-body" aria-labelledby="h-livro">
+        <div class="shell">
+          <div class="book-card rv">
+            <div>
+              <div class="cover" aria-hidden="true"><i></i><b>${esc(l.titulo)}</b></div>
+              <p class="cover-note">Capa provisória, só para esta página.</p>
+            </div>
+            <div>
+              <h1 class="h2 io" id="h-livro">${L(l.titulo)}</h1>
+              <p class="lead rv" style="--d:100ms">${esc(l.subtitulo)}</p>
+              <p class="book-p rv" style="--d:160ms">${esc(l.descricao)}</p>
+              <h2 class="btopics-h rv" style="--d:220ms">O que o livro trata</h2>
+              <ul class="btopics">${l.topicos.map((t, i) => `<li class="rv" style="--d:${260 + i * 70}ms">${esc(t)}</li>`).join("")}</ul>
+              <div class="cta-row rv" style="--d:640ms">${pill(l.textoBotao, { variant: "light", arrow: "up", attrs: "data-open-modal" })}</div>
+            </div>
+          </div>
+          <div class="book-plate rv"><img src="${PLATES[3].src}" alt="${esc(PLATES[3].alt)}" width="1920" height="2681" loading="lazy"></div>
+        </div>
+      </section>
+      ${friso(1)}`;
+    setActiveTab("livro");
+    observeReveals();
+    toTop();
+    initLenis();
+  }
+
+  function fcard(f, i) {
+    const foto = f.foto
+      ? `<img src="${esc(f.foto)}" alt="Foto de ${esc(f.nome)}" width="800" height="1000" loading="lazy">`
+      : `<div class="fphoto-ph" aria-hidden="true"><span class="fphoto-ini">${esc(f.iniciais || "")}</span>${I.lens}</div>`;
+    const lk = f.linkedin
+      ? `<a class="flink" href="${esc(f.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de ${esc(f.nome)} (abre em outra aba)">LinkedIn ${I.up}</a>`
+      : "";
+    return `
+      <article class="fcard rv" style="--d:${i * 100}ms">
+        <div class="fphoto">${foto}${f.foto ? "" : '<span class="fbadge">Foto provisória</span>'}</div>
+        <div class="fbody">
+          <h2 class="fname">${esc(f.nome)}</h2>
+          <div class="chips"><span class="chip">${esc(f.papel)}</span><span class="chip">Descrição provisória</span></div>
+          <div class="fmore" id="fm-${i}"><div class="fmore-in"><p>${esc(f.descricao)}</p></div></div>
+          <div class="factions">
+            <button class="fbtn" type="button" aria-expanded="false" aria-controls="fm-${i}"><span class="fbtn-t">Conhecer</span><span class="fbtn-i" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            ${lk}
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderFounders() {
+    if (liquidStop) { liquidStop(); liquidStop = null; }
+    document.title = "Founders | ReadingStone";
+    const fs = CONFIG.founders || [];
+    const hs = CONFIG.historia || { titulo: "", paragrafos: [] };
+    app.innerHTML = `
+      <div class="post-band on-dark"><img src="${PLATES[2].src}" alt="${esc(PLATES[2].alt)}" width="1792" height="2385" fetchpriority="high"><div class="post-band-scrim"></div></div>
+      <section id="founders-tab" class="shell tab-body" aria-labelledby="h-fnd">
+        <h1 class="h2 io" id="h-fnd">${L("Quem faz", "a ReadingStone.")}</h1>
+        <p class="lead rv" style="--d:120ms">As pessoas por trás da newsletter e do livro.</p>
+        <div class="fgrid">${fs.map(fcard).join("")}
+          <aside class="fstory rv" style="--d:200ms" aria-labelledby="h-hist">
+            <h2 class="fstory-h" id="h-hist">${esc(hs.titulo)}</h2>
+            <div class="story">${(hs.paragrafos || []).map((t) => `<p>${esc(t)}</p>`).join("")}</div>
+            <p class="note"><b>${esc(hs.provisorio || "")}</b></p>
+            <div class="cta-row" style="margin-top:1.5rem">${pill("Assinar grátis", { variant: "blue", arrow: "up", attrs: "data-open-modal" })}</div>
+          </aside>
+        </div>
+      </section>
+      ${friso(0)}`;
+    app.querySelectorAll(".fbtn").forEach((b) =>
+      b.addEventListener("click", () => {
+        const card = b.closest(".fcard");
+        const aberto = card.classList.toggle("open");
+        b.setAttribute("aria-expanded", String(aberto));
+        b.querySelector(".fbtn-t").textContent = aberto ? "Fechar" : "Conhecer";
+      })
+    );
+    setActiveTab("founders");
+    observeReveals();
+    toTop();
+    initLenis();
+  }
+
   /* ---------- roteador por hash ---------- */
   function route() {
     if (navmenu.classList.contains("open")) closeMenu(false);
     const h = location.hash.replace(/^#\/?/, "");
     const m = h.match(/^post\/([\w-]+)/);
-    if (m) { destroyLenis(); renderPost(m[1]); return; }
+    if (m) { destroyLenis(); setActiveTab("inicio"); renderPost(m[1]); return; }
+    if (h === "livro" || h === "#livro") { if (!document.getElementById("livro-tab")) renderLivro(); else toTop(); return; }
+    if (h === "founders") { if (!document.getElementById("founders-tab")) renderFounders(); else toTop(); return; }
 
     const ancora = h.startsWith("#") ? h.slice(1) : "";
+    setActiveTab("inicio");
     if (!document.getElementById("inicio")) renderHome();
     requestAnimationFrame(() => {
       if (ancora) scrollToId(ancora);
-      else if (lenis) lenis.scrollTo(0, { immediate: true });
-      else window.scrollTo(0, 0);
+      else toTop();
     });
   }
   window.addEventListener("hashchange", route);
   document.querySelector(".brand").addEventListener("click", () => { if (location.hash === "" || location.hash === "#/") route(); });
 
+  // depois da abertura 000 a 100, a primeira aba que aparece é sempre a central
+  if (html.classList.contains("intro") && /^#\/(livro|founders|#livro)/.test(location.hash)) history.replaceState(null, "", "#/");
   runLoader();
   route();
 })();
