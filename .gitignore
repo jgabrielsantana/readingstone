@@ -9,10 +9,6 @@ skills-lock.json
 .impeccable/hook.cache.json
 .impeccable/questions/
 
-# Fonte General Sans: licenca da Fontshare nao permite redistribuir os arquivos.
-# Baixe em https://www.fontshare.com/fonts/general-sans e coloque em fonts/ (veja o README).
-fonts/
-
 node_modules/
 .DS_Store
 Thumbs.db

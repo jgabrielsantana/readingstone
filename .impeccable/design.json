@@ -1,124 +1,160 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-18T00:00:00Z",
+  "generatedAt": "2026-10-20T00:00:00.000Z",
   "title": "Design System: ReadingStone",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Papel Azulado", "canonical": "#f4f6fa", "tonalRamp": ["#14264a", "#33302c", "#4a505e", "#b9bcc6", "#c4d0e5", "#dbe2ee", "#e8ecf3", "#f4f6fa"] },
-      "ink": { "role": "neutral", "displayName": "Preto Suave", "canonical": "#22201d", "tonalRamp": ["#22201d", "#33302c", "#4a505e", "#6b7080", "#8d91a0", "#b9bcc6", "#dbe2ee", "#f4f6fa"] },
-      "blue": { "role": "primary", "displayName": "Azul Cianótipo", "canonical": "#1c3a6b", "tonalRamp": ["#14264a", "#1c3a6b", "#2f5192", "#4a6aa8", "#6f8bbd", "#9cb0d4", "#c4d0e5", "#e8ecf3"] },
-      "brick": { "role": "secondary", "displayName": "Tijolo", "canonical": "#a8442a", "tonalRamp": ["#5c2415", "#7c331f", "#a8442a", "#c25f43", "#e58a6e", "#eeae98", "#f5cfc2", "#faeae4"] },
-      "night": { "role": "neutral", "displayName": "Noite", "canonical": "#22201d", "tonalRamp": ["#22201d", "#33302c", "#4a4742", "#6b6862", "#8c8a85", "#b9bcc6", "#dbe2ee", "#f4f6fa"] }
+      "paper": { "role": "neutral", "displayName": "Papel Azulado", "canonical": "#f4f6fa", "tonalRamp": ["#22262d", "#3c424d", "#5a6270", "#7e8695", "#a2aab8", "#c4cad6", "#e0e4ec", "#f4f6fa"] },
+      "paper-step-1": { "role": "neutral", "displayName": "Papel Degrau 1", "canonical": "#e8ecf3", "tonalRamp": ["#22262d", "#3c424d", "#5a6270", "#7e8695", "#a2aab8", "#c4cad6", "#dde2eb", "#e8ecf3"] },
+      "paper-step-2": { "role": "neutral", "displayName": "Papel Degrau 2", "canonical": "#dbe2ee", "tonalRamp": ["#22262d", "#3a4252", "#58637a", "#7a869d", "#9ba7bd", "#bac4d6", "#cfd8e6", "#dbe2ee"] },
+      "ink": { "role": "neutral", "displayName": "Preto Suave", "canonical": "#22201d", "tonalRamp": ["#22201d", "#3a3733", "#55514c", "#736e68", "#938d86", "#b3aea8", "#d3cfca", "#eeece9"] },
+      "ink-soft": { "role": "neutral", "displayName": "Cinza Azulado de Nota", "canonical": "#3f4655", "tonalRamp": ["#1f232b", "#2f3541", "#3f4655", "#586072", "#747c90", "#9299aa", "#b5bac7", "#d8dbe2"] },
+      "blue": { "role": "primary", "displayName": "Azul Cianótipo", "canonical": "#1c3a6b", "tonalRamp": ["#0c1930", "#14264a", "#1c3a6b", "#2c5290", "#3f6bb3", "#6a90c8", "#9fb7dd", "#d3dff0"] },
+      "blue-deep": { "role": "primary", "displayName": "Azul Cianótipo Fundo", "canonical": "#14264a", "tonalRamp": ["#080f1e", "#0e1a33", "#14264a", "#1c3a6b", "#31558f", "#5a7fb5", "#93aed4", "#cdd9ec"] },
+      "on-blue-soft": { "role": "neutral", "displayName": "Papel Sobre Azul", "canonical": "#c4d0e5", "tonalRamp": ["#3d4a63", "#58688a", "#7285a9", "#8d9fc2", "#a6b6d5", "#c4d0e5", "#dde4f0", "#f4f6fa"] },
+      "night": { "role": "neutral", "displayName": "Noite", "canonical": "#22201d", "tonalRamp": ["#0e0d0c", "#1a1816", "#22201d", "#33302c", "#4d4944", "#6e6a64", "#9a968f", "#cbc8c3"] },
+      "on-night-soft": { "role": "neutral", "displayName": "Cinza Sobre Noite", "canonical": "#b9bcc6", "tonalRamp": ["#3b3d44", "#52555e", "#6b6e79", "#868993", "#9fa2ad", "#b9bcc6", "#d3d5dc", "#eceef2"] },
+      "brick": { "role": "secondary", "displayName": "Tijolo", "canonical": "#a8442a", "tonalRamp": ["#3a170d", "#5e2819", "#82351f", "#a8442a", "#c4694f", "#d98d76", "#e8b5a5", "#f5dcd3"] },
+      "brick-on-dark": { "role": "secondary", "displayName": "Tijolo Claro Sobre Escuro", "canonical": "#e58a6e", "tonalRamp": ["#5a2a1b", "#7f3d29", "#a5523a", "#c76b4f", "#e58a6e", "#eca58d", "#f2c0ad", "#f8dcd0"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Título do hero e do fechamento, 700 apertado." },
-      "headline": { "displayName": "Headline", "purpose": "Títulos de seção." },
-      "title": { "displayName": "Title", "purpose": "Frase em destaque e título da capa." },
-      "lead": { "displayName": "Lead", "purpose": "Standfirst, lead e texto da lente." },
-      "body": { "displayName": "Body", "purpose": "Texto corrido." },
-      "label": { "displayName": "Label", "purpose": "Navegação, abas, metadados." }
+      "display": { "displayName": "Display", "purpose": "Título do hero em duas linhas e marca d'água; 700, tracking -0.035em." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de seção (h2), 600, tracking -0.03em." },
+      "title": { "displayName": "Title", "purpose": "Títulos de cartão, linhas de cobertura e artigo; 500 a 700." },
+      "lead": { "displayName": "Lead", "purpose": "Apoio do hero, standfirst, declaração e texto da lente." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido em 1rem; artigo 1.125rem com 1.65 e 38rem de medida." },
+      "label": { "displayName": "Label", "purpose": "Navegação, botões, abas e metadados; 500, caixa de frase." }
     },
     "shadows": [],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entradas, revelação da lente, pressionar." },
-      { "name": "plate-drift", "value": "scale(1) to scale(1.07), 26-32s ease-in-out infinite alternate", "purpose": "Deriva lenta dos plates; desligada com movimento reduzido." },
-      { "name": "state-fast", "value": "150-160ms ease", "purpose": "Troca de tom em hover e foco." }
+      { "name": "ease", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrada e saída de hover, pressionar e menu." },
+      { "name": "ease-soft", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Revelações de bloco, cabeçalho, loader e item de menu (aprox. mola 210/26)." },
+      { "name": "ease-line", "value": "cubic-bezier(0.215, 0.61, 0.355, 1)", "purpose": "Revelação de título por linha (900ms)." },
+      { "name": "ease-word", "value": "cubic-bezier(0.165, 0.84, 0.44, 1)", "purpose": "Revelação por palavra, 35ms de escalonamento." }
     ],
     "breakpoints": [
-      { "name": "narrow", "value": "640px" },
-      { "name": "mobile", "value": "720px" },
-      { "name": "axis-collapse", "value": "860px" }
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "list", "value": "860px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "root-1440", "value": "1440px" },
+      { "name": "root-1920", "value": "1920px" }
+    ],
+    "rootScale": [
+      { "name": "acima de 1920px", "value": "16px" },
+      { "name": "ate 1920px", "value": "max(0.833333vw, 15px)" },
+      { "name": "ate 1440px", "value": "max(1.111111vw, 15px)" },
+      { "name": "ate 1024px", "value": "max(1.5625vw, 16px)" },
+      { "name": "ate 640px", "value": "clamp(15px, 4.444444vw, 19px)" }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Botão Azul",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Ação principal sobre papel: Assinar grátis.",
-      "html": "<a class=\"ds-btn\" href=\"#\">Assinar grátis</a>",
-      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 28px; background:#1c3a6b; color:#f4f6fa; font:500 1.0625rem/1 'General Sans',system-ui,sans-serif; text-decoration:none; border-radius:0; transition:background-color 160ms ease, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn:hover { background:#14264a; } .ds-btn:active { transform:scale(0.97); } .ds-btn:focus-visible { outline:3px solid #1c3a6b; outline-offset:3px; }"
+      "refersTo": "button-blue",
+      "description": "Ação primária em pílula com selo circular; hover escurece para blue-deep.",
+      "html": "<span class=\"ds-pill\"><span class=\"ds-pill-in\">Assinar grátis<span class=\"ds-badge\">&rarr;</span></span></span>",
+      "css": ".ds-pill{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-pill:hover{transform:scale(1.03)}.ds-pill:active{transform:scale(0.97)}.ds-pill-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:var(--blue,#1c3a6b);color:#f4f6fa;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem;transition:background-color 200ms ease}.ds-pill:hover .ds-pill-in{background:#14264a}.ds-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#f4f6fa;color:#1c3a6b;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-pill:hover .ds-badge{transform:translate(0.125rem,-0.125rem)}.ds-pill:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
     },
     {
-      "name": "Paper Button",
+      "name": "Botão Escuro",
       "kind": "button",
-      "refersTo": "button-paper",
-      "description": "Ação sobre campo azul.",
-      "html": "<div style=\"background:#1c3a6b;padding:20px\"><a class=\"ds-btn-paper\" href=\"#\">Conhecer o livro</a></div>",
-      "css": ".ds-btn-paper { display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 28px; background:#f4f6fa; color:#22201d; font:500 1.0625rem/1 'General Sans',system-ui,sans-serif; text-decoration:none; border-radius:0; transition:background-color 160ms ease; } .ds-btn-paper:hover { background:#dbe2ee; } .ds-btn-paper:focus-visible { outline:3px solid #f4f6fa; outline-offset:3px; }"
+      "refersTo": "button-dark",
+      "description": "Pílula noite com selo branco, para ações de contraste sobre papel.",
+      "html": "<span class=\"ds-dark\"><span class=\"ds-dark-in\">Ver edições<span class=\"ds-dark-badge\">&rarr;</span></span></span>",
+      "css": ".ds-dark{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-dark:hover{transform:scale(1.03)}.ds-dark:active{transform:scale(0.97)}.ds-dark-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:#22201d;color:#fff;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem}.ds-dark-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#fff;color:#22201d}"
     },
     {
-      "name": "Email Field",
-      "kind": "input",
-      "refersTo": "input-email",
-      "description": "Campo de e-mail do fechamento, um degrau acima da noite.",
-      "html": "<div style=\"background:#22201d;padding:20px\"><input class=\"ds-input\" type=\"email\" placeholder=\"seu@email.com\"></div>",
-      "css": ".ds-input { width:100%; min-height:56px; padding:0 20px; border:0; border-radius:0; background:#33302c; color:#f4f6fa; font:400 1.0625rem 'General Sans',system-ui,sans-serif; } .ds-input::placeholder { color:#b9bcc6; } .ds-input:focus-visible { outline:3px solid #f4f6fa; outline-offset:3px; }"
+      "name": "Botão Claro",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Pílula em papel degrau 1 com selo noite; hover sobe ao degrau 2.",
+      "html": "<span class=\"ds-light\"><span class=\"ds-light-in\">Saiba mais<span class=\"ds-light-badge\">&rarr;</span></span></span>",
+      "css": ".ds-light{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-light:hover{transform:scale(1.03)}.ds-light-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:#e8ecf3;color:#22201d;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem;transition:background-color 200ms ease}.ds-light:hover .ds-light-in{background:#dbe2ee}.ds-light-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#22201d;color:#fff}"
     },
     {
-      "name": "Edition Tab",
+      "name": "Cartão de Edição",
+      "kind": "card",
+      "refersTo": "card-blue",
+      "description": "Cartão azul de raio 2rem com selo, plate em luminosity, título e chips.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-card-meta\"><span>12 jun 2026</span><span class=\"ds-card-badge\">&nearr;</span></div><div class=\"ds-card-plate\"></div><div class=\"ds-card-bot\"><div class=\"ds-card-t\">Como conferir uma citação gerada por IA</div><p class=\"ds-card-d\">Três passos para rastrear a fonte antes de repetir a resposta.</p></div></a>",
+      "css": ".ds-card{display:block;position:relative;min-height:22rem;overflow:hidden;border-radius:2rem;background:#1c3a6b;padding:1.5rem;color:#f4f6fa;font-family:Onest,system-ui,sans-serif;text-decoration:none;transition:transform 280ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-card:hover{transform:translateY(-0.5rem) scale(1.012);background:#14264a}.ds-card-meta{display:flex;justify-content:space-between;align-items:flex-start;color:#c4d0e5}.ds-card-badge{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:9999px;background:rgba(244,246,250,0.14);color:#f4f6fa;transition:transform 280ms cubic-bezier(0.23,1,0.32,1)}.ds-card:hover .ds-card-badge{transform:rotate(45deg) scale(1.08)}.ds-card-plate{position:absolute;inset:4.75rem 1.5rem auto;height:7.5rem;border-radius:0.9375rem;background:#14264a}.ds-card-bot{position:absolute;inset-inline:1.5rem;bottom:1.5rem}.ds-card-t{font-size:1.25rem;font-weight:500;letter-spacing:-0.01em;line-height:1.15}.ds-card-d{margin-top:0.5rem;color:#c4d0e5}.ds-card:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
+    },
+    {
+      "name": "Linha de Cobertura",
+      "kind": "custom",
+      "refersTo": "row",
+      "description": "Linha de raio 1.25rem em papel degrau 1; em hover vira azul, recua e desliza o selo.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-in\"><span class=\"ds-row-t\">Como ler uma resposta de IA</span><span class=\"ds-row-badge\">&rarr;</span></span></a>",
+      "css": ".ds-row{display:block;font-family:Onest,system-ui,sans-serif;text-decoration:none;color:#22201d}.ds-row-in{display:flex;align-items:center;gap:1rem;border-radius:1.25rem;background:#e8ecf3;padding:1.5rem;transition:background-color 200ms ease,padding 240ms cubic-bezier(0.23,1,0.32,1),color 200ms ease}.ds-row-t{flex:1;font-size:1.5rem;font-weight:500;letter-spacing:-0.01em}.ds-row-badge{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:9999px;background:#1c3a6b;color:#f4f6fa;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-row:hover .ds-row-in{background:#1c3a6b;color:#f4f6fa;padding-left:2rem;padding-right:1.25rem}.ds-row:hover .ds-row-badge{transform:translateX(0.3125rem);background:#f4f6fa;color:#1c3a6b}.ds-row:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
+    },
+    {
+      "name": "Aba de Filtro",
       "kind": "chip",
       "refersTo": "tab",
-      "description": "Filtro da lista de edições; selecionada em azul.",
-      "html": "<div style=\"display:grid;gap:6px;width:190px\"><button class=\"ds-tab\" aria-pressed=\"true\">Todas</button><button class=\"ds-tab\" aria-pressed=\"false\">Método</button></div>",
-      "css": ".ds-tab { background:#e8ecf3; border:0; border-radius:0; text-align:left; min-height:56px; padding:8px 16px; font:500 1rem/1.2 'General Sans',system-ui,sans-serif; color:#22201d; cursor:pointer; } .ds-tab[aria-pressed='true'] { background:#1c3a6b; color:#f4f6fa; } .ds-tab[aria-pressed='false']:hover { background:#dbe2ee; } .ds-tab:focus-visible { outline:3px solid #1c3a6b; outline-offset:3px; }"
+      "description": "Aba de raio 0.9375rem em papel degrau 1; selecionada em azul.",
+      "html": "<button class=\"ds-tab\" aria-pressed=\"false\">Todas</button> <button class=\"ds-tab\" aria-pressed=\"true\">Guias</button>",
+      "css": ".ds-tab{background:#e8ecf3;color:#22201d;border:0;border-radius:0.9375rem;min-height:3rem;padding:0.5rem 1rem;font:500 1rem Onest,system-ui,sans-serif;text-align:left;cursor:pointer;transition:background-color 150ms ease,color 150ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-tab:active{transform:scale(0.97)}.ds-tab[aria-pressed=true]{background:#1c3a6b;color:#f4f6fa}.ds-tab:not([aria-pressed=true]):hover{background:#dbe2ee}.ds-tab:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
     },
     {
-      "name": "Edition Band",
-      "kind": "card",
-      "refersTo": "band",
-      "description": "Linha de edição em degraus de papel; vira azul em hover.",
-      "html": "<div style=\"display:grid;gap:4px\"><a class=\"ds-band\" href=\"#\"><span class=\"ds-date\">12 out 2026</span><span><b class=\"ds-t\">Título da edição</b><span class=\"ds-n\">Nota curta sobre a edição.</span></span><span class=\"ds-n\">5 min</span></a><a class=\"ds-band ds-alt\" href=\"#\"><span class=\"ds-date\">05 out 2026</span><span><b class=\"ds-t\">Outra edição</b><span class=\"ds-n\">Nota curta.</span></span><span class=\"ds-n\">4 min</span></a></div>",
-      "css": ".ds-band { display:grid; grid-template-columns:6.5rem 1fr auto; gap:8px 24px; align-items:center; min-height:92px; padding:16px 20px; background:#e8ecf3; color:#22201d; text-decoration:none; font-family:'General Sans',system-ui,sans-serif; } .ds-alt { background:#dbe2ee; } .ds-t { display:block; font-weight:500; font-size:1.0625rem; line-height:1.25; } .ds-n, .ds-date { font-size:1rem; color:#4a505e; } .ds-band:hover { background:#1c3a6b; color:#f4f6fa; } .ds-band:hover .ds-n, .ds-band:hover .ds-date { color:#c4d0e5; }"
+      "name": "Campo de E-mail",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo do modal de assinatura: papel degrau 1, raio 0.9375rem, foco no degrau 2 com contorno azul.",
+      "html": "<label class=\"ds-label\">E-mail<input class=\"ds-input\" type=\"email\" placeholder=\"voce@exemplo.com\"></label>",
+      "css": ".ds-label{display:grid;gap:0.375rem;font:500 1rem Onest,system-ui,sans-serif;color:#3f4655}.ds-input{width:100%;border:0;border-radius:0.9375rem;background:#e8ecf3;padding:0.9375rem 1rem;font:400 1rem Onest,system-ui,sans-serif;color:#22201d;outline:none;transition:background-color 200ms ease}.ds-input:focus{background:#dbe2ee;outline:0.125rem solid #1c3a6b;outline-offset:0.125rem}"
     },
     {
-      "name": "Reading Stone Lens",
+      "name": "Cartão do Hero",
       "kind": "custom",
-      "refersTo": "reading-stone",
-      "description": "Assinatura: lente circular azul revelando a camada de verificação sobre a resposta de exemplo.",
-      "html": "<div class=\"ds-stone\"><p>A resposta soa certa, mas <span class=\"ds-flag\">esta data precisa ser conferida</span>.</p><div class=\"ds-lens\"><p>A resposta soa certa, mas <span class=\"ds-flag\">esta data precisa ser conferida</span>.</p></div></div>",
-      "css": ".ds-stone { position:relative; padding:14px 18px; font-family:'General Sans',system-ui,sans-serif; color:#22201d; } .ds-stone p { margin:0; font-size:1.375rem; line-height:1.3; letter-spacing:-0.01em; font-weight:500; max-width:24em; } .ds-flag { text-decoration:underline; text-decoration-color:#a8442a; text-decoration-thickness:4px; text-underline-offset:6px; text-decoration-skip-ink:none; } .ds-lens { position:absolute; inset:0; padding:14px 18px; background:#1c3a6b; color:#f4f6fa; clip-path:circle(96px at 50% 50%); } .ds-lens .ds-flag { text-decoration-color:#e58a6e; }"
+      "refersTo": "hero-card",
+      "description": "Carrossel das edições mais novas: ladrilho noite, painel de texto, pontos e botões circulares.",
+      "html": "<div class=\"ds-hcard\"><div class=\"ds-hcard-tile\"><svg width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"12\" cy=\"12\" r=\"7\"/></svg></div><div class=\"ds-hcard-panel\"><div><div class=\"ds-hcard-cap\">Edição recente</div><div class=\"ds-hcard-title\">Como conferir uma citação gerada por IA</div></div><div class=\"ds-hcard-foot\"><span class=\"ds-dots\"><i class=\"ds-dot on\"></i><i class=\"ds-dot\"></i><i class=\"ds-dot\"></i></span></div></div></div>",
+      "css": ".ds-hcard{display:flex;gap:0.5rem;width:21rem;border-radius:1.25rem;background:rgba(244,246,250,0.94);color:#22201d;padding:0.5rem;font-family:Onest,system-ui,sans-serif}.ds-hcard-tile{aspect-ratio:1;width:6rem;display:grid;place-items:center;border-radius:0.9375rem;background:#22201d;color:#e58a6e;font-size:2rem}.ds-hcard-panel{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:0.5rem;border-radius:0.9375rem;background:#e8ecf3;padding:0.75rem}.ds-hcard-cap{font-size:0.9375rem;font-weight:500;color:#3f4655}.ds-hcard-title{font-size:1rem;font-weight:500;line-height:1.3}.ds-dots{display:flex;gap:0.25rem;align-items:center}.ds-dot{display:block;height:0.25rem;width:0.375rem;border-radius:9999px;background:rgba(34,32,29,0.25)}.ds-dot.on{width:1rem;background:#1c3a6b}"
     },
     {
-      "name": "Book Cover",
+      "name": "Pedra de Leitura",
       "kind": "custom",
-      "refersTo": "cover",
-      "description": "Capa 3:4 em papel sobre a página azul, com barra de tijolo.",
-      "html": "<div style=\"background:#1c3a6b;padding:24px\"><div class=\"ds-cover\"><i></i><b>A Máquina Resolve?</b><span>Um livro sobre ler a IA de perto.</span></div></div>",
-      "css": ".ds-cover { background:#f4f6fa; color:#22201d; aspect-ratio:3/4; width:min(100%,240px); display:flex; flex-direction:column; justify-content:space-between; padding:24px; font-family:'General Sans',system-ui,sans-serif; } .ds-cover i { display:block; width:44px; height:6px; background:#a8442a; } .ds-cover b { font-size:1.75rem; line-height:1; letter-spacing:-0.03em; font-weight:700; } .ds-cover span { font-size:1rem; line-height:1.3; }"
+      "refersTo": "card-blue",
+      "description": "Componente assinatura: parágrafo de exemplo com camada azul revelada por círculo (versão estática mostrada aqui).",
+      "html": "<div class=\"ds-stone\"><p>A pesquisa citada foi publicada em <span class=\"ds-flag\">2019 pela universidade de Lisboa</span>, segundo o modelo.</p></div>",
+      "css": ".ds-stone{padding:0.9375rem 1.125rem;border-radius:1.25rem;background:#1c3a6b;color:#f4f6fa;font-family:Onest,system-ui,sans-serif}.ds-stone p{font-size:1.375rem;line-height:1.32;letter-spacing:-0.01em;font-weight:500;max-width:24em}.ds-flag{text-decoration:underline;text-decoration-color:#e58a6e;text-decoration-thickness:0.25rem;text-underline-offset:0.375rem;text-decoration-skip-ink:none}"
     }
   ],
   "narrative": {
     "northStar": "A Prancha Cianótipo",
-    "overview": "A página é uma prancha de herbário impressa em cianótipo: papel azulado, tinta quase preta, e campos inteiros de azul profundo onde as ilustrações de Anna Atkins (domínio público) se fundem num único tom. O sistema é plano e de ângulos retos. A hierarquia vem de degraus de tom e de escala tipográfica grande, nunca de filetes, sombras ou degradês. O tijolo existe apenas como detalhe minúsculo, como um carimbo.\n\nA densidade é editorial e arejada: uma única margem lateral, grandes intervalos entre seções, texto em General Sans, único tipo da casa. A assinatura é a pedra de leitura: uma lente circular que revela, sobre uma resposta de IA de exemplo, o trecho azul com o que precisa ser conferido.",
+    "overview": "A página é uma prancha de herbário impressa em cianótipo: papel azulado, tinta quase preta e campos inteiros de azul profundo onde as pranchas de Anna Atkins (domínio público) se fundem num único tom. O sistema é plano e arredondado: pílulas para ações, cartões de raio grande para blocos de conteúdo, tudo em rem. A hierarquia vem de degraus de tom e de escala tipográfica grande, nunca de filetes, sombras, vidro ou degradês. O tijolo existe apenas como detalhe minúsculo, como um carimbo.\n\nA densidade é arejada e de movimento vivo: título grande em duas linhas, revelações por linha e por palavra, cartões que sobem em hover. A raiz de fonte escala com a largura da janela (grade adaptativa), então toda medida em rem acompanha a tela. Onest é a única família. A assinatura do mundo são duas lentes sobre a mesma ideia: no topo, o cursor pinta uma segunda prancha sobre a primeira; no meio, a \"pedra de leitura\" revela, sobre uma resposta de IA de exemplo, o trecho azul com o que precisa ser conferido.",
     "keyCharacteristics": [
-      "Eixo de 42% (grade 5fr / 7fr): nota lateral à esquerda, conteúdo à direita.",
-      "Campos de azul profundo em largura total (mastro, livro) com plates em mix-blend-mode: luminosity.",
-      "Superfícies planas, cantos retos (0), sem bordas finas, sem sombras, sem gradientes.",
-      "Tijolo só em marcas de 5 a 10 px e num sublinhado de destaque.",
-      "Uma família tipográfica, sem serifa, sem mono."
+      "Raiz adaptativa: 16px acima de 1920px; abaixo, max(0.8333vw, 15px) até 1440px, max(1.1111vw, 15px) até 1024px, max(1.5625vw, 16px) até 640px, clamp(15px, 4.4444vw, 19px) no celular.",
+      "Campos de azul profundo em cartões e faixas, com plates em mix-blend-mode: luminosity sobre o azul.",
+      "Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.",
+      "Véus são chapados (azul translúcido uniforme), nunca em degradê.",
+      "Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado."
     ],
     "rules": [
-      { "name": "The Brick Stamp Rule", "body": "O tijolo nunca cobre uma área maior que uma marca de 44 x 6 px; nunca é fundo, botão ou texto corrido.", "section": "colors" },
-      { "name": "The Tone Step Rule", "body": "Separação entre faixas se faz trocando o tom (paper, step-1, step-2, blue, night), nunca com linha ou borda.", "section": "colors" },
-      { "name": "The One Blue Rule", "body": "Todo plate fotográfico é filtrado para o azul do campo por luminosity; nenhuma imagem aparece em cor própria.", "section": "colors" },
-      { "name": "The One Family Rule", "body": "General Sans em tudo. Hierarquia se faz por peso (400/500/700) e escala, não por segunda família.", "section": "typography" },
-      { "name": "The Sentence Case Rule", "body": "Rótulos e títulos em caixa de frase, sem caixa alta e sem tracking positivo.", "section": "typography" },
-      { "name": "The Flat Plate Rule", "body": "Nenhuma sombra, borda fina ou degradê em nenhuma superfície; separar com tom ou com espaço.", "section": "elevation" }
+      { "name": "The Brick Stamp Rule", "body": "O tijolo nunca cobre área maior que uma marca de 2.75rem por 0.3125rem; nunca é fundo, botão ou texto corrido.", "section": "colors" },
+      { "name": "The Tone Step Rule", "body": "Separação entre faixas se faz trocando o tom (paper, step-1, step-2, blue, night) e espaço, nunca com linha.", "section": "colors" },
+      { "name": "The One Blue Rule", "body": "Todo plate é filtrado para o azul do campo por luminosity; nenhuma imagem aparece em cor própria.", "section": "colors" },
+      { "name": "The One Family Rule", "body": "Onest em tudo. Hierarquia por peso (400/500/600/700) e escala, não por segunda família.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "Rótulos e títulos em caixa de frase, sem caixa alta e sem tracking positivo. Piso de leitura de 1rem (0.9375rem só em legendas).", "section": "typography" },
+      { "name": "The Flat Plate Rule", "body": "Nenhuma sombra, vidro, filete ou degradê; separar com tom, véu chapado ou espaço.", "section": "elevation" }
     ],
     "dos": [
-      "Do usar apenas os tokens de cor listados; texto sobre azul em on-blue, secundário em on-blue-soft.",
-      "Do separar faixas por troca de tom e por espaço (section-gap, 4 px entre bandas).",
-      "Do alinhar blocos de conteúdo ao eixo 5fr/7fr com a margem única.",
+      "Do usar apenas os tokens de cor listados; texto sobre azul em on-blue, secundário em on-blue-soft; sobre noite, on-night-soft.",
+      "Do dimensionar tudo em rem para que a raiz adaptativa governe a escala; manter 1rem como piso de texto corrido.",
+      "Do escolher o raio entre pílula, 2rem, 1.25rem e 0.9375rem conforme a escala do elemento (ação, cartão, bloco, controle).",
+      "Do separar faixas por troca de tom e espaço; véus sobre imagem são azul chapado a 55 a 70%.",
       "Do passar todo plate por mix-blend-mode: luminosity sobre fundo azul e creditar a proveniência.",
-      "Do manter alvos de toque de 56 px (mínimo 44 px) e foco visível de 3 px.",
-      "Do oferecer a versão estática da lente e reduzir movimento quando solicitado."
+      "Do oferecer a lente estática em toque, teclado e movimento reduzido, e manter hover só para ponteiro fino.",
+      "Do rotular a demonstração da lente e o formulário sem endpoint como demonstração."
     ],
     "donts": [
-      "Don't usar sombras, degradês, bordas finas, cantos arredondados ou segunda família tipográfica.",
+      "Don't usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.",
       "Don't usar tijolo como fundo, botão ou texto corrido.",
       "Don't montar caixa de e-mail central sobre cartões iguais (o template de newsletter recusado pela tese).",
-      "Don't exibir plate em cor original."
+      "Don't exibir plate em cor original, nem inventar depoimentos, clientes, avaliações ou autoria.",
+      "Don't usar segunda família tipográfica."
     ]
   }
 }

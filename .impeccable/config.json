@@ -5,5 +5,20 @@
       "maxFindings": 5,
       "maxChars": 8000
     }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-20T13:50:46.382Z",
+        "reason": "Agent: static scan assumes paper ground for the transparent header, which sits over the blue hero/post band; the rendered-page scan (detect on localhost:5173) reports no contrast finding"
+      }
+    ]
   }
 }

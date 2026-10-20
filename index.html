@@ -5,23 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ReadingStone: leia a IA de perto</title>
   <meta name="description" content="Newsletter sobre inteligência artificial para quem estuda e trabalha com ela: modelos, pesquisas, guias e pensamento crítico. Apresenta o livro A Máquina Resolve?">
-  <meta name="theme-color" content="#f4f6fa">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c3a6b'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23f4f6fa' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="preload" href="fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#1c3a6b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c3a6b'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23f4f6fa' stroke-width='3'/%3E%3Ccircle cx='13' cy='13' r='2' fill='%23f4f6fa'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script type="importmap">{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs" } }</script>
+  <script>
+    (function () {
+      var h = document.documentElement;
+      h.classList.add("js");
+      try {
+        var calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!calmo && !sessionStorage.getItem("rs-intro")) h.classList.add("intro");
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-  <header class="bar">
-    <a class="wordmark" href="#/" aria-label="ReadingStone, início">ReadingStone</a>
-    <nav class="links" aria-label="Principal">
-      <a href="#/#edicoes">Edições</a>
-      <a href="#/#glossario">Glossário</a>
-      <a href="#/#livro">O livro</a>
-    </nav>
-    <a class="btn btn-sm" href="#/#assine">Assinar grátis</a>
+  <!-- Abertura: só na primeira visita da sessão e sem movimento reduzido -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-center" id="loader-center">
+      <p class="loader-brand"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg>ReadingStone</p>
+      <p class="loader-tag">Leia a IA de perto.</p>
+    </div>
+    <div class="loader-progress">
+      <div class="loader-track"><div class="loader-fill" id="loader-fill"></div></div>
+      <p class="loader-row"><span>Carregando</span><span class="loader-num" id="loader-num">000</span></p>
+    </div>
+  </div>
+
+  <header class="top" id="topo">
+    <div class="shell top-in">
+      <a class="brand" href="#/" aria-label="ReadingStone, início"><span class="brand-in"><svg class="ico brick" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg>ReadingStone</span></a>
+      <nav class="nav" aria-label="Principal">
+        <ul>
+          <li><a href="#/" aria-current="page">Início</a></li>
+          <li><a href="#/#edicoes">Edições</a></li>
+          <li><a href="#/#glossario">Glossário</a></li>
+          <li><a href="#/#livro">O livro</a></li>
+          <li><button type="button" data-open-modal>Assinar</button></li>
+        </ul>
+      </nav>
+      <div class="top-right">
+        <p class="clock" aria-label="Horário local"><span class="clock-l">Horário local</span><span class="clock-t" id="clock-t">09:41</span><span class="clock-sep" aria-hidden="true">•</span><span class="clock-d" id="clock-d">12 de março de 2025</span></p>
+        <button class="menu-btn" type="button" id="menu-open" aria-haspopup="dialog" aria-controls="navmenu"><span class="menu-btn-in"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="menu-word">Menu</span></span></button>
+      </div>
+    </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
@@ -29,34 +60,94 @@
   </main>
 
   <footer class="foot" id="rodape">
-    <div class="foot-top">
-      <div>
-        <p class="foot-h">Seções</p>
-        <ul>
-          <li><a href="#/#edicoes">Edições</a></li>
-          <li><a href="#/#glossario">Glossário</a></li>
-          <li><a href="#/#livro">O livro</a></li>
-          <li><a href="#/#assine">Assinar</a></li>
-        </ul>
+    <div class="shell foot-in">
+      <div class="foot-cta">
+        <h2 class="foot-h io"><span class="ln"><span>Quer ler a IA</span></span><span class="ln"><span>de perto? Assine.</span></span></h2>
+        <button class="pill pill-light pill-arrow" type="button" data-open-modal><span class="pill-in">Assinar grátis<span class="pill-badge"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
       </div>
-      <div>
-        <p class="foot-h">Sobre os textos</p>
-        <p>Os textos têm caráter informativo. Confira sempre as fontes citadas antes de repetir um dado.</p>
+      <div class="foot-cols">
+        <div>
+          <p class="foot-brand"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg>ReadingStone</p>
+          <p class="foot-tag">Newsletter sobre inteligência artificial, aprendizagem e pensamento crítico.</p>
+        </div>
+        <div>
+          <p class="foot-t">Site</p>
+          <ul>
+            <li><a href="#/#edicoes">Edições</a></li>
+            <li><a href="#/#glossario">Glossário</a></li>
+            <li><a href="#/#livro">O livro</a></li>
+            <li><button type="button" data-open-modal>Assinar</button></li>
+          </ul>
+        </div>
+        <div>
+          <p class="foot-t">Temas</p>
+          <ul id="foot-temas"></ul>
+        </div>
+        <div>
+          <p class="foot-t">Imagens</p>
+          <p class="foot-small">Cianótipos de Anna Atkins, domínio público, via Wikimedia Commons:
+            <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins,_Ferns._Specimen_of_Cyanotype,_1840s,_NGA_136477.jpg">Ferns</a>,
+            <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_Cystoseira_granulata.jpg">Cystoseira granulata</a>,
+            <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_-_Carix_(America)_-_Google_Art_Project.jpg">Carex (America)</a> e
+            <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_-_New_Zealand_-_Google_Art_Project.jpg">New Zealand</a>.</p>
+        </div>
       </div>
-      <div class="foot-credits">
-        <p class="foot-h">Imagens</p>
-        <p>Cianótipos de Anna Atkins, domínio público, via Wikimedia Commons:
-          <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins,_Ferns._Specimen_of_Cyanotype,_1840s,_NGA_136477.jpg">Ferns</a>,
-          <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_Cystoseira_granulata.jpg">Cystoseira granulata</a>,
-          <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_-_Carix_(America)_-_Google_Art_Project.jpg">Carex (America)</a> e
-          <a href="https://commons.wikimedia.org/wiki/File:Anna_Atkins_-_New_Zealand_-_Google_Art_Project.jpg">New Zealand</a>.</p>
+      <div class="foot-legal">
+        <p>© <span id="ano"></span> ReadingStone. Os textos têm caráter informativo; confira as fontes antes de repetir um dado.</p>
       </div>
     </div>
-    <svg class="foot-mark" viewBox="0 0 1000 150" role="img" aria-label="ReadingStone">
-      <text x="0" y="122" font-size="150" textLength="1000" lengthAdjust="spacing">ReadingStone</text>
-    </svg>
-    <p class="foot-legal">© <span id="ano"></span> ReadingStone</p>
+    <p class="foot-mark" aria-hidden="true" data-t="ReadingStone"></p>
   </footer>
+
+  <!-- Menu em tela cheia -->
+  <div class="navmenu" id="navmenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true" hidden>
+    <div class="shell navmenu-top">
+      <p class="navmenu-brand"><svg class="ico brick" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg>ReadingStone</p>
+      <button class="navmenu-close" type="button" id="menu-close"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Fechar</button>
+    </div>
+    <nav class="shell navmenu-nav" aria-label="Menu">
+      <ul>
+        <li><button type="button" data-go="#/">Início</button></li>
+        <li><button type="button" data-go="#/#edicoes">Edições</button></li>
+        <li><button type="button" data-go="#/#glossario">Glossário</button></li>
+        <li><button type="button" data-go="#/#livro">O livro</button></li>
+        <li><button type="button" data-go="modal">Assinar</button></li>
+      </ul>
+    </nav>
+    <div class="shell navmenu-bot">
+      <p>Horário local <span id="menu-clock"></span></p>
+      <button type="button" data-go="modal" class="navmenu-cta">Assinar grátis</button>
+    </div>
+  </div>
+
+  <!-- Assinatura -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-h" aria-hidden="true" hidden>
+    <div class="modal-panel" id="modal-panel">
+      <button class="modal-x" type="button" id="modal-close" aria-label="Fechar"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <div id="modal-form-wrap">
+        <h2 class="modal-h" id="modal-h">Receba a ReadingStone no seu e-mail.</h2>
+        <form class="mform" id="mform" novalidate>
+          <label><span>Nome <span class="opt">(opcional)</span></span>
+            <input type="text" name="nome" autocomplete="name" placeholder="Como podemos te chamar?">
+          </label>
+          <label><span>E-mail</span>
+            <input type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          </label>
+          <p class="mform-msg" id="mform-msg" role="status"></p>
+          <div class="mform-row">
+            <p class="mform-note">Sem spam, sem jargão.</p>
+            <button class="pill pill-dark pill-arrow" type="submit" id="mform-send"><span class="pill-in"><span id="mform-send-t">Assinar grátis</span><span class="pill-badge"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-ok" id="modal-ok" hidden>
+        <span class="modal-ok-badge"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg></span>
+        <h2 class="modal-h">Pronto, seu e-mail está na lista.</h2>
+        <p class="modal-ok-p">Obrigado por assinar. A próxima edição chega no seu e-mail.</p>
+        <button class="pill pill-dark" type="button" id="modal-ok-close"><span class="pill-in">Fechar</span></button>
+      </div>
+    </div>
+  </div>
 
   <script src="posts.js"></script>
   <script src="script.js"></script>

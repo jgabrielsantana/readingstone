@@ -16,7 +16,7 @@ As edições, o glossário, a demonstração da "pedra de leitura" e os dados do
 
 ## Fonte
 
-O site usa a General Sans (Fontshare). Os arquivos da fonte não estão neste repositório por causa da licença. Baixe a família em <https://www.fontshare.com/fonts/general-sans> e coloque `general-sans-400.woff2`, `general-sans-500.woff2` e `general-sans-700.woff2` em `fonts/`. Sem eles, o site usa a fonte padrão do sistema.
+O site usa a Onest (licença SIL OFL), hospedada em `fonts/`.
 
 ## Imagens
 
