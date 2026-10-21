@@ -32,16 +32,63 @@ const CONFIG = {
     link: "#/#assine", // ainda sem link de compra: leva para a assinatura da newsletter
     textoBotao: "Receber novidades do livro"
   },
+  // Aba FAQ: perguntas e respostas. Cada "r" é um parágrafo da resposta.
+  faq: [
+    {
+      p: "Para que serve a newsletter?",
+      r: [
+        "Para explicar inteligência artificial em linguagem simples: modelos, pesquisas, guias e dicas, e também a leitura crítica de como a IA muda o jeito de aprender e de saber.",
+        "Ela é feita para quem usa IA no estudo, no trabalho ou na conversa e quer entender onde a IA acerta, onde erra e como usar sem abrir mão do próprio raciocínio."
+      ]
+    },
+    {
+      p: "O que o livro aborda?",
+      r: [
+        "A Máquina Resolve? trata de como a IA afeta a construção do conhecimento e do pensamento crítico. É uma introdução à epistemologia da IA.",
+        "Entram a diferença entre informação, crença justificada e compreensão; como um modelo de linguagem funciona, sem matemática; alucinação; a IA como testemunha e autoridade; descarregamento cognitivo; confiança excessiva e dependência epistêmica; e como estudar com IA. A aba O livro tem a lista completa."
+      ]
+    },
+    {
+      p: "O livro é só para universitários?",
+      r: [
+        "O foco é a universidade, como diz o subtítulo, e é ali que o livro mais se aplica. Mas a descrição fala de quem estuda, ensina e trabalha com IA, e as ideias servem para qualquer pessoa que queira usar a IA com mais critério."
+      ]
+    },
+    {
+      p: "Por que assinar a newsletter?",
+      r: [
+        "Para acompanhar, no seu e-mail, explicações claras sobre IA, em linguagem simples e sem jargão. É um jeito de se manter informado sem precisar acompanhar todo dia o noticiário especializado.",
+        "Hoje o formulário de assinatura ainda não está conectado a um serviço de e-mail, então ele funciona como demonstração e avisa isso quando você envia."
+      ]
+    },
+    {
+      p: "A ReadingStone fala de como usar a IA?",
+      r: [
+        "Sim. Há guias e dicas práticas: como escolher um assistente de IA, como fazer perguntas melhores, como conferir uma resposta, como estudar sem terceirizar o aprendizado e quais dados nunca colar no chat.",
+        "Na aba Início, em Todas as edições, filtre por Guias e Dicas."
+      ]
+    },
+    {
+      p: "Qual o melhor modelo de IA?",
+      r: [
+        "Não existe um melhor para tudo. Os modelos mudam rápido e cada um vai melhor em certas tarefas, então qualquer ranking envelhece depressa.",
+        "O caminho mais seguro é testar a mesma tarefa real em dois ou três assistentes, começar pelo plano gratuito, considerar onde você já trabalha e pensar em que dados vai colocar ali. A edição \"Como escolher um assistente de IA sem se perder\" detalha esse roteiro."
+      ]
+    }
+  ],
   // Aba Founders. Fotos e descrições PROVISÓRIAS: troque quando tiver os textos e as fotos reais.
   // "foto" vazio = mostra o espaço provisório com as iniciais. "linkedin" vazio = o botão não aparece.
+  // "confirmado: true" tira o aviso "Descrição provisória" do card.
   founders: [
     {
       nome: "João Gabriel Nunes Santana",
       iniciais: "JG",
       papel: "Cofundador",
-      foto: "",
+      foto: "assets/joao-gabriel.jpg",
+      fotoTam: [567, 423],
       linkedin: "",
-      descricao: "Cofundador da ReadingStone. Descrição provisória: aqui entram a formação, os interesses e o que João Gabriel faz na newsletter e no livro."
+      confirmado: true,
+      descricao: "Graduando no ITA e medalhista olímpico, com interesse por Dados, Machine Learning, IA e Finanças. Cofundador da ReadingStone e autor, junto com Mateus, de A Máquina Resolve?"
     },
     {
       nome: "Mateus Costa Medeiros",

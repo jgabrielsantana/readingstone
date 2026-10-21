@@ -135,6 +135,21 @@ components:
     padding: "1.25rem 1.25rem 2rem"
   founder-card-hover:
     backgroundColor: "{colors.blue-deep}"
+  faq-item:
+    backgroundColor: "{colors.paper-step-1}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.card-sm}"
+    padding: "1rem 1.25rem"
+    height: "4.5rem"
+  faq-item-alt:
+    backgroundColor: "{colors.paper-step-2}"
+  faq-badge:
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.on-blue}"
+    rounded: "{rounded.pill}"
+    size: "2.5rem"
+  faq-badge-hover:
+    backgroundColor: "{colors.blue-deep}"
   story-panel:
     backgroundColor: "{colors.paper-step-1}"
     textColor: "{colors.ink}"
@@ -168,7 +183,7 @@ A densidade é arejada e de movimento vivo: título grande em duas linhas, revel
 - Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.
 - Véus são chapados (azul translúcido uniforme), nunca em degradê.
 - Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado.
-- Três abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer.
+- Quatro abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer.
 
 ## Colors
 
@@ -219,7 +234,7 @@ Paleta fixada pelo usuário: papel azulado, preto suave, azul profundo, tijolo m
 
 Contêiner `shell` de 88rem com margem lateral de 1.25rem (2rem a partir de 640px). Seções com 5rem de respiro vertical (7rem a partir de 1024px). Pares de conteúdo usam 5fr/7fr (sobre, pedra de leitura, livro, artigo), com nota ou plate sticky à esquerda; o hero usa 12 colunas, 7 para o texto e 5 para o cartão e os temas. Abaixo de 1024px tudo vira coluna única, a navegação some em favor do botão Menu, plate e lista lateral do artigo são ocultados. A lista de edições usa abas de 13rem (sticky) e linhas com data de 6.5rem, texto e meta; abaixo de 860px as abas viram linha corrida. O primeiro cartão de edição ocupa a largura toda a partir de 768px. Estatísticas em 4 colunas (2 abaixo de 1024px). Intervalos recorrentes: 0.25rem entre linhas empilhadas, 0.75rem e 1.5rem entre blocos, 3rem entre grandes grupos. O friso de três plates sangra até as bordas com cantos arredondados só nas pontas internas.
 
-Três abas por rota de hash (Início, O livro, Founders), sempre com a abertura e a primeira tela em Início. A navegação entre abas mora em três lugares conforme a largura: na navegação do cabeçalho a partir de 1024px (aba atual com sublinhado de 0.1875rem), numa fileira de pílulas sob o cabeçalho abaixo de 1024px e numa barra inferior fixa em noite, de largura total, que esconde ao rolar para baixo e volta ao rolar para cima ou no fim da página (some na abertura; recebe foco, reaparece). O rodapé reserva 6rem para a barra. Corpo das abas (`tab-body`) com 3rem de respiro vertical (2rem no topo do livro) e título de até 14ch. A grade de founders tem 1 coluna, 2 a partir de 768px e 3 (1fr 1fr 1.05fr) a partir de 1100px, com 1.5rem de intervalo; o painel de história ocupa a linha inteira entre 768 e 1099px e vira a terceira coluna a partir de 1100px.
+Quatro abas por rota de hash (Início, O livro, Founders, FAQ em `#/faq`), sempre com a abertura e a primeira tela em Início. A navegação entre abas mora em três lugares conforme a largura: na navegação do cabeçalho a partir de 1024px (aba atual com sublinhado de 0.1875rem), numa fileira de pílulas sob o cabeçalho abaixo de 1024px e numa barra inferior fixa em noite, de largura total, que esconde ao rolar para baixo e volta ao rolar para cima ou no fim da página (some na abertura; recebe foco, reaparece). O rodapé reserva 6rem para a barra. Corpo das abas (`tab-body`) com 3rem de respiro vertical (2rem no topo do livro) e título de até 14ch. A grade de founders tem 1 coluna, 2 a partir de 768px e 3 (1fr 1fr 1.05fr) a partir de 1100px, com 1.5rem de intervalo; o painel de história ocupa a linha inteira entre 768 e 1099px e vira a terceira coluna a partir de 1100px. A aba FAQ usa 5fr/7fr a partir de 1024px (2.5rem de intervalo), com a coluna esquerda (título, apoio e plate 4/3) sticky a 2rem do topo; abaixo disso é coluna única com 2rem de intervalo e 0.5rem entre perguntas. Com sete itens na navegação do cabeçalho, entre 1024 e 1099px o rótulo do relógio some e o intervalo da navegação cai para 1rem. Até 480px a barra inferior e a fileira de abas apertam intervalo (0.125rem e 0.375rem) e padding horizontal (0.75rem e 0.875rem) para caberem quatro pílulas.
 
 ## Elevation & Depth
 
@@ -253,6 +268,9 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 
 ### Cartão de founder
 - Cartão azul de raio 2rem, padding 1.25rem 1.25rem 2rem (1rem 1rem 1.5rem no celular). Foto 4:5 de raio 1.25rem sobre `blue-deep`; sem foto, iniciais 700 em 5.5rem e a lente a 18% de opacidade, mais selo em pílula "Foto provisória" (`on-blue` a 16%, 0.9375rem). Nome 600 em 1.625rem, chips de papel e "Descrição provisória". A descrição expande por `grid-template-rows` de 0fr para 1fr (300ms) com texto em `on-blue-soft` que sobe e aparece; o botão Conhecer (pílula `on-blue` a 16%, 2.875rem) gira o ícone de mais 45 graus e vira Fechar, com `aria-expanded`. A pílula LinkedIn (mesmo estilo, abre em outra aba) só existe quando há URL. Hover: sobe 0.5rem e vira `blue-deep`.
+
+### Sanfona de perguntas (FAQ)
+- Seis perguntas (conteúdo em `CONFIG.faq`) em linhas de raio 1.25rem, `paper-step-1` alternando `paper-step-2`, com 0.5rem entre elas. Cada pergunta é um `h2` com botão de largura total (mín. 4.5rem, padding 1rem 1.25rem, 600 em 1.1875rem, tracking -0.01em, entrelinha 1.25) e, à direita, selo circular azul de 2.5rem com ícone de mais, que gira 45 graus ao abrir (300ms) e escurece para `blue-deep` em hover com ponteiro fino. A resposta expande por `grid-template-rows` de 0fr para 1fr (300ms); os parágrafos (máx. 60ch, padding lateral 1.25rem, 1.5rem no fim) sobem 0.375rem e aparecem em 250ms. Fechada, a resposta fica `inert`; o botão carrega `aria-expanded` e `aria-controls`, e a resposta é uma região rotulada pelo botão. Várias podem ficar abertas ao mesmo tempo. Acima, faixa de plate com véu chapado e título `h1` em duas linhas; abaixo, o friso.
 
 ### Painel de história
 - Painel em `paper-step-1`, raio 2rem, padding 1.75rem (2rem em 1100px), título 600 em 1.875rem, prosa de 1.0625rem e nota de conteúdo provisório em 1rem, botão azul no fim. Fecha a grade de founders sem virar um terceiro cartão azul.
@@ -290,6 +308,7 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 - **Do** rotular a demonstração da lente e o formulário sem endpoint como demonstração, e todo conteúdo de espaço reservado (foto, descrição, capa) como provisório.
 - **Do** manter a barra de abas como a única superfície noite fixa e dar a ela o mesmo vocabulário de pílula; esconder ao descer, mostrar ao subir.
 - **Do** renderizar o botão do LinkedIn só quando há URL.
+- **Do** manter respostas expansíveis fora do fluxo de leitura enquanto fechadas (`inert`) e animá-las por `grid-template-rows`, sem medir altura.
 
 ### Don't:
 - **Don't** usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-20T12:00:00.000Z",
+  "generatedAt": "2026-10-20T18:00:00.000Z",
   "title": "Design System: ReadingStone",
   "extensions": {
     "colorMeta": {
@@ -242,6 +242,11 @@
         "name": "fmore-expand",
         "value": "grid-template-rows 0fr to 1fr, 300ms var(--ease)",
         "purpose": "Descrição do founder expande sem medir altura; texto sobe 0.5rem e aparece em 250ms."
+      },
+      {
+        "name": "faq-expand",
+        "value": "grid-template-rows 0fr to 1fr, 300ms var(--ease)",
+        "purpose": "Resposta da FAQ expande sem medir altura; texto sobe 0.375rem e aparece em 250ms; selo de mais gira 45 graus em 300ms; resposta fechada fica inert."
       }
     ],
     "breakpoints": [
@@ -272,6 +277,14 @@
       {
         "name": "founders-3col",
         "value": "1100px"
+      },
+      {
+        "name": "header-tight",
+        "value": "1024px a 1099px (relógio oculto, intervalo da navegação 1rem)"
+      },
+      {
+        "name": "xs",
+        "value": "480px"
       }
     ],
     "rootScale": [
@@ -375,8 +388,16 @@
       "kind": "nav",
       "refersTo": "tabbar-item",
       "description": "Barra inferior noite de largura total; aba atual em pílula papel. A fileira sob o cabeçalho usa as mesmas pílulas em on-blue a 16%.",
-      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\">Início</a><a href=\"#\">O livro</a><a href=\"#\">Founders</a></nav>",
+      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\">Início</a><a href=\"#\">O livro</a><a href=\"#\">Founders</a><a href=\"#\">FAQ</a></nav>",
       "css": ".ds-tabbar{display:flex;justify-content:center;gap:0.25rem;padding:0.5rem 0.75rem;background:#22201d;font-family:Onest,system-ui,sans-serif}.ds-tabbar a{display:grid;place-items:center;min-height:2.75rem;padding:0 1.25rem;border-radius:9999px;color:#b9bcc6;font-size:1rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background-color 200ms ease,color 200ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-tabbar a:active{transform:scale(0.97)}.ds-tabbar a[aria-current=page]{background:#f4f6fa;color:#22201d}.ds-tabbar a:not([aria-current]):hover{color:#fff;background:rgba(255,255,255,0.12)}.ds-tabbar a:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
+    },
+    {
+      "name": "Pergunta da FAQ",
+      "kind": "custom",
+      "refersTo": "faq-item",
+      "description": "Linha de raio 1.25rem com botão de largura total e selo azul de mais que gira 45 graus ao abrir; resposta expande por grid-rows.",
+      "html": "<ul class=\"ds-q-list\"><li class=\"ds-q open\"><button class=\"ds-q-btn\" aria-expanded=\"true\"><span>O que é a ReadingStone?</span><span class=\"ds-q-i\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\"><path d=\"M12 5v14M5 12h14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span></button><div class=\"ds-q-a\"><div><p>Uma publicação que ensina a ler a IA de perto.</p></div></div></li><li class=\"ds-q\"><button class=\"ds-q-btn\" aria-expanded=\"false\"><span>Quanto custa?</span><span class=\"ds-q-i\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\"><path d=\"M12 5v14M5 12h14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span></button><div class=\"ds-q-a\"><div><p>Resposta de exemplo.</p></div></div></li></ul>",
+      "css": ".ds-q-list{list-style:none;margin:0;padding:0;display:grid;gap:0.5rem;width:30rem;font-family:Onest,system-ui,sans-serif;color:#22201d}.ds-q{border-radius:1.25rem;background:#e8ecf3}.ds-q:nth-child(even){background:#dbe2ee}.ds-q-btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:4.5rem;padding:1rem 1.25rem;border:0;border-radius:1.25rem;background:none;color:inherit;text-align:left;font:600 1.1875rem/1.25 Onest,system-ui,sans-serif;letter-spacing:-0.01em;cursor:pointer}.ds-q-i{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:9999px;background:#1c3a6b;color:#f4f6fa;transition:transform 300ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-q-btn:hover .ds-q-i{background:#14264a}.ds-q.open .ds-q-i{transform:rotate(45deg)}.ds-q-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows 300ms cubic-bezier(0.23,1,0.32,1)}.ds-q-a>div{overflow:hidden}.ds-q-a p{margin:0;padding:0 1.25rem 1.5rem;max-width:60ch;opacity:0;transform:translateY(0.375rem);transition:opacity 250ms ease,transform 300ms cubic-bezier(0.23,1,0.32,1)}.ds-q.open .ds-q-a{grid-template-rows:1fr}.ds-q.open .ds-q-a p{opacity:1;transform:none}.ds-q-btn:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:-0.1875rem}"
     },
     {
       "name": "Cartão de Founder",
@@ -404,7 +425,7 @@
       "Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.",
       "Véus são chapados (azul translúcido uniforme), nunca em degradê.",
       "Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado.",
-      "Três abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer."
+      "Quatro abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer."
     ],
     "rules": [
       {
@@ -447,7 +468,8 @@
       "Do oferecer a lente estática em toque, teclado e movimento reduzido, e manter hover só para ponteiro fino.",
       "Do rotular a demonstração da lente e o formulário sem endpoint como demonstração, e todo conteúdo de espaço reservado (foto, descrição, capa) como provisório.",
       "Do manter a barra de abas como a única superfície noite fixa e dar a ela o mesmo vocabulário de pílula; esconder ao descer, mostrar ao subir.",
-      "Do renderizar o botão do LinkedIn só quando há URL."
+      "Do renderizar o botão do LinkedIn só quando há URL.",
+      "Do manter respostas expansíveis fora do fluxo de leitura enquanto fechadas (inert) e animá-las por grid-template-rows, sem medir altura."
     ],
     "donts": [
       "Don't usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.",

@@ -819,7 +819,7 @@
 
   function fcard(f, i) {
     const foto = f.foto
-      ? `<img src="${esc(f.foto)}" alt="Foto de ${esc(f.nome)}" width="800" height="1000" loading="lazy">`
+      ? `<img src="${esc(f.foto)}" alt="Foto de ${esc(f.nome)}" width="${(f.fotoTam || [800, 1000])[0]}" height="${(f.fotoTam || [800, 1000])[1]}" loading="lazy">`
       : `<div class="fphoto-ph" aria-hidden="true"><span class="fphoto-ini">${esc(f.iniciais || "")}</span>${I.lens}</div>`;
     const lk = f.linkedin
       ? `<a class="flink" href="${esc(f.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de ${esc(f.nome)} (abre em outra aba)">LinkedIn ${I.up}</a>`
@@ -829,7 +829,7 @@
         <div class="fphoto">${foto}${f.foto ? "" : '<span class="fbadge">Foto provisória</span>'}</div>
         <div class="fbody">
           <h2 class="fname">${esc(f.nome)}</h2>
-          <div class="chips"><span class="chip">${esc(f.papel)}</span><span class="chip">Descrição provisória</span></div>
+          <div class="chips"><span class="chip">${esc(f.papel)}</span>${f.confirmado ? "" : '<span class="chip">Descrição provisória</span>'}</div>
           <div class="fmore" id="fm-${i}"><div class="fmore-in"><p>${esc(f.descricao)}</p></div></div>
           <div class="factions">
             <button class="fbtn" type="button" aria-expanded="false" aria-controls="fm-${i}"><span class="fbtn-t">Conhecer</span><span class="fbtn-i" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
@@ -837,6 +837,43 @@
           </div>
         </div>
       </article>`;
+  }
+
+  function renderFaq() {
+    if (liquidStop) { liquidStop(); liquidStop = null; }
+    document.title = "Perguntas frequentes | ReadingStone";
+    const itens = CONFIG.faq || [];
+    app.innerHTML = `
+      <div class="post-band on-dark"><img src="${PLATES[1].src}" alt="${esc(PLATES[1].alt)}" width="1920" height="2417" fetchpriority="high"><div class="post-band-scrim"></div></div>
+      <section id="faq-tab" class="shell tab-body" aria-labelledby="h-faq">
+        <div class="faq-grid">
+          <div class="faq-head">
+            <h1 class="h2 io" id="h-faq">${L("Perguntas", "frequentes")}</h1>
+            <p class="lead rv" style="--d:120ms">Respostas curtas sobre a newsletter e sobre o livro.</p>
+            ${sidePlate(3, "4 / 3")}
+          </div>
+          <ul class="faq-list">
+            ${itens.map((q, i) => `
+              <li class="faq-item rv" style="--d:${i * 70}ms">
+                <h2 class="faq-q"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-r-${i}" id="faq-b-${i}"><span>${esc(q.p)}</span><span class="faq-i" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button></h2>
+                <div class="faq-a" id="faq-r-${i}" role="region" aria-labelledby="faq-b-${i}" inert><div class="faq-a-in">${q.r.map((t) => `<p>${esc(t)}</p>`).join("")}</div></div>
+              </li>`).join("")}
+          </ul>
+        </div>
+      </section>
+      ${friso(2)}`;
+    app.querySelectorAll(".faq-btn").forEach((b) =>
+      b.addEventListener("click", () => {
+        const item = b.closest(".faq-item");
+        const aberto = item.classList.toggle("open");
+        b.setAttribute("aria-expanded", String(aberto));
+        item.querySelector(".faq-a").inert = !aberto;
+      })
+    );
+    setActiveTab("faq");
+    observeReveals();
+    toTop();
+    initLenis();
   }
 
   function renderFounders() {
@@ -890,6 +927,7 @@
     if (m) { destroyLenis(); setActiveTab("inicio"); renderPost(m[1]); return; }
     if (h === "livro" || h === "#livro") { if (!document.getElementById("livro-tab")) renderLivro(); else toTop(); return; }
     if (h === "founders") { if (!document.getElementById("founders-tab")) renderFounders(); else toTop(); return; }
+    if (h === "faq") { if (!document.getElementById("faq-tab")) renderFaq(); else toTop(); return; }
 
     const ancora = h.startsWith("#") ? h.slice(1) : "";
     setActiveTab("inicio");
@@ -903,7 +941,7 @@
   document.querySelector(".brand").addEventListener("click", () => { if (location.hash === "" || location.hash === "#/") route(); });
 
   // depois da abertura 000 a 100, a primeira aba que aparece é sempre a central
-  if (html.classList.contains("intro") && /^#\/(livro|founders|#livro)/.test(location.hash)) history.replaceState(null, "", "#/");
+  if (html.classList.contains("intro") && /^#\/(livro|founders|faq|#livro)/.test(location.hash)) history.replaceState(null, "", "#/");
   runLoader();
   route();
 })();
