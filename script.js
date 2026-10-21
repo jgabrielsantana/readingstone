@@ -637,6 +637,19 @@
   });
   sistemaEscuro.addEventListener("change", (e) => { if (!guardado()) aplicaTema(e.matches ? "dark" : "light"); });
 
+  /* ---------- relógio ---------- */
+  function tickClock() {
+    const d = new Date();
+    const t = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+    const data = d.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+    const a = document.getElementById("clock-t"), b = document.getElementById("clock-d"), c = document.getElementById("menu-clock");
+    if (a) a.textContent = t;
+    if (b) b.textContent = data;
+    if (c) c.textContent = t + ", " + data;
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
   /* ---------- menu em tela cheia e modal ---------- */
   const navmenu = document.getElementById("navmenu");
   const modal = document.getElementById("modal");
