@@ -164,6 +164,44 @@
   // contorno do recorte em degraus, usado nas placas da linha do tempo
   const PLATE_OUTLINE = "M13.6168 0.497469H697.378C700.858 0.497469 704.195 1.38786 706.655 2.97277C709.115 4.55769 710.498 6.70729 710.498 8.94869V411.208C710.498 413.449 709.115 415.599 706.655 417.183C704.195 418.768 700.858 419.659 697.378 419.659H460.249C454.073 419.659 447.976 420.555 442.411 422.281C436.847 424.008 431.958 426.519 428.107 429.63L399.246 452.95C395.559 455.928 390.878 458.333 385.55 459.986C380.223 461.639 374.385 462.497 368.472 462.497H13.6168C10.1373 462.497 6.80038 461.607 4.34003 460.022C1.87968 458.437 0.497469 456.288 0.497469 454.046V8.94869C0.497469 6.70729 1.87968 4.55769 4.34003 2.97277C6.80038 1.38786 10.1373 0.497469 13.6168 0.497469Z";
 
+  /* ---------- placas desenhadas para a linha do tempo da IA ---------- */
+  const ART_R = "var(--shu-soft)", ART_B = "var(--ai-soft)", ART_G = "var(--matsu-soft)";
+  const aBase = (inner) => `<svg class="tl-art" viewBox="0 0 710 462" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${inner}</svg>`;
+  const STK = 'fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"';
+  const noise = (i, j) => { let h = Math.imul(i + 11, 374761393) + Math.imul(j + 7, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+  const circ = (cx, cy, r, extra) => `<circle cx="${cx}" cy="${cy}" r="${r}" ${extra || ""}/>`;
+  const ARTE = {
+    tube: () => aBase(`<g ${STK}><path d="M270 372V196Q270 76 355 76Q440 76 440 196V372Z"/><path d="M248 372H462V404H248Z"/><path d="M300 404V432M332 404V438M378 404V438M410 404V432"/></g>
+      <g fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M322 124H388V230H322Z" stroke="${ART_B}"/><path d="M306 258H404M306 282H404" stroke="${ART_G}" stroke-dasharray="16 10"/><path d="M336 372V322Q336 298 355 298Q374 298 374 322V372" stroke="${ART_R}"/></g>`),
+    neuron: () => aBase(`<g ${STK}><circle cx="330" cy="231" r="58"/><path d="M276 205L200 160M200 160L150 120M200 160L136 178M272 240L180 252M180 252L120 228M180 252L132 296M300 284L262 352M262 352L222 382M388 231H560M560 231L612 190M560 231H624M560 231L612 272"/></g>
+      ${circ(330, 231, 22, `fill="${ART_R}"`)}${[[150, 120], [136, 178], [120, 228], [132, 296], [222, 382]].map(([x, y]) => circ(x, y, 10, `fill="${ART_B}"`)).join("")}${[[612, 190], [624, 231], [612, 272]].map(([x, y]) => circ(x, y, 12, `fill="${ART_G}"`)).join("")}`),
+    transistor: () => aBase(`<g ${STK}><circle cx="355" cy="231" r="124"/><path d="M190 231H318M318 168V294M318 205L398 150V92M318 257L398 312V370"/></g>
+      <path d="M366 292l30 22-6-36z" fill="${ART_R}"/><circle cx="190" cy="231" r="11" fill="${ART_B}"/><circle cx="398" cy="92" r="11" fill="${ART_G}"/><circle cx="398" cy="370" r="11" fill="${ART_G}"/>`),
+    turing: () => aBase(`<g ${STK}><path d="M110 100H330Q352 100 352 122V196Q352 218 330 218H212L156 262V218H110Q88 218 88 196V122Q88 100 110 100Z"/><path d="M600 226H380Q358 226 358 248V322Q358 344 380 344H498L554 388V344H600Q622 344 622 322V248Q622 226 600 226Z"/></g>
+      <text x="220" y="190" text-anchor="middle" font-family="var(--display)" font-weight="800" font-size="96" fill="${ART_R}">?</text>${[440, 490, 540].map((x) => circ(x, 288, 10, 'fill="currentColor"')).join("")}`),
+    dartmouth: () => aBase(`<text x="355" y="318" text-anchor="middle" font-family="var(--display)" font-weight="800" font-size="270" fill="currentColor">IA</text><path d="M205 356H505" stroke="${ART_R}" stroke-width="8" stroke-linecap="round"/>${circ(355, 100, 34, `fill="none" stroke="${ART_B}" stroke-width="6"`)}`),
+    perceptron: () => aBase(`<g stroke-linecap="round" fill="none"><path d="M176 110L494 231" stroke="${ART_B}" stroke-width="4"/><path d="M176 231H494" stroke="currentColor" stroke-width="10"/><path d="M176 352L494 231" stroke="${ART_G}" stroke-width="6"/></g>
+      ${[110, 231, 352].map((y) => circ(150, y, 28, 'fill="none" stroke="currentColor" stroke-width="6"')).join("")}${circ(534, 231, 44, `fill="${ART_R}"`)}<path d="M590 300H626V176H664" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>`),
+    ic: () => { const pins = (n, x0, y0, dx, dy, w, h) => Array.from({ length: n }, (_, i) => `<rect x="${x0 + i * dx}" y="${y0 + i * dy}" width="${w}" height="${h}" rx="3"/>`).join(""); return aBase(`<g ${STK}><rect x="235" y="112" width="240" height="238" rx="16"/></g>
+      <g fill="currentColor">${pins(8, 205, 135, 0, 28, 30, 10)}${pins(8, 475, 135, 0, 28, 30, 10)}${pins(6, 268, 82, 36, 0, 10, 30)}${pins(6, 268, 350, 36, 0, 10, 30)}</g>
+      <rect x="300" y="172" width="110" height="118" rx="8" fill="none" stroke="${ART_R}" stroke-width="6"/><path d="M300 200H260M300 231H250M300 262H260M410 200H460M410 231H470M410 262H460M330 172V140M355 172V130M380 172V140" fill="none" stroke="${ART_B}" stroke-width="4" stroke-linecap="round"/>`); },
+    eliza: () => aBase(`<g ${STK}><path d="M96 92H386Q408 92 408 114V176Q408 198 386 198H174L130 236V198H96Q74 198 74 176V114Q74 92 96 92Z"/><path d="M614 232H300Q278 232 278 254V316Q278 338 300 338H578L622 376V338H614Q636 338 636 316V254Q636 232 614 232Z"/></g>
+      <text x="241" y="156" text-anchor="middle" font-family="Onest, sans-serif" font-size="32" fill="currentColor">Estou cansado.</text><text x="457" y="296" text-anchor="middle" font-family="Onest, sans-serif" font-size="32" fill="${ART_R}">Fale mais sobre isso.</text>`),
+    cpu: () => aBase(`<g ${STK}><path d="M170 152H540V310H170Z"/><path d="M170 210a21 21 0 0 1 0 42"/></g><g fill="currentColor">${Array.from({ length: 8 }, (_, i) => `<rect x="${196 + i * 44}" y="122" width="12" height="30" rx="3"/><rect x="${196 + i * 44}" y="310" width="12" height="30" rx="3"/>`).join("")}</g>
+      <text x="355" y="256" text-anchor="middle" font-family="var(--display)" font-weight="800" font-size="76" fill="${ART_R}">4004</text>`),
+    backprop: () => aBase(`<g stroke="currentColor" stroke-width="3" opacity=".45" fill="none">${[130, 231, 332].flatMap((a) => [86, 186, 276, 376].map((b) => `<path d="M170 ${a}L355 ${b}"/>`)).join("")}${[86, 186, 276, 376].flatMap((a) => [160, 302].map((b) => `<path d="M355 ${a}L540 ${b}"/>`)).join("")}</g>
+      ${[130, 231, 332].map((y) => circ(170, y, 22, 'fill="var(--panel)" stroke="currentColor" stroke-width="5"')).join("")}${[86, 186, 276, 376].map((y) => circ(355, y, 22, 'fill="var(--panel)" stroke="currentColor" stroke-width="5"')).join("")}${[160, 302].map((y) => circ(540, y, 22, `fill="var(--panel)" stroke="${ART_G}" stroke-width="5"`)).join("")}
+      <path d="M540 128C470 24 260 24 170 98" fill="none" stroke="${ART_R}" stroke-width="7" stroke-linecap="round"/><path d="M164 84l-4 34 30-18z" fill="${ART_R}"/>`),
+    chess: () => aBase(`${Array.from({ length: 24 }, (_, k) => { const i = k % 6, j = Math.floor(k / 6); return (i + j) % 2 ? `<rect x="${115 + i * 80}" y="${71 + j * 80}" width="80" height="80" fill="currentColor" opacity=".18"/>` : ""; }).join("")}<rect x="115" y="71" width="480" height="320" fill="none" stroke="currentColor" stroke-width="6"/>
+      <use href="#cross" x="275" y="111" width="160" height="160" style="color:${ART_R}"/><path d="M285 330H425" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>`),
+    alexnet: () => aBase(`${[180, 140, 104, 72, 44].map((s, k) => { const x = 90 + k * 120, y = 231 - s / 2 - 12; return [0, 1, 2].map((m) => `<rect x="${x + m * 14}" y="${y + m * 14}" width="${s}" height="${s}" fill="none" stroke="${k > 2 ? ART_G : k > 0 ? ART_B : "currentColor"}" stroke-width="5"/>`).join("") + (k < 4 ? `<path d="M${x + s + 38} 231h22l-8-8m8 8l-8 8" fill="none" stroke="${ART_R}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>` : ""); }).join("")}`),
+    go: () => aBase(`<g stroke="currentColor" stroke-width="4" opacity=".6">${Array.from({ length: 7 }, (_, i) => `<path d="M${167 + i * 56} 63V399M167 ${63 + i * 56}H503"/>`).join("")}</g>
+      ${[[2, 1, 0], [3, 3, 1], [4, 2, 0], [1, 4, 1], [3, 5, 0], [5, 3, 1], [2, 3, 0]].map(([i, j, w]) => circ(167 + i * 56, 63 + j * 56, 24, w ? 'fill="var(--on-panel)" stroke="var(--on-panel)" stroke-width="3"' : `fill="var(--panel)" stroke="${ART_R}" stroke-width="5"`)).join("")}`),
+    attention: () => aBase(`${Array.from({ length: 64 }, (_, k) => { const i = k % 8, j = Math.floor(k / 8), hot = noise(i, j) > 0.78 && i !== j, v = i === j ? 0.9 : hot ? 0.75 : 0.1 + noise(j, i) * 0.25; return `<rect x="${179 + i * 44}" y="${55 + j * 44}" width="40" height="40" rx="4" fill="${hot ? ART_R : i === j ? "currentColor" : ART_B}" opacity="${v.toFixed(2)}"/>`; }).join("")}`),
+    chat: () => aBase(`<g ${STK}><rect x="110" y="64" width="490" height="226" rx="22"/><rect x="110" y="330" width="490" height="68" rx="34"/></g>
+      <g stroke-linecap="round" stroke-width="12" fill="none"><path d="M150 112H500M150 156H560M150 200H430" stroke="currentColor" opacity=".7"/><path d="M150 244H260" stroke="${ART_R}"/></g>${circ(558, 364, 22, `fill="${ART_R}"`)}<path d="M150 364H320" stroke="currentColor" stroke-width="8" stroke-linecap="round" opacity=".5"/>`)
+  };
+
   /* ---------- home ---------- */
   const SERVICOS = [
     { cat: "Modelos", d: "O que mudou nos assistentes de IA e o que importa para o seu uso." },
@@ -172,6 +210,13 @@
     { cat: "Pensamento crítico", d: "Como a IA muda o jeito de aprender e de saber." }
   ];
   const FASES = [0, 0.12, 0.25, 0.38, 0.5, 0.75];
+  // as quatro fases da lua viram os quatro passos para ler uma resposta de IA
+  const PASSOS = [
+    { v: "Leia", t: "Leia a resposta inteira antes de reagir.", ph: 0 },
+    { v: "Cheque", t: "Ache a fonte do dado e abra você mesmo.", ph: 0.25 },
+    { v: "Pergunte", t: "Peça o raciocínio, um exemplo e o que a IA não sabe.", ph: 0.5 },
+    { v: "Decida", t: "A decisão e a responsabilidade continuam sendo suas.", ph: 0.75 }
+  ];
 
   function renderHome() {
     F.cleanup();
@@ -186,27 +231,17 @@
     const demoHtml = (flagged) =>
       dem.partes.map((x) => (x.m === undefined ? esc(x.t) : flagged ? `<span class="flag">${esc(x.t)}</span>` : esc(x.t))).join("");
 
-    const idxRows = [
-      { t: "centre", post: recentes[0], art: ARTS.musashi, par: 20 },
-      { t: "side", al: "right", art: ARTS.cub, rot: "Leão", par: 60 },
-      { t: "centre", post: recentes[1], art: ARTS.dawn, par: 20 },
-      { t: "side", al: "left", art: ARTS.peonies, rot: "Peônias", par: 60 },
-      { t: "centre", post: recentes[2], art: ARTS.smoke, par: 20 },
-      { t: "side", al: "right", art: ARTS.enlight, rot: "Iluminação", par: 60 },
-      { t: "centre", post: recentes[3], art: ARTS.fox, par: 20 }
-    ];
     const plateOutline = `<svg class="tl-outline" viewBox="0 0 710.995 462.995" preserveAspectRatio="none" aria-hidden="true"><path d="${PLATE_OUTLINE}" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke"/></svg>`;
-    const rowHtml = (r, i) => {
-      const plate = `<div class="tl-plate" data-par="${r.par}"><div class="tl-fill"><div class="tl-slot" data-slot>${img(r.art)}</div></div>${plateOutline}</div>`;
-      if (r.t === "side") {
-        return `<div class="tl-row side ${r.al} c${i % 3}"><div class="tl-pl-wrap">${plate}</div><p class="tl-year" data-par="${r.par}" aria-hidden="true">${letras(r.rot, 0)}</p><span class="sr">${esc(r.art.nome)}, ${esc(r.art.autor)}</span></div>`;
+    let lado = 0;
+    const rowHtml = (h, i) => {
+      const centre = h.lado === "c", par = centre ? 20 : 60;
+      const plate = `<div class="tl-plate" data-par="${par}"><div class="tl-fill"><div class="tl-slot">${ARTE[h.arte]()}</div></div>${plateOutline}</div>`;
+      const seal = `<p class="tl-year" data-par="${par}" aria-hidden="true">${letras(h.ano, 0)}</p>`;
+      if (!centre) {
+        const al = lado++ % 2 === 0 ? "right" : "left";
+        return `<div class="tl-row side ${al} c${i % 3}"><div class="tl-pl-wrap">${plate}</div>${seal}<p class="tl-note" data-par="40"><b>${esc(h.titulo)}.</b> ${esc(h.texto)}</p></div>`;
       }
-      const p = r.post;
-      return `<div class="tl-row centre ${corDe(p.categoria)}">
-        <a class="tl-pl-wrap" href="#/post/${esc(p.slug)}" tabindex="-1" aria-hidden="true">${plate}</a>
-        <p class="tl-year" data-par="${r.par}" aria-hidden="true">${letras(fmtCurta(p.data), 0)}</p>
-        <p class="tl-copy" data-par="110"><a href="#/post/${esc(p.slug)}"><b>${esc(p.titulo)}.</b> ${esc(p.resumo)}</a></p>
-      </div>`;
+      return `<div class="tl-row centre c${i % 3}"><div class="tl-pl-wrap">${plate}</div>${seal}<p class="tl-copy" data-par="110"><b>${esc(h.titulo)}.</b> ${esc(h.texto)}</p></div>`;
     };
 
     app.innerHTML = `
@@ -270,18 +305,18 @@
                 </svg>
                 <canvas class="s-trace"></canvas>
               </div>
-              ${CATEGORIAS.map((c, i) => `<button class="orbit-label c${i % 3}${c === ativa ? " live" : ""}" type="button" data-filter="${esc(c)}">${F.moonSvg(FASES[i], 22)}<span><b>${esc(c)}</b><small>${contagem(c)} ${contagem(c) === 1 ? "edição" : "edições"}</small></span></button>`).join("")}
+              ${PASSOS.map((p, i) => `<div class="orbit-label c${i % 3}">${F.moonSvg(p.ph, 22)}<span><b>${esc(p.v)}</b><small>${esc(p.t)}</small></span></div>`).join("")}
             </div>
             <canvas class="seam" aria-hidden="true" data-carry="light"></canvas>
             <div class="season-col">
               <div class="shead io">
                 <h2 class="sh2" id="h-ciclo">
-                  <span class="sh2-l">${palavras("as fases", false)}</span>
-                  <span class="sh2-l">${palavras("da leitura", false)}<span class="stop">.</span></span>
+                  <span class="sh2-l">${palavras("quatro fases", false)}</span>
+                  <span class="sh2-l">${palavras("para ler a IA", false)}<span class="stop">.</span></span>
                 </h2>
                 <span class="s-rule" aria-hidden="true"></span>
-                <p class="sh-intro">${palavras("Seis temas, uma lua: modelos, pesquisas, guias, dicas, pensamento crítico e ética.", false)}</p>
-                <ul class="theme-chips">${CATEGORIAS.map((c) => `<li><button type="button" data-filter="${esc(c)}">${esc(c)}</button></li>`).join("")}</ul>
+                <p class="sh-intro">${palavras("Antes de repetir o que uma IA respondeu, passe pelas quatro fases da lua.", false)}</p>
+                <ol class="steps-m">${PASSOS.map((p) => `<li><b>${esc(p.v)}.</b> ${esc(p.t)}</li>`).join("")}</ol>
               </div>
               <div class="splate" aria-label="Lua de hoje">
                 <svg class="splate-frame" viewBox="0 0 277 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0.5 0.5H276.5V101L268 109.5H0.5Z" vector-effect="non-scaling-stroke"/></svg>
@@ -293,11 +328,11 @@
         </div><div class="layer-shade"></div></div>
 
         <div class="layer last">
-          <section class="timeline" id="edicoes" aria-labelledby="h-ed">
+          <section class="timeline" id="historia" aria-labelledby="h-his">
             <div class="tl-wrap">
-              <h2 class="tl-h io" id="h-ed">${LS("as edições", "recentes")}</h2>
+              <h2 class="tl-h io" id="h-his">${LS("da válvula", "ao ChatGPT")}</h2>
               <div class="tl-rail" aria-hidden="true"><i class="tl-track"></i><i class="tl-prog"></i><i class="tl-mark"></i></div>
-              ${idxRows.map(rowHtml).join("")}
+              ${HISTORIA.map(rowHtml).join("")}
             </div>
           </section>
         </div>
@@ -343,7 +378,7 @@
           <ul class="rows">
             ${SERVICOS.map((s, i) => `
               <li class="rv" style="--d:${i * 80}ms">
-                <a class="row" href="#/#lista" data-filter="${esc(s.cat)}">
+                <a class="row" href="#/#edicoes" data-filter="${esc(s.cat)}">
                   <span class="row-in"><h3 class="row-t">${esc(s.cat)}</h3><p class="row-d">${esc(s.d)}</p><span class="row-badge">${I.up}</span></span>
                 </a>
               </li>`).join("")}
@@ -351,7 +386,7 @@
         </div>
       </section>
 
-      <section class="sec" id="lista" aria-labelledby="h-lista" style="padding-top:0">
+      <section class="sec" id="edicoes" aria-labelledby="h-lista" style="padding-top:0">
         <div class="shell">
           <h2 class="h2 io" id="h-lista">${L("Todas as edições")}</h2>
           <div class="all-grid">
@@ -375,6 +410,8 @@
           </div>
         </div>
       </section>
+
+      ${friso(1, 3, 0)}
 
       <section class="padd" id="livro-home" aria-labelledby="h-padd">
         <canvas class="contours" aria-hidden="true"></canvas>
@@ -400,7 +437,7 @@
               <span class="cal-link" aria-hidden="true"></span>
               <span class="cal-mk">${F.moonSvg(FASES[i], 18)}</span>
               <p class="cal-r">${i === 0 ? "lua nova" : i === 1 ? "crescente" : i === 2 ? "quarto" : i === 3 ? "gibosa" : i === 4 ? "lua cheia" : "minguante"}</p>
-              <p class="cal-n"><a href="#/#lista" data-filter="${esc(c)}">${esc(c)}</a></p>
+              <p class="cal-n"><a href="#/#edicoes" data-filter="${esc(c)}">${esc(c)}</a></p>
               <p class="cal-d">${contagem(c)} ${contagem(c) === 1 ? "edição" : "edições"}</p>
             </li>`).join("")}
           </ul>
@@ -423,7 +460,7 @@
     app.querySelectorAll(".contours").forEach((c) => F.reg(F.contours(c)));
     F.reg(F.moonHero(hero));
     F.reg(F.stack(stack));
-    F.reg(F.season(season, [0.07, 0.23, 0.39, 0.55, 0.71, 0.87]));
+    F.reg(F.season(season, [0.2, 0.55, 0.72, 0.87]));
     F.reg(F.timeline(tl));
     season.querySelectorAll(".seam").forEach((c) => F.reg(F.seam(c, season, c.dataset.carry)));
     const padd = app.querySelector(".padd");
@@ -449,8 +486,8 @@
 
   function goFilter(cat) {
     filtro = cat;
-    if (document.getElementById("lista")) { paintList(); scrollToId("lista"); }
-    else location.hash = "#/#lista";
+    if (document.getElementById("edicoes")) { paintList(); scrollToId("edicoes"); }
+    else location.hash = "#/#edicoes";
   }
 
   /* ---------- a lua sobre a resposta ---------- */
@@ -544,7 +581,7 @@
         <div class="shell th-in">
           <h1 class="post-title io">${esc(p.titulo)}</h1>
           <p class="post-meta">${esc(p.categoria)}, ${fmtData(p.data)}, ${p.leitura} minutos de leitura</p>
-          <a class="back" href="#/#lista">Todas as edições</a>
+          <a class="back" href="#/#edicoes">Todas as edições</a>
         </div>
       </section>
       <article class="shell post-grid">

@@ -24,7 +24,7 @@ O site tem quatro abas, em rotas por hash: `#/` (Início), `#/livro` (O livro), 
 
 ## Conteúdo
 
-As edições, o glossário, a demonstração da "lua sobre a resposta" e os dados do livro ficam em `posts.js`. Para publicar uma edição, adicione um item no topo de `POSTS`. Os textos atuais são exemplos. A fase da lua mostrada no site é calculada no navegador, com o lado aceso do hemisfério sul.
+A linha do tempo da história da IA (`HISTORIA`), as edições, o glossário, a demonstração da "lua sobre a resposta" e os dados do livro ficam em `posts.js`. Para publicar uma edição, adicione um item no topo de `POSTS`. Os textos atuais são exemplos. A fase da lua mostrada no site é calculada no navegador, com o lado aceso do hemisfério sul.
 
 ## Fontes
 

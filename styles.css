@@ -767,3 +767,39 @@ html.theme-anim .theme-btn .ico { transition-duration: 450ms !important; transit
 
 /* cruz de Malta desenhada em CSS, para botões */
 .xs { display: block; width: 1.25rem; height: 1.25rem; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M17 3H31Q27 14 27 21Q36 22 45 17V31Q36 26 27 27Q27 34 31 45H17Q21 34 21 27Q12 26 3 31V17Q12 22 21 21Q21 14 17 3Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M17 3H31Q27 14 27 21Q36 22 45 17V31Q36 26 27 27Q27 34 31 45H17Q21 34 21 27Q12 26 3 31V17Q12 22 21 21Q21 14 17 3Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+
+/* ---------- ajustes: história da IA, passos da leitura, lente no escuro, redes ---------- */
+.tl-art { width: 100%; height: 100%; color: var(--on-panel); }
+.tl-slot svg { display: block; }
+.tl-note { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; width: min(max(calc(var(--u) * 430), 14rem), 46%); font-size: max(calc(var(--u) * 18), 1.0625rem); line-height: 1.4; color: var(--on-panel); }
+.tl-note b { font-weight: 700; }
+.tl-row.side.right .tl-note { left: var(--gutter-t); }
+.tl-row.side.left .tl-note { left: calc(var(--gutter-t) + var(--u) * 333 + var(--u) * 90); }
+@media (max-width: 639px) { .tl-note { position: static; transform: none; width: auto; } }
+
+.steps-m { margin-top: 1.5rem; display: grid; gap: 0.75rem; max-width: 26rem; font-size: 1.0625rem; line-height: 1.4; list-style: none; }
+.steps-m b { color: var(--shu-soft); font-weight: 700; }
+@media (min-width: 1024px) { .steps-m { display: none; } }
+@media (max-width: 1023px) { .orbit-frame { opacity: 0.4; } }
+.orbit-label span { max-width: 15.5rem; }
+.orbit-label small { line-height: 1.3; }
+
+[data-theme="dark"] .stone .lens-layer { background: var(--washi); color: var(--sumi); }
+[data-theme="dark"] .stone .lens-layer .flag { text-decoration-color: var(--shu-deep); }
+[data-theme="dark"] .stone.static .lens-layer { background: none; color: inherit; }
+[data-theme="dark"] .stone.static .lens-layer .flag { text-decoration-color: var(--accent); }
+
+.foot-social { gap: 0.75rem; }
+.foot-social a { min-height: 3.25rem; padding: 0 1.375rem 0 1.125rem; gap: 0.75rem; background: rgba(246, 243, 236, 0.12); font-size: 1.0625rem; font-weight: 500; transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--ease); }
+.foot-social a:active { transform: scale(0.97); }
+.foot-social .ico { width: 1.5rem; height: 1.5rem; }
+@media (hover: hover) and (pointer: fine) { .foot-social a:hover { background: var(--accent); color: var(--sumi); } }
+.shead { position: relative; z-index: 2; background: var(--panel); padding: 1.25rem 1.5rem 1.5rem 0; margin: -1.25rem 0 0; }
+@media (max-width: 1023px) { .shead { background: transparent; padding: 0; margin: 0; } }
+
+.orbit-label { width: max-content; max-width: 17rem; }
+.orbit-label[data-pos="top"] { transform: translate(-50%, 20px); flex-direction: column; text-align: center; }
+.orbit-label[data-pos="bot"] { transform: translate(-50%, calc(-100% - 20px)); flex-direction: column-reverse; text-align: center; }
+.orbit-label[data-pos="top"] span, .orbit-label[data-pos="bot"] span { justify-items: center; }
+
+.shead { width: fit-content; max-width: 32rem; }

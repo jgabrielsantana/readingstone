@@ -141,12 +141,13 @@
     return () => { ro.disconnect(); stopWatch(); stopTick(); stopTheme(); };
   }
 
+  const SHADE = 0.4;
   /* ---------- pilha: cada camada fixa no topo e a próxima passa por cima ---------- */
   function stack(container) {
     const layers = [...container.querySelectorAll(":scope > .layer")];
     const pinned = layers.slice(0, -1).map((el, i) => ({ inner: el.querySelector(".layer-in"), shade: el.querySelector(".layer-shade"), next: layers[i + 1] }));
     const phone = matchMedia("(max-width: 639px)");
-    const RECEDE_SCALE = 0.9, RECEDE_SHADE = 0.55;
+    const RECEDE_SCALE = 0.9, RECEDE_SHADE = SHADE;
     const apply = () => {
       const view = window.innerHeight || 1;
       const shrink = phone.matches ? 0 : 1 - RECEDE_SCALE;
@@ -171,7 +172,8 @@
     const draw = () => {
       const cell = W < 640 ? 16 : CELL_BASE;
       const cs = getComputedStyle(canvas);
-      const surface = carry === "light" ? cs.getPropertyValue("--bg-now").trim() || getComputedStyle(document.body).backgroundColor : cs.getPropertyValue("--panel-now").trim() || "#0b0b0d";
+      let surface = carry === "light" ? getComputedStyle(document.body).backgroundColor : cs.getPropertyValue("--panel-now").trim() || "#0b0b0d";
+      if (carry === "light") { const m = surface.match(/d+(.d+)?/g) || [245, 245, 243], f = 1 - SHADE * cur; surface = `rgb(${Math.round(m[0] * f)} ${Math.round(m[1] * f)} ${Math.round(m[2] * f)})`; }
       const accent = cs.getPropertyValue("--accent-now").trim() || "#d7263d";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
@@ -239,6 +241,15 @@
       dpr = dprMax(); W = hero.clientWidth; H = hero.clientHeight;
       for (const c of [base, red, cover]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
       geom = geomFor(W, H);
+      if (window.innerWidth >= 1024) {
+        // a lua fica centrada no vão entre o título e os painéis da direita
+        const hr = hero.getBoundingClientRect(), k = hr.width / Math.max(1, hero.clientWidth);
+        const nome = hero.querySelector(".h1 [aria-hidden]") || hero.querySelector(".h1");
+        const hp = hero.querySelector(".hpanels");
+        const esq = (nome.getBoundingClientRect().right - hr.left) / k + 32;
+        const dir = (hp && hp.offsetParent ? (hp.getBoundingClientRect().left - hr.left) / k : W - 32) - 32;
+        if (dir - esq > 160) geom = { cx: (esq + dir) / 2, cy: geom.cy, r: Math.min(geom.r, (dir - esq) / 2 - 8) };
+      }
       const rad = geom.r * dpr * 0.62;
       brush.width = brush.height = Math.ceil(rad * 2);
       hero.style.setProperty("--mx", geom.cx + "px"); hero.style.setProperty("--my", geom.cy + "px"); hero.style.setProperty("--mr", geom.r + "px");
@@ -267,6 +278,8 @@
       last = { x, y }; idle = 0;
     };
     const ro = new ResizeObserver(size); ro.observe(hero); size();
+    addEventListener("resize", size);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     const stopWatch = watch(hero, (v) => { vis = v; }, "0px");
     const stopTheme = onTheme(paint);
     if (!reduce && finePointer) addEventListener("pointermove", move, { passive: true });
@@ -281,7 +294,7 @@
       rctx.globalCompositeOperation = "destination-out"; rctx.fillStyle = "rgba(0,0,0," + fade + ")"; rctx.fillRect(0, 0, red.width, red.height);
       if (drawing) { points.forEach((p) => stamp(p.x, p.y)); points = []; }
     });
-    return () => { ro.disconnect(); stopWatch(); stopTheme(); stopTick(); removeEventListener("pointermove", move); };
+    return () => { ro.disconnect(); removeEventListener("resize", size); stopWatch(); stopTheme(); stopTick(); removeEventListener("pointermove", move); };
   }
 
   /* ---------- as fases da leitura: meia-tinta, órbita e retículo ---------- */
@@ -389,7 +402,10 @@
       labels.forEach((el, i) => {
         const m = markers[i], x = tx + m.x * s, y = ty + m.y * s;
         el.style.left = x + "px"; el.style.top = y + "px";
-        el.classList.toggle("flip", x > w * 0.62);
+        // os rótulos ficam dentro da elipse: em cima vai abaixo da linha, embaixo vai acima
+        const pos = Math.abs(m.x - HUB.x) > 360 ? "side" : m.y < HUB.y ? "top" : "bot";
+        el.dataset.pos = pos;
+        el.classList.toggle("flip", pos === "side" && x > w * 0.62);
       });
       bake(); renderTrace(); dirty = true; drawDots();
     }

@@ -107,13 +107,13 @@ components:
 
 Tsuki quer dizer lua em japonês. A página é uma estampa em papel branco com tinta sumi: a lua aparece preta sobre o papel, branca sobre o escuro e vermelha onde o cursor passa. O símbolo é a cruz de Malta de braços côncavos (cruz pattée) e a mascote é um leão heráldico rampante, em vermelho com garras e língua brancas. O vermelho é o selo (hanko): botões, marcas de data, o ponto final dos títulos. Azul (`ai`) e verde (`matsu`) entram como segunda e terceira cor de selo, girando com os temas.
 
-A apresentação é uma pilha: hero, fases da leitura e linha do tempo fixam no topo e a seguinte passa por cima, enquanto a coberta recua para 90% e escurece. Depois vêm blocos em fluxo normal e o rodapé, com borda vermelha e painel preto. Tudo é medido em rem; a raiz escala com a largura. Os blocos de pilha e o livro/rodapé usam `cqw` do próprio contêiner, então são o quadro de 1440 em qualquer largura.
+A apresentação é uma pilha: hero, "quatro fases para ler a IA" (órbita com Leia, Cheque, Pergunte e Decida) e a linha do tempo da história da IA (da válvula ao ChatGPT) fixam no topo e a seguinte passa por cima, enquanto a coberta recua para 90% e escurece. Depois vêm blocos em fluxo normal e o rodapé, com borda vermelha e painel preto. Tudo é medido em rem; a raiz escala com a largura. Os blocos de pilha e o livro/rodapé usam `cqw` do próprio contêiner, então são o quadro de 1440 em qualquer largura.
 
 **Key Characteristics:**
 - Marca: cruz de Malta de braços côncavos e leão rampante (arquivo `assets/lion.svg`, CC0, cores por variáveis CSS).
 - Papel `washi`, tinta `sumi`, vermelho `shu`. Painéis escuros são escuros nos dois temas; o modo escuro troca só papel, tinta e vermelho.
 - Cantos retos e uma única forma recortada: o canto inferior direito cortado em diagonal (botões, painéis, placas). Colchetes de painel em quatro cantos.
-- Estampas japonesas de domínio público (Yoshitoshi, Hiroshige, Koryusai) em placas com recorte em degraus.
+- Estampas japonesas de domínio público (Yoshitoshi, Hiroshige, Koryusai) nas páginas internas e na demonstração; a linha do tempo da IA usa placas com recorte em degraus e desenhos feitos em código (válvula, transistor, perceptron, chip, tabuleiros, Transformer, chat).
 - Contornos que rolam (curvas de nível) no fundo de hero, páginas internas, livro e rodapé; meia-tinta em forma de lua no bloco das fases.
 - A lua de hoje é calculada de verdade (ciclo sinódico), com o lado aceso no hemisfério sul.
 - Movimento: pilha com recuo, revelações por letra e por palavra, órbita de seis segundos, retículo xadrez no cursor, trilha vermelha da lua no hero, tudo parado com movimento reduzido.
@@ -171,7 +171,7 @@ Cantos retos. A forma da marca é o corte diagonal de 0.5 a 2rem no canto inferi
 - Quatro cantos de 0.625rem desenhados com um traço; abrem 5px em hover. Usados no hero (última edição, em números), no livro e na história dos founders.
 
 ### Placas da linha do tempo
-- Imagem com recorte em degraus (clip path e contorno), selo vermelho com a data no canto, hover que recua a imagem 5% e escurece as demais placas.
+- Desenho em código sobre uma placa com recorte em degraus (clip path e contorno), selo com o ano no canto (vermelho, azul ou verde), hover que recua a placa 5% e escurece as demais. Os eventos ficam em `HISTORIA`, em `posts.js`.
 
 ### Calendário de temas
 - Faixa escura no pé do bloco do livro, com um cartão por tema (fase da lua, nome, contagem de edições), conectores tracejados que correm e o tema da última edição em vermelho.

@@ -17,7 +17,7 @@ THESIS: A lua muda de fase sem mudar de lugar; o site olha a IA em todas as fase
 
 OWN-WORLD: Papel branco, tinta sumi, selo vermelho; azul e verde como segunda e terceira cor de selo. Cruz de Malta de braços côncavos; leão heráldico rampante vermelho (CC0) como mascote. Estampas de Yoshitoshi em placas com recorte em degraus, contornos que rolam como curvas de nível, meia-tinta em forma de lua.
 
-STORY: Véu de abertura com o leão se enchendo de cima para baixo; hero com a lua e o leão; a pilha cobre o hero com as fases da leitura (órbita de seis temas) e depois com as edições recentes; o livro fecha a página antes do rodapé de borda vermelha.
+STORY: Véu de abertura com o leão se enchendo de cima para baixo; hero com a lua e o leão; a pilha cobre o hero com as quatro fases para ler a IA (órbita) e depois com a linha do tempo da história da IA; o livro fecha a página antes do rodapé de borda vermelha.
 
 FIRST VIEWPORT: papel branco (ou escuro), "Tsuki" em Shippori Mincho 9rem, três linhas de meta, lua com o leão, painéis de colchetes à direita (última edição, números), botão Assinar grátis e a lua de hoje.
 

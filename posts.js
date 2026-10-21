@@ -111,8 +111,8 @@ const CONFIG = {
   // Redes sociais do rodapé. Só aparecem as que têm "url"; preencha a do LinkedIn e a do X quando existirem.
   redes: [
     { nome: "Instagram", url: "https://www.instagram.com/reading.stone/", icone: "instagram" },
-    { nome: "LinkedIn", url: "", icone: "linkedin" },
-    { nome: "X", url: "", icone: "x" }
+    { nome: "LinkedIn", url: "https://www.linkedin.com/in/reading-stone-3a7824445/", icone: "linkedin" },
+    { nome: "X", url: "https://x.com/ReadingStonezz", icone: "x" }
   ],
   // Quando tiver um serviço de e-mail (Buttondown, Mailchimp, Substack...),
   // coloque aqui a URL de inscrição. Vazio = apenas simula o envio.
@@ -370,4 +370,24 @@ const GLOSSARIO = [
   { termo: "Epistemologia", def: "Área da filosofia que estuda o conhecimento: o que é saber algo e como justificamos o que sabemos." },
   { termo: "Descarregamento cognitivo", def: "Passar uma tarefa mental para uma ferramenta externa, como a IA, em vez de fazê-la por conta própria." },
   { termo: "Dependência epistêmica", def: "Depender de outra fonte para saber algo, sem conseguir avaliar se ela está certa." }
+];
+
+// Linha do tempo da história da IA, da válvula ao ChatGPT. Cada item: ano, título, texto e o desenho da placa.
+// "lado": "c" = destaque no centro (com texto ao lado); "s" = placa menor, que alterna de lado.
+const HISTORIA = [
+  { ano: "1906", titulo: "O triodo", texto: "Lee de Forest cria a válvula de três eletrodos, que amplifica sinais elétricos e vira a peça dos primeiros computadores.", arte: "tube", lado: "c" },
+  { ano: "1943", titulo: "O neurônio artificial", texto: "Warren McCulloch e Walter Pitts descrevem um modelo matemático de neurônio, a base das redes neurais.", arte: "neuron", lado: "s" },
+  { ano: "1947", titulo: "O transistor", texto: "Nos Laboratórios Bell, Bardeen, Brattain e Shockley criam o transistor, que substitui a válvula e encolhe os computadores.", arte: "transistor", lado: "c" },
+  { ano: "1950", titulo: "As máquinas pensam?", texto: "Alan Turing publica “Computing Machinery and Intelligence” e propõe o jogo da imitação, hoje chamado teste de Turing.", arte: "turing", lado: "s" },
+  { ano: "1956", titulo: "Nasce o nome", texto: "O termo inteligência artificial é adotado na oficina de Dartmouth, organizada por John McCarthy e outros pesquisadores.", arte: "dartmouth", lado: "c" },
+  { ano: "1958", titulo: "O perceptron", texto: "Frank Rosenblatt apresenta o perceptron, uma rede neural simples capaz de aprender a separar padrões.", arte: "perceptron", lado: "s" },
+  { ano: "1958", titulo: "O circuito integrado", texto: "Jack Kilby, na Texas Instruments, monta o primeiro circuito integrado: vários componentes em uma só peça.", arte: "ic", lado: "c" },
+  { ano: "1966", titulo: "ELIZA", texto: "Joseph Weizenbaum cria a ELIZA, um programa que conversa por texto e mostra como é fácil atribuir compreensão a uma máquina.", arte: "eliza", lado: "s" },
+  { ano: "1971", titulo: "O microprocessador", texto: "A Intel lança o 4004, o primeiro microprocessador comercial: um computador inteiro em um chip.", arte: "cpu", lado: "c" },
+  { ano: "1986", titulo: "A retropropagação", texto: "Rumelhart, Hinton e Williams popularizam a retropropagação, o método que ensina redes de várias camadas.", arte: "backprop", lado: "s" },
+  { ano: "1997", titulo: "Deep Blue", texto: "O computador Deep Blue, da IBM, vence o campeão mundial de xadrez Garry Kasparov em uma disputa de seis partidas.", arte: "chess", lado: "c" },
+  { ano: "2012", titulo: "AlexNet", texto: "Uma rede neural profunda vence a competição ImageNet com larga vantagem e abre a era do aprendizado profundo.", arte: "alexnet", lado: "s" },
+  { ano: "2016", titulo: "AlphaGo", texto: "O AlphaGo, da DeepMind, vence Lee Sedol, um dos maiores jogadores de Go do mundo.", arte: "go", lado: "c" },
+  { ano: "2017", titulo: "O Transformer", texto: "Pesquisadores do Google publicam “Attention Is All You Need” e apresentam a arquitetura por trás dos modelos de linguagem.", arte: "attention", lado: "s" },
+  { ano: "2022", titulo: "O ChatGPT", texto: "A OpenAI lança o ChatGPT em novembro e leva os modelos de linguagem ao público em geral.", arte: "chat", lado: "c" }
 ];
