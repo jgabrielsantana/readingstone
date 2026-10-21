@@ -268,7 +268,7 @@
           </div>
           <div class="about-state">
             <h2 class="sr" id="h-sobre">Sobre a ReadingStone</h2>
-            <p class="state io">${palavras("Ajudamos quem estuda e trabalha com IA a entender o que ela faz, onde erra e como usá-la com critério.", false)} ${palavras("Sem jargão.", true)}</p>
+            <p class="state io">${palavras("A ReadingStone entrega conteúdos informativos sobre IA, de seu funcionamento aos seus limites", false)} ${palavras("e à ética de usá-la.", true)}</p>
             <div class="about-foot rv" style="--d:200ms">
               <p class="facts"><span><b>Formato</b> newsletter e site</span><span><b>Idioma</b> português do Brasil</span></p>
               ${pill("Conhecer o livro", { variant: "ghost", arrow: "right", tag: "a", href: "#/livro" })}

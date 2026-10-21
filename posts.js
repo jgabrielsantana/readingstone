@@ -57,7 +57,7 @@ const CONFIG = {
     {
       p: "Por que assinar a newsletter?",
       r: [
-        "Para acompanhar, no seu e-mail, explicações claras sobre IA, em linguagem simples e sem jargão. É um jeito de se manter informado sem precisar acompanhar todo dia o noticiário especializado.",
+        "Para acompanhar, no seu e-mail, explicações claras sobre IA, em linguagem simples. É um jeito de se manter informado sem precisar acompanhar todo dia o noticiário especializado.",
         "Hoje o formulário de assinatura ainda não está conectado a um serviço de e-mail, então ele funciona como demonstração e avisa isso quando você envia."
       ]
     },
