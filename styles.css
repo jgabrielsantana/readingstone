@@ -621,3 +621,53 @@ section.tab-body[id="livro-tab"] { padding-top: 2rem; }
 }
 @media (min-width: 1024px) and (max-width: 1099px) { .clock-l { display: none; } .nav ul { gap: 1rem; } }
 .faq-head .side-plate { margin-top: 2rem; }
+
+/* ---------- botão de tema (sol e lua) ---------- */
+:root { color-scheme: light; }
+.theme-btn { position: relative; flex: none; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border-radius: var(--r-control); background: #fff; color: #22201d; transition: background-color 200ms ease, transform 240ms var(--ease); }
+.theme-btn:active { transform: scale(0.94); }
+.theme-btn .ico { grid-area: 1 / 1; font-size: 1.25rem; transition: opacity 350ms var(--ease), transform 450ms var(--ease); }
+.theme-btn .t-moon { opacity: 0; transform: rotate(90deg) scale(0.4); }
+[data-theme="dark"] .theme-btn .t-sun { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+[data-theme="dark"] .theme-btn .t-moon { opacity: 1; transform: none; }
+@media (max-width: 640px) { .theme-btn { width: 2.5rem; height: 2.5rem; } }
+@media (hover: hover) and (pointer: fine) { .theme-btn:hover { background: #e8ecf3; } }
+
+/* a troca de tema anima só as cores, por um instante */
+html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after { transition-property: background-color, color, border-color, fill, stroke, opacity, transform !important; transition-duration: 350ms !important; transition-timing-function: ease !important; transition-delay: 0s !important; }
+html.theme-anim .theme-btn .ico { transition-duration: 450ms !important; transition-timing-function: var(--ease) !important; }
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after { transition-duration: 0.01ms !important; }
+  .theme-btn .ico { transition: none; }
+}
+
+/* ---------- tema escuro ---------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1320;
+  --fg: #e8ecf4;
+  --muted: #aeb7c8;
+  --surface: #171e2e;
+  --surface-2: #202a3d;
+  --blue: #1f4182;
+  --blue-deep: #14264a;
+  --night: #060911;
+  --night-2: #131a29;
+}
+html[data-theme="dark"] { scrollbar-color: var(--on-blue-soft) var(--surface); }
+[data-theme="dark"] :focus-visible { outline-color: var(--on-blue-soft); }
+[data-theme="dark"] .pill-dark .pill-in { background: var(--fg); color: var(--bg); }
+[data-theme="dark"] .pill-dark .pill-badge { background: var(--bg); color: var(--fg); }
+[data-theme="dark"] .hcard { background: rgba(14, 19, 32, 0.94); }
+[data-theme="dark"] .dot { background: rgba(232, 236, 244, 0.3); }
+[data-theme="dark"] .dot.on { background: var(--on-blue-soft); }
+[data-theme="dark"] .rb { background: var(--surface-2); }
+[data-theme="dark"] .tile-ghost { background: rgba(23, 30, 46, 0.7); }
+[data-theme="dark"] .prose li::before { background: var(--on-blue-soft); }
+[data-theme="dark"] .modal { background: rgba(0, 0, 0, 0.68); }
+[data-theme="dark"] .modal-panel { background: var(--surface); }
+[data-theme="dark"] .mform input { background: var(--bg); }
+[data-theme="dark"] .mform input:focus { background: var(--surface-2); outline-color: var(--on-blue-soft); }
+[data-theme="dark"] .modal-x { background: var(--bg); }
+[data-theme="dark"] .skip { background: var(--fg); color: var(--bg); }
+[data-theme="dark"] .mform-msg { color: var(--brick-soft); }

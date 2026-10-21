@@ -649,6 +649,26 @@
     observeReveals();
   }
 
+  /* ---------- tema claro e escuro ---------- */
+  const themeBtn = document.getElementById("theme-btn");
+  const sistemaEscuro = matchMedia("(prefers-color-scheme: dark)");
+  const guardado = () => { try { const t = localStorage.getItem("rs-tema"); return t === "dark" || t === "light" ? t : null; } catch (e) { return null; } };
+  function aplicaTema(t) {
+    html.setAttribute("data-theme", t);
+    themeBtn.setAttribute("aria-label", t === "dark" ? "Ativar o modo claro" : "Ativar o modo escuro");
+  }
+  aplicaTema(html.getAttribute("data-theme") === "dark" ? "dark" : "light");
+  themeBtn.addEventListener("click", () => {
+    const t = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.classList.add("theme-anim");
+    aplicaTema(t);
+    try { localStorage.setItem("rs-tema", t); } catch (e) {}
+    clearTimeout(themeBtn._anim);
+    themeBtn._anim = setTimeout(() => html.classList.remove("theme-anim"), 500);
+  });
+  // sem escolha salva, acompanha o tema do sistema
+  sistemaEscuro.addEventListener("change", (e) => { if (!guardado()) aplicaTema(e.matches ? "dark" : "light"); });
+
   /* ---------- menu em tela cheia e modal ---------- */
   const navmenu = document.getElementById("navmenu");
   const modal = document.getElementById("modal");

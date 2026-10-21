@@ -316,3 +316,7 @@ Raio grande e consistente: pílula (`9999px`) para botões, selos, chips, ladril
 - **Don't** montar caixa de e-mail central sobre cartões iguais (o template de newsletter recusado pela tese).
 - **Don't** exibir plate em cor original, nem inventar depoimentos, clientes, avaliações ou autoria.
 - **Don't** usar segunda família tipográfica.
+
+## Tema claro e escuro
+
+Botão branco ao lado direito do Menu, com sol no modo claro e lua no escuro. Na primeira visita o tema segue o do sistema; depois a escolha fica em `localStorage` (`rs-tema`). O tema vive em `data-theme` na raiz e só troca os tokens de cor (papel, tinta, superfícies); os campos azuis e o rodapé continuam azul e noite. A troca anima cores por 350ms e é instantânea com movimento reduzido.
