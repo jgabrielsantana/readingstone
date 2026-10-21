@@ -12,7 +12,7 @@ Pessoas que usam IA de forma casual para estudar, trabalhar ou conversar, e pess
 
 ## Product Purpose
 
-ReadingStone é uma newsletter (formato revista/jornal) sobre inteligência artificial, atualizada com frequência: modelos, pesquisas em diferentes contextos, abordagens e recomendações. Também apresenta o produto principal da marca, o livro *A Máquina Resolve?*. Sucesso: o leitor volta, assina a newsletter e se interessa pelo livro.
+Tsuki é uma newsletter (formato revista/jornal) sobre inteligência artificial, atualizada com frequência: modelos, pesquisas em diferentes contextos, abordagens e recomendações. Também apresenta o produto principal da marca, o livro *A Máquina Resolve?*. Sucesso: o leitor volta, assina a newsletter e se interessa pelo livro.
 
 ## Positioning
 
@@ -25,7 +25,7 @@ Conteúdo publicado por edição: o dono do site adiciona itens à lista `POSTS`
 ## Capabilities and Constraints
 
 - Site estático em HTML, CSS e JavaScript, sem framework. Roteamento por hash (`#/post/slug`).
-- Home com destaque, edições filtráveis por categoria, glossário, seção do livro e formulário de assinatura.
+- Home em pilha de seções (hero com a lua, fases da leitura, linha do tempo das edições), seguida de edições filtráveis por categoria, glossário, bloco do livro e formulário de assinatura. Modo claro e escuro, que segue o sistema na primeira visita.
 - O formulário de assinatura ainda não envia nada: o usuário não quer conectar serviço de e-mail por enquanto.
 - Ainda não há link de compra do livro; o botão leva à assinatura da newsletter.
 - Categorias atuais: Modelos, Pesquisas, Guias, Dicas, Pensamento crítico, Ética e segurança.
@@ -33,9 +33,9 @@ Conteúdo publicado por edição: o dono do site adiciona itens à lista `POSTS`
 
 ## Brand Commitments
 
-- Nome: ReadingStone. Livro: *A Máquina Resolve?*, subtítulo "Inteligência artificial, aprendizagem e pensamento crítico na universidade".
+- Nome: Tsuki (lua, em japonês; antes ReadingStone). Símbolo: cruz de Malta (braços côncavos). Mascote: leão heráldico rampante. Livro: *A Máquina Resolve?*, subtítulo "Inteligência artificial, aprendizagem e pensamento crítico na universidade".
 - Descrição do livro: como a IA afeta a construção do conhecimento e do pensamento crítico (epistemologia da IA). Temas: informação, crença justificada e compreensão; como um modelo de linguagem funciona, sem matemática; "papagaio estocástico"; alucinação; IA como testemunha e autoridade; descarregamento cognitivo; desempenho com IA contra aprendizagem sem IA; confiança excessiva e dependência epistêmica; matriz de delegação; o caso da engenharia.
-- Vinculante pelo pedido do usuário (visual): papel claro, preto suave e azul profundo, com um pequeno acento em vermelho-tijolo. Azul em links, marcadores e navegação; vermelho só em detalhes.
+- Vinculante pelo pedido do usuário (visual, 2026-10-21): branco, vermelho e preto como base, com detalhes em azul e verde; estética e arte japonesa; a lua e suas fases em branco, preto e vermelho. A pedra de leitura deixou de ser a identidade da marca.
 
 ## Evidence on Hand
 

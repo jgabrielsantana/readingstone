@@ -1,10 +1,11 @@
 (function () {
   const html = document.documentElement;
   const app = document.getElementById("app");
+  const F = window.FX;
   document.getElementById("ano").textContent = new Date().getFullYear();
 
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduce = F.reduce;
+  const finePointer = F.finePointer;
 
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -13,30 +14,42 @@
     const [y, m, d] = iso.split("-");
     return Number(d) + " " + MESES[Number(m) - 1] + " " + y;
   };
+  const fmtCurta = (iso) => { const [, m, d] = iso.split("-"); return Number(d) + " " + MESES[Number(m) - 1]; };
   const sorted = () => [...POSTS].sort((a, b) => b.data.localeCompare(a.data));
-  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const clamp = F.clamp;
+  // cada tema leva uma das três cores de selo: vermelho, azul ou verde
+  const corDe = (cat) => "c" + (Math.max(0, CATEGORIAS.indexOf(cat)) % 3);
 
   /* ---------- ícones ---------- */
+  const cruz = (cls) => `<svg class="ico ${cls || ""}" viewBox="0 0 48 48" aria-hidden="true"><use href="#cross"/></svg>`;
+  const leao = (cls) => `<svg class="lion ${cls || ""}" viewBox="0 0 306.45 372.84" aria-hidden="true"><use href="assets/lion.svg#lion"/></svg>`;
+  const ARROW = '<svg class="ico cta-arrow" viewBox="0 0 14 11" aria-hidden="true"><path d="M0 5.5H13M8 .5L13 5.5L8 10.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
   const I = {
-    lens: '<svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="18.5" cy="18.5" r="3.4" fill="currentColor"/></svg>',
     up: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    right: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    down: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    dot: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" fill="currentColor"/></svg>'
+    right: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
+  const BR = '<svg viewBox="0 0 10.5 10.5" aria-hidden="true"><path d="M0 .5H10V10.5" fill="none" stroke="currentColor"/></svg>';
+  const brk = () => ["tl", "tr", "br", "bl"].map((c) => `<span class="bk ${c}">${BR}</span>`).join("");
 
-  // Cianótipos de Anna Atkins (domínio público). Créditos no rodapé.
-  const PLATES = [
-    { src: "assets/ferns-specimen-of-cyanotype.jpg", nome: "Ferns", alt: "Cianótipo de samambaias em branco sobre fundo azul, por Anna Atkins" },
-    { src: "assets/carex-america.jpg", nome: "Carex (America)", alt: "Cianótipo de uma planta com folhas em leque, por Anna Atkins" },
-    { src: "assets/anna-atkins-cystoseira-granulata.jpg", nome: "Cystoseira granulata", alt: "Cianótipo de uma alga ramificada, por Anna Atkins" },
-    { src: "assets/new-zealand.jpg", nome: "New Zealand", alt: "Cianótipo de uma folha de samambaia da Nova Zelândia, por Anna Atkins" }
-  ];
-  const plateFor = (slug) => {
+  /* ---------- estampas japonesas em domínio público ---------- */
+  const ARTS = {
+    musashi: { src: "assets/the-moon-on-musashi-plain-musashino-no.jpg", w: 1300, h: 1929, pos: "50% 22%", nome: "A lua na planície de Musashi", autor: "Yoshitoshi", alt: "Gravura japonesa de uma raposa de pelo claro sob uma lua cheia, entre capim alto" },
+    dawn: { src: "assets/dawn-moon-of-the-shinto-rites-shinji.jpg", w: 1300, h: 1906, pos: "62% 12%", nome: "A lua da alvorada dos ritos xintoístas", autor: "Yoshitoshi", alt: "Gravura japonesa de um sacerdote de vestes azuis e vermelhas erguendo papéis, sob céu azul e uma lua escura" },
+    smoke: { src: "assets/moon-and-smoke-enchu-no-tsuki-from.jpg", w: 1300, h: 1874, pos: "40% 14%", nome: "Lua e fumaça", autor: "Yoshitoshi", alt: "Gravura japonesa de um bombeiro diante de chamas alaranjadas, com a lua branca ao fundo" },
+    fox: { src: "assets/the-cry-of-the-fox-konkai.jpg", w: 1300, h: 1851, pos: "50% 10%", nome: "O uivo da raposa", autor: "Yoshitoshi", alt: "Gravura japonesa de uma raposa vestida como monge sob uma lua crescente, em noite escura" },
+    cub: { src: "assets/a-lion-training-a-cub.jpg", w: 1300, h: 2794, pos: "50% 6%", nome: "Um leão ensina o filhote", autor: "Hiroshige", alt: "Gravura japonesa de um leão de juba marrom olhando de uma rocha para o filhote, que sobe pela pedra" },
+    peonies: { src: "assets/chinese-lions-and-peonies.jpg", w: 1300, h: 1766, pos: "30% 78%", nome: "Leões chineses e peônias", autor: "Koryusai", alt: "Gravura japonesa de leões de pelagem encaracolada entre peônias cor de rosa" },
+    enlight: { src: "assets/moon-of-enlightenment-godo-no-tsuki-from.jpg", w: 1300, h: 1884, pos: "50% 18%", nome: "A lua da iluminação", autor: "Yoshitoshi", alt: "Gravura japonesa de um homem careca sentado, apontando para uma lua cheia no céu" },
+    cauldron: { src: "assets/a-cauldron-on-a-moonlit-night-tsukiyo.jpg", w: 1300, h: 1885, pos: "50% 12%", nome: "Um caldeirão em noite de lua", autor: "Yoshitoshi", alt: "Gravura japonesa de dois homens diante de um grande caldeirão, sob a lua cheia" },
+    clothes: { src: "assets/yoshitoshi-100-aspects-of-the-moon-84.jpg", w: 1300, h: 1737, pos: "50% 14%", nome: "A lua que bate o tecido", autor: "Yoshitoshi", alt: "Gravura japonesa de uma mulher batendo tecido, com uma criança ao lado e a lua cheia na janela" }
+  };
+  const ART_LIST = ["musashi", "dawn", "smoke", "fox", "cub", "peonies", "enlight", "cauldron", "clothes"];
+  const artFor = (slug) => {
     let h = 0;
     for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-    return PLATES[h % PLATES.length];
+    return ARTS[["musashi", "dawn", "smoke", "fox", "enlight", "cauldron", "clothes"][h % 7]];
   };
+  const img = (a, extra) => `<img src="${a.src}" alt="${esc(a.alt)}" width="${a.w}" height="${a.h}" style="object-position:${a.pos}" ${extra || 'loading="lazy"'}>`;
 
   let filtro = "Todas";
 
@@ -53,45 +66,32 @@
   addEventListener("resize", applyAdaptiveGrid);
 
   /* ---------- rolagem: Lenis + trava ---------- */
-  let lenis = null;
-  let lenisBusy = false;
-  let locked = false;
+  let lenis = null, lenisBusy = false, locked = false, stopLenisTick = null;
   async function initLenis() {
-    if (reduce || lenis || lenisBusy) return;
+    if (reduce || lenis || lenisBusy || location.search.indexOf("lenis=0") >= 0) return;
     lenisBusy = true;
     try {
       const m = await import("lenis");
       if (!lenisBusy) return;
       lenis = new m.default({ smoothWheel: true });
-      lenis.on("scroll", updateStats);
-      const raf = (t) => {
-        if (!lenis) return;
-        lenis.raf(t);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
+      stopLenisTick = F.tick((t) => { if (lenis) lenis.raf(t); }, 0);
       if (locked) lenis.stop();
-    } catch (e) {
-      /* sem a biblioteca, a rolagem nativa continua funcionando */
-    }
+    } catch (e) { /* sem a biblioteca, a rolagem nativa continua funcionando */ }
   }
   function destroyLenis() {
     lenisBusy = false;
+    if (stopLenisTick) { stopLenisTick(); stopLenisTick = null; }
     if (lenis) { lenis.destroy(); lenis = null; }
   }
   function stopScroll() {
     locked = true;
     if (lenis) lenis.stop();
-    html.style.position = "relative";
-    html.style.overflow = "hidden";
-    html.style.height = "100%";
+    html.style.position = "relative"; html.style.overflow = "hidden"; html.style.height = "100%";
   }
   function startScroll() {
     locked = false;
     if (lenis) lenis.start();
-    html.style.removeProperty("position");
-    html.style.removeProperty("overflow");
-    html.style.removeProperty("height");
+    html.style.removeProperty("position"); html.style.removeProperty("overflow"); html.style.removeProperty("height");
   }
   function scrollToId(id) {
     const el = document.getElementById(id);
@@ -99,99 +99,70 @@
     if (lenis) lenis.scrollTo(el, { offset: -8 });
     else window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 8, behavior: reduce ? "auto" : "smooth" });
   }
+  const toTop = () => { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); };
 
-  /* ---------- abertura ---------- */
+  /* ---------- abertura: o leão se enche de cima para baixo ---------- */
   function setReady() { html.classList.add("ready"); }
   function runLoader() {
     const loader = document.getElementById("loader");
     if (!html.classList.contains("intro") || !loader) { setReady(); return; }
     stopScroll();
-    const fill = document.getElementById("loader-fill");
-    const num = document.getElementById("loader-num");
-    const FILL_MS = 1300;
+    const fill = document.getElementById("loader-fill"), num = document.getElementById("loader-num");
+    const FILL_MS = 1500;
     const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
     const t0 = performance.now();
-    const tick = (now) => {
-      const t = clamp((now - t0) / FILL_MS, 0, 1);
-      const p = Math.round(ease(t) * 100);
-      fill.style.width = p + "%";
+    const tickLoad = (now) => {
+      const t = clamp((now - t0) / FILL_MS, 0, 1), e = ease(t), p = Math.round(e * 100);
+      loader.style.setProperty("--p", e.toFixed(3));
+      fill.style.transform = `scaleX(${e.toFixed(3)})`;
       num.textContent = String(p).padStart(3, "0");
-      if (t < 1) { requestAnimationFrame(tick); return; }
-      loader.classList.add("out");
-      let done = false;
-      const finish = () => {
-        if (done) return;
-        done = true;
-        html.classList.remove("intro");
-        try { sessionStorage.setItem("rs-intro", "1"); } catch (e) {}
-        setReady();
-        startScroll();
-      };
-      loader.addEventListener("transitionend", (e) => { if (e.target === loader) finish(); });
-      setTimeout(finish, 1100);
+      if (t < 1) { requestAnimationFrame(tickLoad); return; }
+      loader.classList.add("clear");
+      setTimeout(() => {
+        loader.classList.add("out");
+        let done = false;
+        const finish = () => {
+          if (done) return; done = true;
+          html.classList.remove("intro");
+          try { sessionStorage.setItem("tsuki-intro", "1"); } catch (e) {}
+          setReady(); startScroll();
+        };
+        loader.addEventListener("transitionend", (e) => { if (e.target === loader) finish(); });
+        setTimeout(finish, 1100);
+      }, 430);
     };
-    requestAnimationFrame(tick);
+    requestAnimationFrame(tickLoad);
   }
-
-  /* ---------- relógio ---------- */
-  function tickClock() {
-    const d = new Date();
-    const t = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
-    const data = d.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
-    const a = document.getElementById("clock-t");
-    const b = document.getElementById("clock-d");
-    const c = document.getElementById("menu-clock");
-    if (a) a.textContent = t;
-    if (b) b.textContent = data;
-    if (c) c.textContent = t + ", " + data;
-  }
-  tickClock();
-  setInterval(tickClock, 1000);
 
   /* ---------- peças ---------- */
   const L = (...linhas) => linhas.map((l) => '<span class="ln"><span>' + esc(l) + "</span></span>").join("");
+  const LS = (...linhas) => linhas.map((l, i) => '<span class="ln"><span>' + esc(l) + (i === linhas.length - 1 ? '<span class="stop">.</span>' : "") + "</span></span>").join("");
   let wi = 0;
   const palavras = (txt, soft) =>
     txt.split(" ").map((w) => '<span class="w' + (soft ? " soft" : "") + '" style="--i:' + wi++ + '">' + esc(w) + "</span>").join(" ");
+  const letras = (txt, base) => [...txt].map((ch, i) => `<span class="lt" style="--i:${(base || 0) + i}">${ch === " " ? "&nbsp;" : esc(ch)}</span>`).join("");
 
-  function pill(label, o) {
-    const { variant = "dark", arrow = "up", attrs = "", tag = "button", href = "" } = o || {};
-    const badge = arrow ? '<span class="pill-badge">' + (arrow === "right" ? I.right : I.up) + "</span>" : "";
-    const cls = "pill pill-" + variant + (arrow ? " pill-arrow" : "");
-    const inner = '<span class="pill-in">' + esc(label) + badge + "</span>";
-    return tag === "a"
-      ? '<a class="' + cls + '" href="' + esc(href) + '" ' + attrs + ">" + inner + "</a>"
-      : '<button class="' + cls + '" type="button" ' + attrs + ">" + inner + "</button>";
-  }
-
-  function card(p, i) {
-    return `
-      <a class="card rv" href="#/post/${esc(p.slug)}" style="--d:${i * 90}ms">
-        <div class="card-meta"><span>${fmtData(p.data)}</span></div>
-        <div class="card-plate"><img src="${plateFor(p.slug).src}" alt="" width="800" height="400" loading="lazy"></div>
-        <div class="card-bot">
-          <h3 class="card-t">${esc(p.titulo)}</h3>
-          <p class="card-d">${esc(p.resumo)}</p>
-          <div class="chips"><span class="chip">${esc(p.categoria)}</span><span class="chip">${p.leitura} min de leitura</span><span class="card-badge">${I.up}</span></div>
-        </div>
-      </a>`;
+  function cta(label, o) {
+    const { variant = "solid", tag = "button", href = "", attrs = "", arrow = true } = o || {};
+    const inner = '<span class="cta-in"><span class="cta-t">' + esc(label) + "</span>" + (arrow ? ARROW : "") + "</span>";
+    const cls = "cta cta-" + variant;
+    return tag === "a" ? '<a class="' + cls + '" href="' + esc(href) + '" ' + attrs + ">" + inner + "</a>" : '<button class="' + cls + '" type="button" ' + attrs + ">" + inner + "</button>";
   }
 
   function bandRow(p) {
     return `
-      <a class="bandrow" href="#/post/${esc(p.slug)}">
+      <a class="bandrow ${corDe(p.categoria)}" href="#/post/${esc(p.slug)}">
         <span class="bandrow-d">${fmtData(p.data)}</span>
         <span><span class="bandrow-t">${esc(p.titulo)}</span><span class="bandrow-n">${esc(p.resumo)}</span></span>
         <span class="bandrow-m">${esc(p.categoria)} · ${p.leitura} min</span>
       </a>`;
   }
 
-  const friso = (inicio) => `<div class="frieze">${[0, 1, 2].map((k) => { const q = PLATES[(inicio + k) % PLATES.length]; return `<div><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div>`; }).join("")}</div>`;
+  const friso = (...ks) => `<div class="frieze">${ks.map((k) => { const a = ARTS[ART_LIST[k % ART_LIST.length]]; return `<div>${img(a)}</div>`; }).join("")}</div>`;
+  const sidePlate = (key, ratio) => { const a = ARTS[key]; return `<figure class="side-plate rv" style="--ratio:${ratio}"><div class="plate-box">${img(a)}</div><figcaption>${esc(a.nome)}, ${esc(a.autor)}</figcaption></figure>`; };
 
-  const sidePlate = (i, ratio) => {
-    const q = PLATES[i];
-    return `<figure class="side-plate rv" style="--ratio:${ratio}"><div class="plate-box"><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div><figcaption>${esc(q.nome)}, Anna Atkins</figcaption></figure>`;
-  };
+  // contorno do recorte em degraus, usado nas placas da linha do tempo
+  const PLATE_OUTLINE = "M13.6168 0.497469H697.378C700.858 0.497469 704.195 1.38786 706.655 2.97277C709.115 4.55769 710.498 6.70729 710.498 8.94869V411.208C710.498 413.449 709.115 415.599 706.655 417.183C704.195 418.768 700.858 419.659 697.378 419.659H460.249C454.073 419.659 447.976 420.555 442.411 422.281C436.847 424.008 431.958 426.519 428.107 429.63L399.246 452.95C395.559 455.928 390.878 458.333 385.55 459.986C380.223 461.639 374.385 462.497 368.472 462.497H13.6168C10.1373 462.497 6.80038 461.607 4.34003 460.022C1.87968 458.437 0.497469 456.288 0.497469 454.046V8.94869C0.497469 6.70729 1.87968 4.55769 4.34003 2.97277C6.80038 1.38786 10.1373 0.497469 13.6168 0.497469Z";
 
   /* ---------- home ---------- */
   const SERVICOS = [
@@ -200,89 +171,158 @@
     { cat: "Guias", d: "Como usar a IA para estudar e trabalhar sem se perder." },
     { cat: "Pensamento crítico", d: "Como a IA muda o jeito de aprender e de saber." }
   ];
-  let liquidStop = null;
-  let heroCardIdx = 0;
+  const FASES = [0, 0.12, 0.25, 0.38, 0.5, 0.75];
 
   function renderHome() {
-    document.title = "ReadingStone: leia a IA de perto";
-    const l = CONFIG.livro;
-    const dem = DEMO;
-    const recentes = sorted().slice(0, 4);
-    const destaques = sorted().slice(0, 3);
+    F.cleanup();
+    document.title = "Tsuki: leia a IA de perto";
+    const dem = DEMO, l = CONFIG.livro;
+    const todos = sorted(), ultimo = todos[0], recentes = todos.slice(0, 4);
+    const lua = F.moonPhase();
+    const contagem = (c) => POSTS.filter((p) => p.categoria === c).length;
+    const ativa = ultimo ? ultimo.categoria : null;
     wi = 0;
 
     const demoHtml = (flagged) =>
       dem.partes.map((x) => (x.m === undefined ? esc(x.t) : flagged ? `<span class="flag">${esc(x.t)}</span>` : esc(x.t))).join("");
 
+    const idxRows = [
+      { t: "centre", post: recentes[0], art: ARTS.musashi, par: 20 },
+      { t: "side", al: "right", art: ARTS.cub, rot: "Leão", par: 60 },
+      { t: "centre", post: recentes[1], art: ARTS.dawn, par: 20 },
+      { t: "side", al: "left", art: ARTS.peonies, rot: "Peônias", par: 60 },
+      { t: "centre", post: recentes[2], art: ARTS.smoke, par: 20 },
+      { t: "side", al: "right", art: ARTS.enlight, rot: "Iluminação", par: 60 },
+      { t: "centre", post: recentes[3], art: ARTS.fox, par: 20 }
+    ];
+    const plateOutline = `<svg class="tl-outline" viewBox="0 0 710.995 462.995" preserveAspectRatio="none" aria-hidden="true"><path d="${PLATE_OUTLINE}" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke"/></svg>`;
+    const rowHtml = (r, i) => {
+      const plate = `<div class="tl-plate" data-par="${r.par}"><div class="tl-fill"><div class="tl-slot" data-slot>${img(r.art)}</div></div>${plateOutline}</div>`;
+      if (r.t === "side") {
+        return `<div class="tl-row side ${r.al} c${i % 3}"><div class="tl-pl-wrap">${plate}</div><p class="tl-year" data-par="${r.par}" aria-hidden="true">${letras(r.rot, 0)}</p><span class="sr">${esc(r.art.nome)}, ${esc(r.art.autor)}</span></div>`;
+      }
+      const p = r.post;
+      return `<div class="tl-row centre ${corDe(p.categoria)}">
+        <a class="tl-pl-wrap" href="#/post/${esc(p.slug)}" tabindex="-1" aria-hidden="true">${plate}</a>
+        <p class="tl-year" data-par="${r.par}" aria-hidden="true">${letras(fmtCurta(p.data), 0)}</p>
+        <p class="tl-copy" data-par="110"><a href="#/post/${esc(p.slug)}"><b>${esc(p.titulo)}.</b> ${esc(p.resumo)}</a></p>
+      </div>`;
+    };
+
     app.innerHTML = `
-      <section class="hero on-dark" id="inicio" aria-labelledby="h1">
-        <div class="hero-bg" id="hero-bg">
-          <img src="${PLATES[0].src}" alt="${esc(PLATES[0].alt)}" width="1920" height="2477" fetchpriority="high">
-          <canvas aria-hidden="true"></canvas>
-        </div>
-        <div class="hero-scrim"></div>
-        <p class="hero-mark hv" aria-hidden="true" data-t="ReadingStone" style="--d:300ms"></p>
-        <div class="hero-wrap">
-          <div class="hero-grid">
-            <div class="hero-left">
-              <h1 class="h1" id="h1">${L("Leia a IA", "de perto.")}</h1>
-              <p class="sup hv" style="--d:650ms">Modelos, pesquisas e guias em linguagem simples. Entenda onde a IA acerta, onde erra e como usar sem abrir mão do seu raciocínio.</p>
-              <div class="cta-row hv" style="--d:750ms">
-                ${pill("Assinar grátis", { variant: "light", arrow: "up", attrs: "data-open-modal" })}
-                ${pill("Ver edições", { variant: "ghost", arrow: null, tag: "a", href: "#/#edicoes" })}
-              </div>
+      <div class="stack" id="stack">
+        <div class="layer"><div class="layer-in">
+          <section class="hero" data-hero id="inicio" aria-labelledby="h1">
+            <canvas class="contours" aria-hidden="true"></canvas>
+            <div class="moon-wrap" aria-hidden="true">
+              <canvas class="moon-base"></canvas><canvas class="moon-red"></canvas>
+              <div class="hero-lion">${leao()}</div>
             </div>
-            <div class="hero-right">
-              <div class="hcard hv" id="hcard" style="--d:400ms">
-                <div class="hcard-in" id="hcard-in" tabindex="0" role="link" aria-label="Abrir a edição em destaque">
-                  <div class="hcard-tile" aria-hidden="true">${I.lens}</div>
-                  <div class="hcard-panel">
-                    <div class="hcard-slot"><div class="hcard-txt" id="hcard-txt"></div></div>
-                    <div class="hcard-foot">
-                      <div class="dots" id="hcard-dots" aria-hidden="true">${destaques.map((_, i) => `<span class="dot${i === 0 ? " on" : ""}"></span>`).join("")}</div>
-                      <div class="rbs">
-                        <button class="rb prev" type="button" id="hcard-prev" aria-label="Edição anterior">${I.right}</button>
-                        <button class="rb" type="button" id="hcard-next" aria-label="Próxima edição">${I.right}</button>
-                      </div>
-                    </div>
+            <div class="hero-col">
+              <div class="hero-mid">
+                <div class="ident">
+                  <p class="id hv" style="--d:180ms"><span class="kanji" lang="ja" aria-hidden="true">月</span> lua em japonês</p>
+                  <h1 class="h1" id="h1"><span class="sr">Tsuki</span><span aria-hidden="true">${letras("Tsuki", 0)}</span></h1>
+                  <ul class="meta">
+                    <li class="hv" style="--d:440ms">${F.moonSvg(0.5, 18)}<span>Newsletter sobre IA</span></li>
+                    <li class="hv" style="--d:570ms">${F.moonSvg(0.25, 18)}<span>Em português do Brasil</span></li>
+                    <li class="hv" style="--d:700ms">${F.moonSvg(0.0, 18)}<span>Livro: ${esc(l.titulo)}</span></li>
+                  </ul>
+                </div>
+                <div class="hpanels">
+                  <a class="bpanel hv" style="--d:900ms" href="${ultimo ? "#/post/" + esc(ultimo.slug) : "#/"}">
+                    ${brk()}
+                    <p class="bp-eb">última edição</p>
+                    <dl class="bp-dl"><dt>${esc(ultimo ? ultimo.titulo : "Em breve")}</dt><dd>${esc(ultimo ? ultimo.categoria : "")}</dd><dd>${ultimo ? fmtData(ultimo.data) : ""}</dd></dl>
+                  </a>
+                  <div class="bpanel hv" style="--d:1000ms">
+                    ${brk()}
+                    <p class="bp-eb">em números</p>
+                    <dl class="bp-stats">
+                      <div><dt>Edições</dt><dd>${letras(String(POSTS.length), 0)}</dd></div>
+                      <div><dt>Temas</dt><dd>${letras(String(CATEGORIAS.length), 2)}</dd></div>
+                      <div><dt>Termos</dt><dd>${letras(String(GLOSSARIO.length), 4)}</dd></div>
+                    </dl>
                   </div>
                 </div>
               </div>
-              <div class="topics hv" style="--d:550ms">
-                <p class="topics-l">Explorar por tema</p>
-                <ul class="topics-grid">${CATEGORIAS.map((c) => `<li><button class="topic" type="button" data-filter="${esc(c)}">${I.dot}${esc(c)}</button></li>`).join("")}</ul>
+              <div class="hactions hv" style="--d:1250ms">
+                <div class="today">${F.moonSvg(lua.p, 32, "today-glyph")}<p><b>Lua de hoje</b><span>${esc(lua.nome)}, ${Math.round(lua.illum * 100)}%</span></p></div>
+                ${cta("Assinar grátis", { variant: "solid", attrs: "data-open-modal" })}
+                <div class="hlinks"><a href="#/#edicoes">Ver edições</a><a href="#/livro">O livro</a></div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="hero-bar hv" style="--d:900ms">
-          <div class="shell hero-bar-in"><span>Newsletter sobre IA</span><span>Em português do Brasil</span><span>Role para explorar ${I.down}</span></div>
-        </div>
-      </section>
+          </section>
+        </div><div class="layer-shade"></div></div>
 
-      <section class="sec" id="sobre" aria-labelledby="h-sobre">
+        <div class="layer"><div class="layer-in">
+          <section class="season" data-season id="ciclo" aria-labelledby="h-ciclo">
+            <div class="orbit-frame">
+              <div class="stage" aria-hidden="true">
+                <canvas class="s-dots"></canvas>
+                <svg class="s-svg" viewBox="0 0 1440 800">
+                  <g class="s-grid">
+                    <line x1="360" y1="-4000" x2="360" y2="4800"/><line x1="720" y1="-4000" x2="720" y2="4800"/><line x1="1080" y1="-4000" x2="1080" y2="4800"/><line x1="-4000" y1="400" x2="5440" y2="400"/>
+                  </g>
+                  <circle class="s-ring" cx="720" cy="400" r="76"/><circle class="s-ring ghost" cx="720" cy="400" r="342"/><circle class="s-ring ghost" cx="720" cy="400" r="426"/>
+                  <circle class="s-ping" cx="720" cy="400" r="12"/><circle class="s-hub" cx="720" cy="400" r="9"/>
+                  <g class="s-marks"><rect x="64" y="76" width="16" height="16"/><rect x="1360" y="76" width="16" height="16"/><rect x="64" y="710" width="16" height="16"/><rect x="1360" y="710" width="16" height="16"/></g>
+                </svg>
+                <canvas class="s-trace"></canvas>
+              </div>
+              ${CATEGORIAS.map((c, i) => `<button class="orbit-label c${i % 3}${c === ativa ? " live" : ""}" type="button" data-filter="${esc(c)}">${F.moonSvg(FASES[i], 22)}<span><b>${esc(c)}</b><small>${contagem(c)} ${contagem(c) === 1 ? "edição" : "edições"}</small></span></button>`).join("")}
+            </div>
+            <canvas class="seam" aria-hidden="true" data-carry="light"></canvas>
+            <div class="season-col">
+              <div class="shead io">
+                <h2 class="sh2" id="h-ciclo">
+                  <span class="sh2-l">${palavras("as fases", false)}</span>
+                  <span class="sh2-l">${palavras("da leitura", false)}<span class="stop">.</span></span>
+                </h2>
+                <span class="s-rule" aria-hidden="true"></span>
+                <p class="sh-intro">${palavras("Seis temas, uma lua: modelos, pesquisas, guias, dicas, pensamento crítico e ética.", false)}</p>
+                <ul class="theme-chips">${CATEGORIAS.map((c) => `<li><button type="button" data-filter="${esc(c)}">${esc(c)}</button></li>`).join("")}</ul>
+              </div>
+              <div class="splate" aria-label="Lua de hoje">
+                <svg class="splate-frame" viewBox="0 0 277 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0.5 0.5H276.5V101L268 109.5H0.5Z" vector-effect="non-scaling-stroke"/></svg>
+                <div class="splate-badge">${F.moonSvg(lua.p, 38)}</div>
+                <dl class="splate-dl"><div><dt>hoje</dt><dd>${esc(lua.nome)}</dd></div><div><dt>luz</dt><dd>${Math.round(lua.illum * 100)}%</dd></div><div><dt>dia</dt><dd>${Math.floor(lua.age) + 1} do ciclo</dd></div></dl>
+              </div>
+            </div>
+          </section>
+        </div><div class="layer-shade"></div></div>
+
+        <div class="layer last">
+          <section class="timeline" id="edicoes" aria-labelledby="h-ed">
+            <div class="tl-wrap">
+              <h2 class="tl-h io" id="h-ed">${LS("as edições", "recentes")}</h2>
+              <div class="tl-rail" aria-hidden="true"><i class="tl-track"></i><i class="tl-prog"></i><i class="tl-mark"></i></div>
+              ${idxRows.map(rowHtml).join("")}
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section class="sec sobre" id="sobre" aria-labelledby="h-sobre">
         <div class="shell about-grid">
-          <div class="about-art">
-            <span class="about-lens" aria-hidden="true">${I.lens}</span>
-            <p class="about-note rv">${I.lens}<span>A pedra de leitura era uma lente que ampliava as letras na página.</span></p>
-          </div>
+          <div class="about-art" aria-hidden="true">${cruz("about-cross")}<span class="about-kanji" lang="ja">月</span></div>
           <div class="about-state">
-            <h2 class="sr" id="h-sobre">Sobre a ReadingStone</h2>
-            <p class="state io">${palavras("A ReadingStone entrega conteúdos informativos sobre IA, de seu funcionamento aos seus limites", false)} ${palavras("e à ética de usá-la.", true)}</p>
+            <h2 class="sr" id="h-sobre">Sobre a Tsuki</h2>
+            <p class="state io">${palavras("A Tsuki entrega conteúdos informativos sobre IA, de seu funcionamento aos seus limites", false)} ${palavras("e à ética de usá-la.", true)}</p>
             <div class="about-foot rv" style="--d:200ms">
               <p class="facts"><span><b>Formato</b> newsletter e site</span><span><b>Idioma</b> português do Brasil</span></p>
-              ${pill("Conhecer o livro", { variant: "ghost", arrow: "right", tag: "a", href: "#/livro" })}
+              ${cta("Conhecer o livro", { variant: "ghost", tag: "a", href: "#/livro" })}
             </div>
           </div>
         </div>
       </section>
 
-      <section class="sec" id="pedra" aria-labelledby="h-pedra" style="padding-top:0">
+      <section class="sec" id="demo" aria-labelledby="h-demo" style="padding-top:0">
         <div class="shell pedra-grid">
-          <div>${sidePlate(1, "5 / 6")}</div>
+          <div>${sidePlate("enlight", "5 / 6")}</div>
           <div>
-            <h2 class="h2 io" id="h-pedra">${L("Passe a pedra", "sobre a resposta.")}</h2>
-            <p class="lead rv" style="--d:120ms">Uma resposta fluente não é uma resposta conferida. A pedra mostra o que pedir de volta.</p>
+            <h2 class="h2 io" id="h-demo">${L("Passe a lua", "sobre a resposta.")}</h2>
+            <p class="lead rv" style="--d:120ms">Uma resposta fluente não é uma resposta conferida. A lua mostra o que pedir de volta.</p>
             <div class="stone-wrap rv" style="--d:200ms">
               <div class="stone" id="stone" tabindex="0" role="group" aria-label="Resposta de exemplo da IA. Passe o mouse para ver os trechos a conferir; a lista abaixo traz o mesmo conteúdo." aria-describedby="checks">
                 <p class="base">${demoHtml(false)}</p>
@@ -294,23 +334,6 @@
               </ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section aria-label="Leia, cheque, pense">
-        <ul class="shell band4">
-          <li class="rv" style="--d:0ms"><div class="tile tile-light">Leia</div></li>
-          <li class="rv" style="--d:120ms"><div class="tile tile-blue">Cheque</div></li>
-          <li class="rv" style="--d:240ms"><div class="tile tile-dark" aria-label="depois">${I.right}</div></li>
-          <li class="rv" style="--d:360ms"><div class="tile tile-ghost">Pense</div></li>
-        </ul>
-      </section>
-
-      <section class="sec" id="edicoes" aria-labelledby="h-ed">
-        <div class="shell">
-          <h2 class="h2 io center" id="h-ed">${L("Edições recentes")}</h2>
-          <p class="lead rv center" style="--d:120ms;max-width:none;text-align:center">Textos de exemplo, até a primeira edição.</p>
-          <div class="cards">${recentes.map(card).join("")}</div>
         </div>
       </section>
 
@@ -342,7 +365,7 @@
 
       <section class="sec" id="glossario" aria-labelledby="h-gl" style="padding-top:0">
         <div class="shell pedra-grid">
-          <div>${sidePlate(2, "5 / 6")}</div>
+          <div>${sidePlate("clothes", "5 / 6")}</div>
           <div>
             <h2 class="h2 io" id="h-gl">${L("Glossário rápido")}</h2>
             <p class="lead rv" style="--d:120ms">Os termos que mais aparecem nas notícias sobre IA.</p>
@@ -353,40 +376,67 @@
         </div>
       </section>
 
-      <section class="sec on-dark" aria-labelledby="h-num">
-        <div class="shell">
-          <div class="stats-panel rv">
-            <h2 class="stats-h io" id="h-num">${L("O que já está no ar.")}</h2>
-            <ul class="stats-grid">
-              ${[
-                [POSTS.length, "Edições no site"],
-                [GLOSSARIO.length, "Termos no glossário"],
-                [CATEGORIAS.length, "Categorias de tema"],
-                [PLATES.length, "Cianótipos no site"]
-              ].map(([v, t], i) => `<li class="rv" style="--d:${i * 90}ms"><p class="stat-n" data-v="${v}">${reduce ? v : 0}</p><p class="stat-l">${esc(t)}</p></li>`).join("")}
-            </ul>
-          </div>
+      <section class="padd" id="livro-home" aria-labelledby="h-padd">
+        <canvas class="contours" aria-hidden="true"></canvas>
+        <div class="padd-fig" data-up><div class="padd-lion" aria-hidden="true">${leao()}</div></div>
+        <div class="padd-band"></div>
+        <canvas class="seam" aria-hidden="true" data-carry="dark"></canvas>
+        <h2 class="padd-h io" id="h-padd"><span class="sh2-l">${palavras("a máquina", false)}</span><span class="sh2-l">${palavras("resolve", false)}<span class="stop red">?</span></span></h2>
+        <div class="padd-intro">
+          <p class="padd-p io">${palavras(l.subtitulo, false)}</p>
+          <div class="padd-cta rv" style="--d:420ms">${cta("Conhecer o livro", { variant: "solid", tag: "a", href: "#/livro" })}</div>
+        </div>
+        <div class="pp meet rv" style="--d:300ms">${brk()}
+          <dl><dt>${esc(l.titulo)}</dt><dd>Epistemologia da IA</dd><dd>Para quem estuda e trabalha com IA</dd></dl>
+        </div>
+        <div class="pp stats rv" style="--d:420ms">${brk()}
+          <dl>
+            ${[[l.topicos.length, "temas do livro", 0.0], [POSTS.length, "edições no site", 0.25], [GLOSSARIO.length, "termos no glossário", 0.38], [CATEGORIAS.length, "temas da newsletter", 0.5]].map(([v, t, ph]) => `<div class="stat-row">${F.moonSvg(ph, 28)}<div><dt>${esc(t)}</dt><dd>${letras(String(v), 0)}</dd></div></div>`).join("")}
+          </dl>
+        </div>
+        <div class="cal" aria-label="Temas e fases da lua">
+          <ul>
+            ${CATEGORIAS.map((c, i) => `<li class="cal-card c${i % 3}${c === ativa ? " live" : ""}" style="--c:${i - 2.5};--k:${i}">
+              <span class="cal-link" aria-hidden="true"></span>
+              <span class="cal-mk">${F.moonSvg(FASES[i], 18)}</span>
+              <p class="cal-r">${i === 0 ? "lua nova" : i === 1 ? "crescente" : i === 2 ? "quarto" : i === 3 ? "gibosa" : i === 4 ? "lua cheia" : "minguante"}</p>
+              <p class="cal-n"><a href="#/#lista" data-filter="${esc(c)}">${esc(c)}</a></p>
+              <p class="cal-d">${contagem(c)} ${contagem(c) === 1 ? "edição" : "edições"}</p>
+            </li>`).join("")}
+          </ul>
         </div>
       </section>`;
 
     paintList();
-    app.querySelectorAll(".tab").forEach((b) =>
-      b.addEventListener("click", () => {
-        filtro = b.dataset.cat;
-        paintList();
-      })
-    );
-    app.querySelectorAll("[data-filter]").forEach((b) =>
-      b.addEventListener("click", (e) => { e.preventDefault(); goFilter(b.dataset.filter); })
-    );
+    app.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { filtro = b.dataset.cat; paintList(); }));
+    app.querySelectorAll("[data-filter]").forEach((b) => b.addEventListener("click", (e) => { e.preventDefault(); goFilter(b.dataset.filter); }));
 
-    heroCardIdx = 0;
-    bindHeroCard(destaques);
     bindStone();
-    startLiquid();
     observeReveals();
-    updateStats();
+    mountHome();
     initLenis();
+  }
+
+  function mountHome() {
+    const hero = app.querySelector("[data-hero]"), stack = document.getElementById("stack"), season = app.querySelector("[data-season]");
+    const tl = app.querySelector(".timeline");
+    app.querySelectorAll(".contours").forEach((c) => F.reg(F.contours(c)));
+    F.reg(F.moonHero(hero));
+    F.reg(F.stack(stack));
+    F.reg(F.season(season, [0.07, 0.23, 0.39, 0.55, 0.71, 0.87]));
+    F.reg(F.timeline(tl));
+    season.querySelectorAll(".seam").forEach((c) => F.reg(F.seam(c, season, c.dataset.carry)));
+    const padd = app.querySelector(".padd");
+    padd.querySelectorAll(".seam").forEach((c) => F.reg(F.seam(c, padd, c.dataset.carry)));
+    const fig = padd.querySelector(".padd-fig");
+    F.reg(F.onScroll(() => {
+      if (reduce) return;
+      const r = padd.getBoundingClientRect(), vh = innerHeight, p = clamp((vh - r.top) / (vh + r.height), 0, 1);
+      fig.style.transform = `translateY(${(-48 * (r.width / 1440) * p).toFixed(1)}px)`;
+    }));
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { padd.classList.add("in"); io.disconnect(); } }), { rootMargin: "0px 0px -20% 0px" });
+    io.observe(padd); F.reg(() => io.disconnect());
+    if (reduce) padd.classList.add("in");
   }
 
   function paintList() {
@@ -399,132 +449,11 @@
 
   function goFilter(cat) {
     filtro = cat;
-    if (document.getElementById("lista")) {
-      paintList();
-      scrollToId("lista");
-    } else {
-      location.hash = "#/#lista";
-    }
+    if (document.getElementById("lista")) { paintList(); scrollToId("lista"); }
+    else location.hash = "#/#lista";
   }
 
-  /* ---------- cartão em carrossel do hero ---------- */
-  function bindHeroCard(itens) {
-    const txt = document.getElementById("hcard-txt");
-    const dots = document.querySelectorAll("#hcard-dots .dot");
-    const box = document.getElementById("hcard-in");
-    if (!txt) return;
-    const write = (p) => {
-      txt.innerHTML = `<p class="hcard-cap">${esc(p.categoria)}</p><p class="hcard-title">${esc(p.titulo)}</p>`;
-    };
-    write(itens[0]);
-    let busy = false;
-    const go = (step) => {
-      if (busy) return;
-      busy = true;
-      const n = itens.length;
-      heroCardIdx = (heroCardIdx + step + n) % n;
-      txt.classList.add("out-up");
-      setTimeout(() => {
-        write(itens[heroCardIdx]);
-        txt.classList.remove("out-up");
-        txt.classList.add("in-from");
-        requestAnimationFrame(() => requestAnimationFrame(() => { txt.classList.remove("in-from"); busy = false; }));
-        dots.forEach((d, i) => d.classList.toggle("on", i === heroCardIdx));
-      }, reduce ? 0 : 160);
-    };
-    document.getElementById("hcard-next").addEventListener("click", (e) => { e.stopPropagation(); go(1); });
-    document.getElementById("hcard-prev").addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
-    box.addEventListener("click", () => { location.hash = "#/post/" + itens[heroCardIdx].slug; });
-    box.addEventListener("keydown", (e) => { if (e.key === "Enter") location.hash = "#/post/" + itens[heroCardIdx].slug; });
-  }
-
-  /* ---------- revelação líquida no hero ---------- */
-  function startLiquid() {
-    if (liquidStop) { liquidStop(); liquidStop = null; }
-    if (reduce) return;
-    const box = document.getElementById("hero-bg");
-    if (!box) return;
-    const canvas = box.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
-    const brushRadius = 143, decay = 0.016, fadeFrames = 120;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const radius = brushRadius * dpr;
-    const cover = document.createElement("canvas");
-    const cctx = cover.getContext("2d");
-    const brush = document.createElement("canvas");
-    const bctx = brush.getContext("2d");
-    brush.width = brush.height = Math.ceil(radius * 2);
-    const img = new Image();
-    let loaded = false, W = 1, H = 1, points = [], last = null, idle = fadeFrames + 1, raf = 0, dead = false;
-
-    const drawCover = () => {
-      if (!loaded) return;
-      cctx.clearRect(0, 0, W, H);
-      const s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
-      const w = img.naturalWidth * s, h = img.naturalHeight * s;
-      cctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
-    };
-    const size = () => {
-      const r = box.getBoundingClientRect();
-      W = canvas.width = Math.max(1, Math.round(r.width * dpr));
-      H = canvas.height = Math.max(1, Math.round(r.height * dpr));
-      cover.width = W; cover.height = H;
-      drawCover();
-    };
-    img.onload = () => { loaded = true; drawCover(); };
-    img.src = PLATES[1].src; // revelada sob o cursor; a base é a PLATES[0]
-
-    const stamp = (x, y) => {
-      const c = radius;
-      bctx.globalCompositeOperation = "source-over";
-      bctx.clearRect(0, 0, brush.width, brush.height);
-      const g = bctx.createRadialGradient(c, c, 0, c, c, c);
-      g.addColorStop(0, "rgba(255,255,255,1)");
-      g.addColorStop(0.55, "rgba(255,255,255,0.82)");
-      g.addColorStop(1, "rgba(255,255,255,0)");
-      bctx.fillStyle = g;
-      bctx.fillRect(0, 0, brush.width, brush.height);
-      bctx.globalCompositeOperation = "source-in";
-      bctx.drawImage(cover, x - c, y - c, brush.width, brush.height, 0, 0, brush.width, brush.height);
-      ctx.globalCompositeOperation = "source-over";
-      ctx.drawImage(brush, x - c, y - c);
-    };
-    const tick = () => {
-      raf = 0;
-      if (dead) return;
-      const drawing = points.length > 0;
-      if (drawing) idle = 0; else idle++;
-      if (idle > fadeFrames) { if (idle === fadeFrames + 1) ctx.clearRect(0, 0, W, H); return; }
-      const fade = drawing ? decay : Math.min(decay + idle * 0.004, 0.5);
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.fillStyle = "rgba(0,0,0," + fade + ")";
-      ctx.fillRect(0, 0, W, H);
-      if (drawing) { points.forEach((p) => stamp(p.x, p.y)); points = []; }
-      raf = requestAnimationFrame(tick);
-    };
-    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    const move = (e) => {
-      const r = canvas.getBoundingClientRect();
-      const x = (e.clientX - r.left) * dpr, y = (e.clientY - r.top) * dpr;
-      if (x < -radius || y < -radius || x > W + radius || y > H + radius) { last = null; return; }
-      if (last) {
-        const dx = x - last.x, dy = y - last.y, dist = Math.hypot(dx, dy);
-        const step = Math.max(radius * 0.3, 1);
-        const n = Math.min(Math.ceil(dist / step), 60);
-        for (let i = 1; i <= n; i++) points.push({ x: last.x + (dx * i) / n, y: last.y + (dy * i) / n });
-      } else points.push({ x, y });
-      last = { x, y };
-      idle = 0;
-      kick();
-    };
-    const ro = new ResizeObserver(size);
-    ro.observe(box);
-    size();
-    window.addEventListener("pointermove", move, { passive: true });
-    liquidStop = () => { dead = true; ro.disconnect(); window.removeEventListener("pointermove", move); if (raf) cancelAnimationFrame(raf); };
-  }
-
-  /* ---------- a pedra ---------- */
+  /* ---------- a lua sobre a resposta ---------- */
   function bindStone() {
     const st = document.getElementById("stone");
     if (!st) return;
@@ -542,30 +471,11 @@
     st.addEventListener("blur", () => { st.style.removeProperty("--r"); st.classList.remove("on"); });
   }
 
-  /* ---------- números que contam ao rolar ---------- */
-  let statsTimer = 0;
-  function updateStats() {
-    if (statsTimer) return;
-    statsTimer = setTimeout(() => {
-      statsTimer = 0;
-      const vh = window.innerHeight;
-      document.querySelectorAll(".stat-n").forEach((el) => {
-        const v = Number(el.dataset.v);
-        if (reduce) { el.textContent = v; return; }
-        const r = el.getBoundingClientRect();
-        // 0 quando o topo toca a base da janela; 1 quando o centro chega ao centro da janela
-        const p = clamp((vh - r.top) / (vh - (vh / 2 - r.height / 2)), 0, 1);
-        el.textContent = Math.round(p * v);
-      });
-    }, 30);
-  }
-  window.addEventListener("scroll", updateStats, { passive: true });
-
   /* ---------- revelações ao entrar na tela ---------- */
   let io = null;
   function observeReveals() {
     if (io) io.disconnect();
-    const els = [...app.querySelectorAll(".rv, .io"), ...document.querySelectorAll(".foot .io")].filter((el) => !el.closest(".hero") && !el.classList.contains("in"));
+    const els = [...app.querySelectorAll(".rv, .io")].filter((el) => !el.classList.contains("in"));
     if (!("IntersectionObserver" in window) || reduce) { els.forEach((el) => el.classList.add("in", "done")); return; }
     io = new IntersectionObserver(
       (entries) => entries.forEach((en) => { if (en.isIntersecting) { const alvo = en.target; alvo.classList.add("in"); setTimeout(() => alvo.classList.add("done"), 1000); io.unobserve(alvo); } }),
@@ -587,6 +497,24 @@
   }, { passive: true });
   tabbar.addEventListener("focusin", () => tabbar.classList.remove("hide"));
 
+  /* ---------- páginas internas: cabeçalho com contornos ---------- */
+  const tabHead = (id, linhas, lead, cls) => `
+    <section class="tabhead ${cls || ""}" id="${id}">
+      <canvas class="contours" aria-hidden="true"></canvas>
+      <div class="shell th-in">
+        <h1 class="th io">${LS(...linhas)}</h1>
+        ${lead ? `<p class="lead rv" style="--d:120ms">${lead}</p>` : ""}
+      </div>
+    </section>`;
+
+  function afterRender(tab) {
+    app.querySelectorAll(".contours").forEach((c) => F.reg(F.contours(c)));
+    if (tab) setActiveTab(tab);
+    observeReveals();
+    toTop();
+    initLenis();
+  }
+
   /* ---------- artigo ---------- */
   function bloco(b, n) {
     const a = ` class="rv" style="--d:${(n % 3) * 70}ms"`;
@@ -598,33 +526,37 @@
   }
 
   function renderPost(slug) {
+    F.cleanup();
     const p = POSTS.find((x) => x.slug === slug);
-    if (liquidStop) { liquidStop(); liquidStop = null; }
     if (!p) {
-      app.innerHTML = `<div class="post-band"><div class="post-band-scrim"></div></div><div class="shell post-grid"><div></div><div><a class="back" href="#/" style="display:inline-block">Voltar ao início</a><h1 class="post-title">Edição não encontrada</h1></div></div>`;
+      app.innerHTML = `${tabHead("post-head", ["Edição não", "encontrada"], `<a class="back" href="#/">Voltar ao início</a>`)}`;
+      afterRender(null);
       return;
     }
-    document.title = `${p.titulo} | ReadingStone`;
-    const pl = plateFor(p.slug);
-    const pl2 = PLATES[(PLATES.indexOf(pl) + 1) % PLATES.length];
+    document.title = `${p.titulo} | Tsuki`;
+    const a1 = artFor(p.slug);
     const l = CONFIG.livro;
     const outros = sorted().filter((x) => x.slug !== slug).slice(0, 3);
 
     app.innerHTML = `
-      <div class="post-band on-dark"><img src="${pl.src}" alt="${esc(pl.alt)}" width="1600" height="2000" fetchpriority="high"><div class="post-band-scrim"></div></div>
+      <section class="tabhead post-head" id="post-head">
+        <canvas class="contours" aria-hidden="true"></canvas>
+        <div class="shell th-in">
+          <h1 class="post-title io">${esc(p.titulo)}</h1>
+          <p class="post-meta">${esc(p.categoria)}, ${fmtData(p.data)}, ${p.leitura} minutos de leitura</p>
+          <a class="back" href="#/#lista">Todas as edições</a>
+        </div>
+      </section>
       <article class="shell post-grid">
         <div class="post-side">
-          <a class="back" href="#/#lista">Todas as edições</a>
           <dl class="side-list">
             <div><dt>Categoria</dt><dd>${esc(p.categoria)}</dd></div>
             <div><dt>Publicado em</dt><dd>${fmtData(p.data)}</dd></div>
             <div><dt>Leitura</dt><dd>${p.leitura} minutos</dd></div>
           </dl>
-          <figure class="side-plate" style="--ratio:4 / 3"><div class="plate-box"><img src="${pl2.src}" alt="${esc(pl2.alt)}" width="1600" height="2000" loading="lazy"></div><figcaption>${esc(pl2.nome)}, Anna Atkins</figcaption></figure>
+          <figure class="side-plate"><div class="plate-box">${img(a1)}</div><figcaption>${esc(a1.nome)}, ${esc(a1.autor)}</figcaption></figure>
         </div>
         <div>
-          <h1 class="post-title rv">${esc(p.titulo)}</h1>
-          <p class="post-meta">${esc(p.categoria)}, ${fmtData(p.data)}, ${p.leitura} minutos de leitura</p>
           <p class="post-lede rv" style="--d:80ms">${esc(p.resumo)}</p>
           <div class="prose">${p.corpo.map((b, n) => bloco(b, n)).join("")}</div>
         </div>
@@ -633,10 +565,10 @@
       <section class="shell post-end" aria-labelledby="h-cta-livro">
         <h2 class="h2 io" id="h-cta-livro">${L("Quer ir além?", "Leia o livro.")}</h2>
         <p class="lead rv" style="--d:100ms"><b>${esc(l.titulo)}</b> aprofunda este e outros temas, passo a passo.</p>
-        <div class="cta-row rv" style="--d:160ms;margin-top:1.75rem">${pill("Conhecer o livro", { variant: "blue", arrow: "up", tag: "a", href: "#/livro" })}</div>
+        <div class="cta-row rv" style="--d:160ms;margin-top:1.75rem">${cta("Conhecer o livro", { variant: "solid", tag: "a", href: "#/livro" })}</div>
       </section>
 
-      <div class="frieze" aria-hidden="false">${[1, 2, 3].map((k) => { const q = PLATES[(PLATES.indexOf(pl) + k) % PLATES.length]; return `<div><img src="${q.src}" alt="${esc(q.alt)}" width="1600" height="2000" loading="lazy"></div>`; }).join("")}</div>
+      ${friso(4, 5, 6)}
 
       <section class="sec" aria-labelledby="h-mais">
         <div class="shell">
@@ -644,15 +576,15 @@
           <div class="bands rv" style="margin-top:1.5rem;--d:100ms">${outros.map(bandRow).join("")}</div>
         </div>
       </section>`;
-
+    afterRender(null);
+    setActiveTab("inicio");
     window.scrollTo(0, 0);
-    observeReveals();
   }
 
   /* ---------- tema claro e escuro ---------- */
   const themeBtn = document.getElementById("theme-btn");
   const sistemaEscuro = matchMedia("(prefers-color-scheme: dark)");
-  const guardado = () => { try { const t = localStorage.getItem("rs-tema"); return t === "dark" || t === "light" ? t : null; } catch (e) { return null; } };
+  const guardado = () => { try { const t = localStorage.getItem("tsuki-tema"); return t === "dark" || t === "light" ? t : null; } catch (e) { return null; } };
   function aplicaTema(t) {
     html.setAttribute("data-theme", t);
     themeBtn.setAttribute("aria-label", t === "dark" ? "Ativar o modo claro" : "Ativar o modo escuro");
@@ -662,11 +594,10 @@
     const t = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
     html.classList.add("theme-anim");
     aplicaTema(t);
-    try { localStorage.setItem("rs-tema", t); } catch (e) {}
+    try { localStorage.setItem("tsuki-tema", t); } catch (e) {}
     clearTimeout(themeBtn._anim);
     themeBtn._anim = setTimeout(() => html.classList.remove("theme-anim"), 500);
   });
-  // sem escolha salva, acompanha o tema do sistema
   sistemaEscuro.addEventListener("change", (e) => { if (!guardado()) aplicaTema(e.matches ? "dark" : "light"); });
 
   /* ---------- menu em tela cheia e modal ---------- */
@@ -674,6 +605,8 @@
   const modal = document.getElementById("modal");
   const menuBtn = document.getElementById("menu-open");
   let lastFocus = null;
+  const luaHoje = F.moonPhase();
+  document.getElementById("menu-moon").textContent = luaHoje.nome + ", " + Math.round(luaHoje.illum * 100) + "%";
 
   const setInert = (on) => ["conteudo", "topo", "rodape", "tabbar"].forEach((id) => { const el = document.getElementById(id); if (el) el.inert = on; });
   function trap(container, e) {
@@ -741,7 +674,6 @@
       if (location.hash === alvo) route(); else location.hash = alvo;
     })
   );
-  // qualquer botão "assinar" da página abre o modal
   document.addEventListener("click", (e) => {
     const t = e.target.closest("[data-open-modal]");
     if (t) { e.preventDefault(); openModal(); }
@@ -754,13 +686,8 @@
   };
   const redes = (CONFIG.redes || []).filter((r) => r.url);
   const footSocial = document.getElementById("foot-social");
-  footSocial.innerHTML = redes.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(r.nome)} da ReadingStone (abre em outra aba)">${ICONES[r.icone] || ""}${esc(r.nome)}</a></li>`).join("");
+  footSocial.innerHTML = redes.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(r.nome)} da Tsuki (abre em outra aba)">${ICONES[r.icone] || ""}${esc(r.nome)}</a></li>`).join("");
   footSocial.hidden = !redes.length;
-
-  // temas no rodapé
-  const footTemas = document.getElementById("foot-temas");
-  footTemas.innerHTML = CATEGORIAS.map((c) => `<li><button type="button" data-foot-filter="${esc(c)}">${esc(c)}</button></li>`).join("");
-  footTemas.addEventListener("click", (e) => { const b = e.target.closest("[data-foot-filter]"); if (b) goFilter(b.dataset.footFilter); });
 
   /* ---------- formulário de assinatura ---------- */
   document.getElementById("mform").addEventListener("submit", async (e) => {
@@ -786,61 +713,57 @@
       ok.querySelector(".modal-h").textContent = conectado ? "Pronto, seu e-mail está na lista." : "Formulário em demonstração.";
       ok.querySelector(".modal-ok-p").textContent = conectado
         ? "Obrigado por assinar. A próxima edição chega no seu e-mail."
-        : "O envio ainda não está conectado a um serviço de e-mail, então nada foi salvo.";
+        : "Ainda não há serviço de e-mail conectado, então nada foi enviado nem guardado. Quando o envio estiver ligado, esta janela vai confirmar a sua assinatura.";
       document.getElementById("modal-form-wrap").hidden = true;
       ok.hidden = false;
+      ok.querySelector("button").focus();
     } catch (err) {
-      msg.textContent = "Não foi possível enviar agora. Tente de novo em instantes.";
+      msg.textContent = "Não deu para enviar agora. Tente de novo em instantes.";
     } finally {
       send.textContent = "Assinar grátis";
     }
   });
 
-
-  /* ---------- abas: livro e founders ---------- */
+  /* ---------- abas: livro, founders e FAQ ---------- */
   function setActiveTab(tab) {
     document.querySelectorAll("[data-tab]").forEach((el) => {
       if (el.dataset.tab === tab) el.setAttribute("aria-current", "page"); else el.removeAttribute("aria-current");
     });
   }
-  const toTop = () => { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); };
 
   function renderLivro() {
-    if (liquidStop) { liquidStop(); liquidStop = null; }
+    F.cleanup();
     const l = CONFIG.livro;
-    document.title = l.titulo + " | ReadingStone";
+    document.title = l.titulo + " | Tsuki";
     app.innerHTML = `
-      <div class="post-band on-dark"><img src="${PLATES[0].src}" alt="${esc(PLATES[0].alt)}" width="1920" height="2477" fetchpriority="high"><div class="post-band-scrim"></div></div>
-      <section id="livro-tab" class="on-dark tab-body" aria-labelledby="h-livro">
+      ${tabHead("livro-tab", ["O livro"], "Um livro sobre como a IA muda o jeito de aprender e de saber.")}
+      <section class="tab-body" aria-labelledby="h-livro">
         <div class="shell">
           <div class="book-card rv">
             <div>
-              <div class="cover" aria-hidden="true"><i></i><b>${esc(l.titulo)}</b></div>
+              <div class="cover" aria-hidden="true">${cruz("cover-cross")}<b>${esc(l.titulo)}</b></div>
               <p class="cover-note">Capa provisória, só para esta página.</p>
             </div>
             <div>
-              <h1 class="h2 io" id="h-livro">${L(l.titulo)}</h1>
+              <h2 class="book-h io" id="h-livro">${L(l.titulo)}</h2>
               <p class="lead rv" style="--d:100ms">${esc(l.subtitulo)}</p>
               <p class="book-p rv" style="--d:160ms">${esc(l.descricao)}</p>
-              <h2 class="btopics-h rv" style="--d:220ms">O que o livro trata</h2>
+              <h3 class="btopics-h rv" style="--d:220ms">O que o livro trata</h3>
               <ul class="btopics">${l.topicos.map((t, i) => `<li class="rv" style="--d:${260 + i * 70}ms">${esc(t)}</li>`).join("")}</ul>
-              <div class="cta-row rv" style="--d:640ms">${pill(l.textoBotao, { variant: "light", arrow: "up", attrs: "data-open-modal" })}</div>
+              <div class="cta-row rv" style="--d:640ms">${cta(l.textoBotao, { variant: "light", attrs: "data-open-modal" })}</div>
             </div>
           </div>
-          <div class="book-plate rv"><img src="${PLATES[3].src}" alt="${esc(PLATES[3].alt)}" width="1920" height="2681" loading="lazy"></div>
+          <div class="book-plate rv">${img(ARTS.dawn)}</div>
         </div>
       </section>
-      ${friso(1)}`;
-    setActiveTab("livro");
-    observeReveals();
-    toTop();
-    initLenis();
+      ${friso(0, 1, 2)}`;
+    afterRender("livro");
   }
 
   function fcard(f, i) {
     const foto = f.foto
       ? `<img src="${esc(f.foto)}" alt="Foto de ${esc(f.nome)}" width="${(f.fotoTam || [800, 1000])[0]}" height="${(f.fotoTam || [800, 1000])[1]}" loading="lazy">`
-      : `<div class="fphoto-ph" aria-hidden="true"><span class="fphoto-ini">${esc(f.iniciais || "")}</span>${I.lens}</div>`;
+      : `<div class="fphoto-ph" aria-hidden="true"><span class="fphoto-ini">${esc(f.iniciais || "")}</span>${cruz()}</div>`;
     const lk = f.linkedin
       ? `<a class="flink" href="${esc(f.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de ${esc(f.nome)} (abre em outra aba)">LinkedIn ${I.up}</a>`
       : "";
@@ -852,7 +775,7 @@
           <div class="chips"><span class="chip">${esc(f.papel)}</span>${f.confirmado ? "" : '<span class="chip">Descrição provisória</span>'}</div>
           <div class="fmore" id="fm-${i}"><div class="fmore-in"><p>${esc(f.descricao)}</p></div></div>
           <div class="factions">
-            <button class="fbtn" type="button" aria-expanded="false" aria-controls="fm-${i}"><span class="fbtn-t">Conhecer</span><span class="fbtn-i" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <button class="fbtn" type="button" aria-expanded="false" aria-controls="fm-${i}"><span class="fbtn-t">Conhecer</span><span class="fbtn-i" aria-hidden="true"><b class="xs"></b></span></button>
             ${lk}
           </div>
         </div>
@@ -860,28 +783,24 @@
   }
 
   function renderFaq() {
-    if (liquidStop) { liquidStop(); liquidStop = null; }
-    document.title = "Perguntas frequentes | ReadingStone";
+    F.cleanup();
+    document.title = "Perguntas frequentes | Tsuki";
     const itens = CONFIG.faq || [];
     app.innerHTML = `
-      <div class="post-band on-dark"><img src="${PLATES[1].src}" alt="${esc(PLATES[1].alt)}" width="1920" height="2417" fetchpriority="high"><div class="post-band-scrim"></div></div>
-      <section id="faq-tab" class="shell tab-body" aria-labelledby="h-faq">
+      ${tabHead("faq-tab", ["Perguntas", "frequentes"], "Respostas curtas sobre a newsletter e sobre o livro.")}
+      <section class="shell tab-body" aria-label="Perguntas e respostas">
         <div class="faq-grid">
-          <div class="faq-head">
-            <h1 class="h2 io" id="h-faq">${L("Perguntas", "frequentes")}</h1>
-            <p class="lead rv" style="--d:120ms">Respostas curtas sobre a newsletter e sobre o livro.</p>
-            ${sidePlate(3, "4 / 3")}
-          </div>
+          <div class="faq-head">${sidePlate("cauldron", "4 / 3")}</div>
           <ul class="faq-list">
             ${itens.map((q, i) => `
               <li class="faq-item rv" style="--d:${i * 70}ms">
-                <h2 class="faq-q"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-r-${i}" id="faq-b-${i}"><span>${esc(q.p)}</span><span class="faq-i" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button></h2>
+                <h2 class="faq-q"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-r-${i}" id="faq-b-${i}"><span>${esc(q.p)}</span><span class="faq-i" aria-hidden="true"><b class="xs"></b></span></button></h2>
                 <div class="faq-a" id="faq-r-${i}" role="region" aria-labelledby="faq-b-${i}" inert><div class="faq-a-in">${q.r.map((t) => `<p>${esc(t)}</p>`).join("")}</div></div>
               </li>`).join("")}
           </ul>
         </div>
       </section>
-      ${friso(2)}`;
+      ${friso(3, 7, 8)}`;
     app.querySelectorAll(".faq-btn").forEach((b) =>
       b.addEventListener("click", () => {
         const item = b.closest(".faq-item");
@@ -890,32 +809,28 @@
         item.querySelector(".faq-a").inert = !aberto;
       })
     );
-    setActiveTab("faq");
-    observeReveals();
-    toTop();
-    initLenis();
+    afterRender("faq");
   }
 
   function renderFounders() {
-    if (liquidStop) { liquidStop(); liquidStop = null; }
-    document.title = "Founders | ReadingStone";
+    F.cleanup();
+    document.title = "Founders | Tsuki";
     const fs = CONFIG.founders || [];
     const hs = CONFIG.historia || { titulo: "", paragrafos: [] };
     app.innerHTML = `
-      <div class="post-band on-dark"><img src="${PLATES[2].src}" alt="${esc(PLATES[2].alt)}" width="1792" height="2385" fetchpriority="high"><div class="post-band-scrim"></div></div>
-      <section id="founders-tab" class="shell tab-body" aria-labelledby="h-fnd">
-        <h1 class="h2 io" id="h-fnd">${L("Quem faz", "a ReadingStone.")}</h1>
-        <p class="lead rv" style="--d:120ms">As pessoas por trás da newsletter e do livro.</p>
+      ${tabHead("founders-tab", ["Quem faz", "a Tsuki"], "As pessoas por trás da newsletter e do livro.")}
+      <section class="shell tab-body" aria-label="Founders">
         <div class="fgrid">${fs.map(fcard).join("")}
           <aside class="fstory rv" style="--d:200ms" aria-labelledby="h-hist">
+            ${brk()}
             <h2 class="fstory-h" id="h-hist">${esc(hs.titulo)}</h2>
             <div class="story">${(hs.paragrafos || []).map((t) => `<p>${esc(t)}</p>`).join("")}</div>
             <p class="note"><b>${esc(hs.provisorio || "")}</b></p>
-            <div class="cta-row" style="margin-top:1.5rem">${pill("Assinar grátis", { variant: "blue", arrow: "up", attrs: "data-open-modal" })}</div>
+            <div class="cta-row" style="margin-top:1.5rem">${cta("Assinar grátis", { variant: "solid", attrs: "data-open-modal" })}</div>
           </aside>
         </div>
       </section>
-      ${friso(0)}`;
+      ${friso(1, 4, 5)}`;
     app.querySelectorAll(".fbtn").forEach((b) =>
       b.addEventListener("click", () => {
         const card = b.closest(".fcard");
@@ -924,10 +839,7 @@
         b.querySelector(".fbtn-t").textContent = aberto ? "Fechar" : "Conhecer";
       })
     );
-    setActiveTab("founders");
-    observeReveals();
-    toTop();
-    initLenis();
+    afterRender("founders");
   }
 
   // tocar na aba em que você já está leva ao topo dela
@@ -960,6 +872,7 @@
   window.addEventListener("hashchange", route);
   document.querySelector(".brand").addEventListener("click", () => { if (location.hash === "" || location.hash === "#/") route(); });
 
+  F.footer();
   // depois da abertura 000 a 100, a primeira aba que aparece é sempre a central
   if (html.classList.contains("intro") && /^#\/(livro|founders|faq|#livro)/.test(location.hash)) history.replaceState(null, "", "#/");
   runLoader();

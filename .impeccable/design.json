@@ -1,227 +1,253 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-20T18:00:00.000Z",
-  "title": "Design System: ReadingStone",
+  "generatedAt": "2026-10-21T15:23:02.299Z",
+  "title": "Design System: Tsuki",
   "extensions": {
     "colorMeta": {
-      "paper": {
+      "washi": {
         "role": "neutral",
-        "displayName": "Papel Azulado",
-        "canonical": "#f4f6fa",
+        "displayName": "Washi",
+        "canonical": "#f5f5f3",
         "tonalRamp": [
-          "#22262d",
-          "#3c424d",
-          "#5a6270",
-          "#7e8695",
-          "#a2aab8",
-          "#c4cad6",
-          "#e0e4ec",
-          "#f4f6fa"
+          "#0a0a0c",
+          "#585859",
+          "#a7a7a6",
+          "#f5f5f3",
+          "#f8f8f6",
+          "#fafaf9",
+          "#fdfdfc",
+          "#ffffff"
         ]
       },
-      "paper-step-1": {
+      "washi-step-1": {
         "role": "neutral",
-        "displayName": "Papel Degrau 1",
-        "canonical": "#e8ecf3",
+        "displayName": "Washi Degrau 1",
+        "canonical": "#ebebe8",
         "tonalRamp": [
-          "#22262d",
-          "#3c424d",
-          "#5a6270",
-          "#7e8695",
-          "#a2aab8",
-          "#c4cad6",
-          "#dde2eb",
-          "#e8ecf3"
+          "#0a0a0c",
+          "#555555",
+          "#a0a09f",
+          "#ebebe8",
+          "#f0f0ee",
+          "#f5f5f4",
+          "#fafaf9",
+          "#ffffff"
         ]
       },
-      "paper-step-2": {
+      "washi-step-2": {
         "role": "neutral",
-        "displayName": "Papel Degrau 2",
-        "canonical": "#dbe2ee",
+        "displayName": "Washi Degrau 2",
+        "canonical": "#dedcd6",
         "tonalRamp": [
-          "#22262d",
-          "#3a4252",
-          "#58637a",
-          "#7a869d",
-          "#9ba7bd",
-          "#bac4d6",
-          "#cfd8e6",
-          "#dbe2ee"
+          "#0a0a0c",
+          "#51504f",
+          "#979693",
+          "#dedcd6",
+          "#e6e5e0",
+          "#efeeeb",
+          "#f7f6f5",
+          "#ffffff"
         ]
       },
-      "ink": {
+      "sumi": {
         "role": "neutral",
-        "displayName": "Preto Suave",
-        "canonical": "#22201d",
+        "displayName": "Sumi",
+        "canonical": "#0b0b0d",
         "tonalRamp": [
-          "#22201d",
-          "#3a3733",
-          "#55514c",
-          "#736e68",
-          "#938d86",
-          "#b3aea8",
-          "#d3cfca",
-          "#eeece9"
+          "#0a0a0c",
+          "#0a0a0c",
+          "#0b0b0d",
+          "#0b0b0d",
+          "#48484a",
+          "#858586",
+          "#c2c2c3",
+          "#ffffff"
         ]
       },
-      "ink-soft": {
+      "sumi-step-1": {
         "role": "neutral",
-        "displayName": "Cinza Azulado de Nota",
-        "canonical": "#3f4655",
+        "displayName": "Sumi Degrau 1",
+        "canonical": "#16161a",
         "tonalRamp": [
-          "#1f232b",
-          "#2f3541",
-          "#3f4655",
-          "#586072",
-          "#747c90",
-          "#9299aa",
-          "#b5bac7",
-          "#d8dbe2"
+          "#0a0a0c",
+          "#0e0e11",
+          "#121215",
+          "#16161a",
+          "#505053",
+          "#8b8b8d",
+          "#c5c5c6",
+          "#ffffff"
         ]
       },
-      "blue": {
+      "sumi-step-2": {
+        "role": "neutral",
+        "displayName": "Sumi Degrau 2",
+        "canonical": "#232329",
+        "tonalRamp": [
+          "#0a0a0c",
+          "#121216",
+          "#1b1b1f",
+          "#232329",
+          "#5a5a5f",
+          "#919194",
+          "#c8c8ca",
+          "#ffffff"
+        ]
+      },
+      "shu": {
         "role": "primary",
-        "displayName": "Azul Cianótipo",
-        "canonical": "#1c3a6b",
+        "displayName": "Vermelho Selo",
+        "canonical": "#d7263d",
         "tonalRamp": [
-          "#0c1930",
-          "#14264a",
-          "#1c3a6b",
-          "#2c5290",
-          "#3f6bb3",
-          "#6a90c8",
-          "#9fb7dd",
-          "#d3dff0"
+          "#0a0a0c",
+          "#4e131c",
+          "#931d2d",
+          "#d7263d",
+          "#e15c6e",
+          "#eb939e",
+          "#f5c9cf",
+          "#ffffff"
         ]
       },
-      "blue-deep": {
+      "shu-deep": {
         "role": "primary",
-        "displayName": "Azul Cianótipo Fundo",
-        "canonical": "#14264a",
+        "displayName": "Vermelho Selo Fundo",
+        "canonical": "#b81d32",
         "tonalRamp": [
-          "#080f1e",
-          "#0e1a33",
-          "#14264a",
-          "#1c3a6b",
-          "#31558f",
-          "#5a7fb5",
-          "#93aed4",
-          "#cdd9ec"
+          "#0a0a0c",
+          "#441019",
+          "#7e1725",
+          "#b81d32",
+          "#ca5665",
+          "#dc8e99",
+          "#edc7cc",
+          "#ffffff"
         ]
       },
-      "on-blue-soft": {
-        "role": "neutral",
-        "displayName": "Papel Sobre Azul",
-        "canonical": "#c4d0e5",
+      "shu-soft": {
+        "role": "primary",
+        "displayName": "Vermelho Selo Suave",
+        "canonical": "#ff7a8a",
         "tonalRamp": [
-          "#3d4a63",
-          "#58688a",
-          "#7285a9",
-          "#8d9fc2",
-          "#a6b6d5",
-          "#c4d0e5",
-          "#dde4f0",
-          "#f4f6fa"
+          "#0a0a0c",
+          "#5c2f36",
+          "#ad5560",
+          "#ff7a8a",
+          "#ff9ba7",
+          "#ffbdc5",
+          "#ffdee2",
+          "#ffffff"
         ]
       },
-      "night": {
-        "role": "neutral",
-        "displayName": "Noite",
-        "canonical": "#22201d",
-        "tonalRamp": [
-          "#0e0d0c",
-          "#1a1816",
-          "#22201d",
-          "#33302c",
-          "#4d4944",
-          "#6e6a64",
-          "#9a968f",
-          "#cbc8c3"
-        ]
-      },
-      "on-night-soft": {
-        "role": "neutral",
-        "displayName": "Cinza Sobre Noite",
-        "canonical": "#b9bcc6",
-        "tonalRamp": [
-          "#3b3d44",
-          "#52555e",
-          "#6b6e79",
-          "#868993",
-          "#9fa2ad",
-          "#b9bcc6",
-          "#d3d5dc",
-          "#eceef2"
-        ]
-      },
-      "brick": {
+      "ai": {
         "role": "secondary",
-        "displayName": "Tijolo",
-        "canonical": "#a8442a",
+        "displayName": "Azul Ai",
+        "canonical": "#1f4e9c",
         "tonalRamp": [
-          "#3a170d",
-          "#5e2819",
-          "#82351f",
-          "#a8442a",
-          "#c4694f",
-          "#d98d76",
-          "#e8b5a5",
-          "#f5dcd3"
+          "#0a0a0c",
+          "#11213c",
+          "#18376c",
+          "#1f4e9c",
+          "#577ab5",
+          "#8fa7ce",
+          "#c7d3e6",
+          "#ffffff"
         ]
       },
-      "brick-on-dark": {
+      "matsu": {
         "role": "secondary",
-        "displayName": "Tijolo Claro Sobre Escuro",
-        "canonical": "#e58a6e",
+        "displayName": "Verde Matsu",
+        "canonical": "#2e7d5b",
         "tonalRamp": [
-          "#5a2a1b",
-          "#7f3d29",
-          "#a5523a",
-          "#c76b4f",
-          "#e58a6e",
-          "#eca58d",
-          "#f2c0ad",
-          "#f8dcd0"
+          "#0a0a0c",
+          "#163026",
+          "#225741",
+          "#2e7d5b",
+          "#629e84",
+          "#97bead",
+          "#cbdfd6",
+          "#ffffff"
+        ]
+      },
+      "night-bg": {
+        "role": "neutral",
+        "displayName": "Fundo do Modo Escuro",
+        "canonical": "#0d0d10",
+        "tonalRamp": [
+          "#0a0a0c",
+          "#0b0b0d",
+          "#0c0c0f",
+          "#0d0d10",
+          "#4a4a4c",
+          "#868688",
+          "#c3c3c3",
+          "#ffffff"
+        ]
+      },
+      "night-fg": {
+        "role": "neutral",
+        "displayName": "Texto do Modo Escuro",
+        "canonical": "#f1f1ee",
+        "tonalRamp": [
+          "#0a0a0c",
+          "#575757",
+          "#a4a4a3",
+          "#f1f1ee",
+          "#f5f5f2",
+          "#f8f8f7",
+          "#fcfcfb",
+          "#ffffff"
+        ]
+      },
+      "night-accent": {
+        "role": "primary",
+        "displayName": "Vermelho do Modo Escuro",
+        "canonical": "#ee4258",
+        "tonalRamp": [
+          "#0a0a0c",
+          "#561d25",
+          "#a22f3f",
+          "#ee4258",
+          "#f27182",
+          "#f7a1ac",
+          "#fbd0d5",
+          "#ffffff"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Título do hero em duas linhas e marca d'água; 700, tracking -0.035em."
+        "purpose": "\"Tsuki\" no hero; Shippori Mincho 800, 0.95, -0.02em."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Títulos de seção (h2), 600, tracking -0.03em."
+        "purpose": "Títulos da pilha, do livro e do rodapé; Shippori Mincho 800."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Títulos de cartão, linhas de cobertura e artigo; 500 a 700."
-      },
-      "lead": {
-        "displayName": "Lead",
-        "purpose": "Apoio do hero, standfirst, declaração e texto da lente."
+        "purpose": "Perguntas da FAQ, nomes e cartões do calendário; Shippori Mincho 800."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Texto corrido em 1rem; artigo 1.125rem com 1.65 e 38rem de medida."
+        "purpose": "Texto corrido em Onest 400, 1rem."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Navegação, botões, abas e metadados; 500, caixa de frase."
+        "purpose": "Navegação, botões e metadados em Onest 500, caixa alta, 1rem."
       }
     },
-    "shadows": [],
+    "shadows": {},
     "motion": [
       {
         "name": "ease",
         "value": "cubic-bezier(0.23, 1, 0.32, 1)",
-        "purpose": "Entrada e saída de hover, pressionar e menu."
+        "purpose": "Entradas, hover, pressionar e menu."
       },
       {
-        "name": "ease-soft",
-        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
-        "purpose": "Revelações de bloco, cabeçalho, loader e item de menu (aprox. mola 210/26)."
+        "name": "ease-plate",
+        "value": "cubic-bezier(0.33, 0, 0, 1)",
+        "purpose": "Preenchimento do botão, recuo da placa e abertura dos colchetes (250 a 700ms)."
       },
       {
         "name": "ease-line",
@@ -231,22 +257,27 @@
       {
         "name": "ease-word",
         "value": "cubic-bezier(0.165, 0.84, 0.44, 1)",
-        "purpose": "Revelação por palavra, 35ms de escalonamento."
+        "purpose": "Revelação por palavra e letra."
       },
       {
-        "name": "tabbar-hide",
-        "value": "translateY(100%) 250ms var(--ease)",
-        "purpose": "Barra de abas some ao rolar para baixo (após 160px) e volta ao subir ou no fim da página."
+        "name": "stack-recede",
+        "value": "scale(0.9) e sombra de 55%",
+        "purpose": "A camada coberta da pilha encolhe e escurece enquanto a próxima sobe."
       },
       {
-        "name": "fmore-expand",
-        "value": "grid-template-rows 0fr to 1fr, 300ms var(--ease)",
-        "purpose": "Descrição do founder expande sem medir altura; texto sobe 0.5rem e aparece em 250ms."
+        "name": "orbit-lap",
+        "value": "6000ms, seno suave",
+        "purpose": "A volta da órbita acende os seis temas, freando nas pontas da elipse."
       },
       {
-        "name": "faq-expand",
-        "value": "grid-template-rows 0fr to 1fr, 300ms var(--ease)",
-        "purpose": "Resposta da FAQ expande sem medir altura; texto sobe 0.375rem e aparece em 250ms; selo de mais gira 45 graus em 300ms; resposta fechada fica inert."
+        "name": "moon-trail",
+        "value": "rastro de pincel com fade",
+        "purpose": "A lua vermelha aparece sob o cursor e some em seguida."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "sem pilha animada, sem trilha, sem volta",
+        "purpose": "Conteúdo igual, sem deslocamento."
       }
     ],
     "breakpoints": [
@@ -267,24 +298,16 @@
         "value": "1024px"
       },
       {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
         "name": "root-1440",
         "value": "1440px"
       },
       {
         "name": "root-1920",
         "value": "1920px"
-      },
-      {
-        "name": "founders-3col",
-        "value": "1100px"
-      },
-      {
-        "name": "header-tight",
-        "value": "1024px a 1099px (relógio oculto, intervalo da navegação 1rem)"
-      },
-      {
-        "name": "xs",
-        "value": "480px"
       }
     ],
     "rootScale": [
@@ -301,8 +324,8 @@
         "value": "max(1.111111vw, 15px)"
       },
       {
-        "name": "ate 1024px",
-        "value": "max(1.5625vw, 16px)"
+        "name": "ate 1279px",
+        "value": "16px"
       },
       {
         "name": "ate 640px",
@@ -312,171 +335,53 @@
   },
   "components": [
     {
-      "name": "Botão Azul",
+      "name": "Botão Solid",
       "kind": "button",
-      "refersTo": "button-blue",
-      "description": "Ação primária em pílula com selo circular; hover escurece para blue-deep.",
-      "html": "<span class=\"ds-pill\"><span class=\"ds-pill-in\">Assinar grátis<span class=\"ds-badge\">&rarr;</span></span></span>",
-      "css": ".ds-pill{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-pill:hover{transform:scale(1.03)}.ds-pill:active{transform:scale(0.97)}.ds-pill-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:var(--blue,#1c3a6b);color:#f4f6fa;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem;transition:background-color 200ms ease}.ds-pill:hover .ds-pill-in{background:#14264a}.ds-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#f4f6fa;color:#1c3a6b;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-pill:hover .ds-badge{transform:translate(0.125rem,-0.125rem)}.ds-pill:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
+      "refersTo": "cta-solid",
+      "description": "Ação primária com corte no canto, contorno vermelho e preenchimento que cresce da esquerda em hover.",
+      "html": "<span class=\"ds-cta\"><span class=\"ds-cta-in\">Assinar grátis →</span></span>",
+      "css": ".ds-cta{display:inline-block;background:#d7263d;clip-path:polygon(0 0,100% 0,100% calc(100% - .5rem),calc(100% - .5rem) 100%,0 100%)}.ds-cta-in{display:block;margin:1px;padding:.9375rem 1.5rem;background:#0b0b0d;color:#ff7a8a;text-transform:uppercase;font:500 1rem Onest,sans-serif;clip-path:polygon(0 0,100% 0,100% calc(100% - .5rem),calc(100% - .5rem) 100%,0 100%)}"
     },
     {
-      "name": "Botão Escuro",
-      "kind": "button",
-      "refersTo": "button-dark",
-      "description": "Pílula noite com selo branco, para ações de contraste sobre papel.",
-      "html": "<span class=\"ds-dark\"><span class=\"ds-dark-in\">Ver edições<span class=\"ds-dark-badge\">&rarr;</span></span></span>",
-      "css": ".ds-dark{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-dark:hover{transform:scale(1.03)}.ds-dark:active{transform:scale(0.97)}.ds-dark-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:#22201d;color:#fff;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem}.ds-dark-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#fff;color:#22201d}"
-    },
-    {
-      "name": "Botão Claro",
-      "kind": "button",
-      "refersTo": "button-light",
-      "description": "Pílula em papel degrau 1 com selo noite; hover sobe ao degrau 2.",
-      "html": "<span class=\"ds-light\"><span class=\"ds-light-in\">Saiba mais<span class=\"ds-light-badge\">&rarr;</span></span></span>",
-      "css": ".ds-light{display:inline-block;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-light:hover{transform:scale(1.03)}.ds-light-in{display:inline-flex;align-items:center;gap:0.75rem;border-radius:9999px;background:#e8ecf3;color:#22201d;font:500 1rem Onest,system-ui,sans-serif;padding:0.375rem 0.375rem 0.375rem 1.5rem;transition:background-color 200ms ease}.ds-light:hover .ds-light-in{background:#dbe2ee}.ds-light-badge{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:9999px;background:#22201d;color:#fff}"
-    },
-    {
-      "name": "Cartão de Edição",
-      "kind": "card",
-      "refersTo": "card-blue",
-      "description": "Cartão azul de raio 2rem com selo, plate em luminosity, título e chips.",
-      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-card-meta\"><span>12 jun 2026</span><span class=\"ds-card-badge\">&nearr;</span></div><div class=\"ds-card-plate\"></div><div class=\"ds-card-bot\"><div class=\"ds-card-t\">Como conferir uma citação gerada por IA</div><p class=\"ds-card-d\">Três passos para rastrear a fonte antes de repetir a resposta.</p></div></a>",
-      "css": ".ds-card{display:block;position:relative;min-height:22rem;overflow:hidden;border-radius:2rem;background:#1c3a6b;padding:1.5rem;color:#f4f6fa;font-family:Onest,system-ui,sans-serif;text-decoration:none;transition:transform 280ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-card:hover{transform:translateY(-0.5rem) scale(1.012);background:#14264a}.ds-card-meta{display:flex;justify-content:space-between;align-items:flex-start;color:#c4d0e5}.ds-card-badge{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:9999px;background:rgba(244,246,250,0.14);color:#f4f6fa;transition:transform 280ms cubic-bezier(0.23,1,0.32,1)}.ds-card:hover .ds-card-badge{transform:rotate(45deg) scale(1.08)}.ds-card-plate{position:absolute;inset:4.75rem 1.5rem auto;height:7.5rem;border-radius:0.9375rem;background:#14264a}.ds-card-bot{position:absolute;inset-inline:1.5rem;bottom:1.5rem}.ds-card-t{font-size:1.25rem;font-weight:500;letter-spacing:-0.01em;line-height:1.15}.ds-card-d{margin-top:0.5rem;color:#c4d0e5}.ds-card:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
-    },
-    {
-      "name": "Linha de Cobertura",
-      "kind": "custom",
-      "refersTo": "row",
-      "description": "Linha de raio 1.25rem em papel degrau 1; em hover vira azul, recua e desliza o selo.",
-      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-in\"><span class=\"ds-row-t\">Como ler uma resposta de IA</span><span class=\"ds-row-badge\">&rarr;</span></span></a>",
-      "css": ".ds-row{display:block;font-family:Onest,system-ui,sans-serif;text-decoration:none;color:#22201d}.ds-row-in{display:flex;align-items:center;gap:1rem;border-radius:1.25rem;background:#e8ecf3;padding:1.5rem;transition:background-color 200ms ease,padding 240ms cubic-bezier(0.23,1,0.32,1),color 200ms ease}.ds-row-t{flex:1;font-size:1.5rem;font-weight:500;letter-spacing:-0.01em}.ds-row-badge{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:9999px;background:#1c3a6b;color:#f4f6fa;transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-row:hover .ds-row-in{background:#1c3a6b;color:#f4f6fa;padding-left:2rem;padding-right:1.25rem}.ds-row:hover .ds-row-badge{transform:translateX(0.3125rem);background:#f4f6fa;color:#1c3a6b}.ds-row:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
-    },
-    {
-      "name": "Aba de Filtro",
-      "kind": "chip",
-      "refersTo": "tab",
-      "description": "Aba de raio 0.9375rem em papel degrau 1; selecionada em azul.",
-      "html": "<button class=\"ds-tab\" aria-pressed=\"false\">Todas</button> <button class=\"ds-tab\" aria-pressed=\"true\">Guias</button>",
-      "css": ".ds-tab{background:#e8ecf3;color:#22201d;border:0;border-radius:0.9375rem;min-height:3rem;padding:0.5rem 1rem;font:500 1rem Onest,system-ui,sans-serif;text-align:left;cursor:pointer;transition:background-color 150ms ease,color 150ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-tab:active{transform:scale(0.97)}.ds-tab[aria-pressed=true]{background:#1c3a6b;color:#f4f6fa}.ds-tab:not([aria-pressed=true]):hover{background:#dbe2ee}.ds-tab:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:0.1875rem}"
-    },
-    {
-      "name": "Campo de E-mail",
-      "kind": "input",
-      "refersTo": "input-field",
-      "description": "Campo do modal de assinatura: papel degrau 1, raio 0.9375rem, foco no degrau 2 com contorno azul.",
-      "html": "<label class=\"ds-label\">E-mail<input class=\"ds-input\" type=\"email\" placeholder=\"voce@exemplo.com\"></label>",
-      "css": ".ds-label{display:grid;gap:0.375rem;font:500 1rem Onest,system-ui,sans-serif;color:#3f4655}.ds-input{width:100%;border:0;border-radius:0.9375rem;background:#e8ecf3;padding:0.9375rem 1rem;font:400 1rem Onest,system-ui,sans-serif;color:#22201d;outline:none;transition:background-color 200ms ease}.ds-input:focus{background:#dbe2ee;outline:0.125rem solid #1c3a6b;outline-offset:0.125rem}"
-    },
-    {
-      "name": "Cartão do Hero",
-      "kind": "custom",
-      "refersTo": "hero-card",
-      "description": "Carrossel das edições mais novas: ladrilho noite, painel de texto, pontos e botões circulares.",
-      "html": "<div class=\"ds-hcard\"><div class=\"ds-hcard-tile\"><svg width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"12\" cy=\"12\" r=\"7\"/></svg></div><div class=\"ds-hcard-panel\"><div><div class=\"ds-hcard-cap\">Edição recente</div><div class=\"ds-hcard-title\">Como conferir uma citação gerada por IA</div></div><div class=\"ds-hcard-foot\"><span class=\"ds-dots\"><i class=\"ds-dot on\"></i><i class=\"ds-dot\"></i><i class=\"ds-dot\"></i></span></div></div></div>",
-      "css": ".ds-hcard{display:flex;gap:0.5rem;width:21rem;border-radius:1.25rem;background:rgba(244,246,250,0.94);color:#22201d;padding:0.5rem;font-family:Onest,system-ui,sans-serif}.ds-hcard-tile{aspect-ratio:1;width:6rem;display:grid;place-items:center;border-radius:0.9375rem;background:#22201d;color:#e58a6e;font-size:2rem}.ds-hcard-panel{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:0.5rem;border-radius:0.9375rem;background:#e8ecf3;padding:0.75rem}.ds-hcard-cap{font-size:0.9375rem;font-weight:500;color:#3f4655}.ds-hcard-title{font-size:1rem;font-weight:500;line-height:1.3}.ds-dots{display:flex;gap:0.25rem;align-items:center}.ds-dot{display:block;height:0.25rem;width:0.375rem;border-radius:9999px;background:rgba(34,32,29,0.25)}.ds-dot.on{width:1rem;background:#1c3a6b}"
-    },
-    {
-      "name": "Pedra de Leitura",
-      "kind": "custom",
-      "refersTo": "card-blue",
-      "description": "Componente assinatura: parágrafo de exemplo com camada azul revelada por círculo (versão estática mostrada aqui).",
-      "html": "<div class=\"ds-stone\"><p>A pesquisa citada foi publicada em <span class=\"ds-flag\">2019 pela universidade de Lisboa</span>, segundo o modelo.</p></div>",
-      "css": ".ds-stone{padding:0.9375rem 1.125rem;border-radius:1.25rem;background:#1c3a6b;color:#f4f6fa;font-family:Onest,system-ui,sans-serif}.ds-stone p{font-size:1.375rem;line-height:1.32;letter-spacing:-0.01em;font-weight:500;max-width:24em}.ds-flag{text-decoration:underline;text-decoration-color:#e58a6e;text-decoration-thickness:0.25rem;text-underline-offset:0.375rem;text-decoration-skip-ink:none}"
-    },
-    {
-      "name": "Barra de Abas",
-      "kind": "nav",
-      "refersTo": "tabbar-item",
-      "description": "Barra inferior noite de largura total; aba atual em pílula papel. A fileira sob o cabeçalho usa as mesmas pílulas em on-blue a 16%.",
-      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\">Início</a><a href=\"#\">O livro</a><a href=\"#\">Founders</a><a href=\"#\">FAQ</a></nav>",
-      "css": ".ds-tabbar{display:flex;justify-content:center;gap:0.25rem;padding:0.5rem 0.75rem;background:#22201d;font-family:Onest,system-ui,sans-serif}.ds-tabbar a{display:grid;place-items:center;min-height:2.75rem;padding:0 1.25rem;border-radius:9999px;color:#b9bcc6;font-size:1rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background-color 200ms ease,color 200ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-tabbar a:active{transform:scale(0.97)}.ds-tabbar a[aria-current=page]{background:#f4f6fa;color:#22201d}.ds-tabbar a:not([aria-current]):hover{color:#fff;background:rgba(255,255,255,0.12)}.ds-tabbar a:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
-    },
-    {
-      "name": "Pergunta da FAQ",
-      "kind": "custom",
-      "refersTo": "faq-item",
-      "description": "Linha de raio 1.25rem com botão de largura total e selo azul de mais que gira 45 graus ao abrir; resposta expande por grid-rows.",
-      "html": "<ul class=\"ds-q-list\"><li class=\"ds-q open\"><button class=\"ds-q-btn\" aria-expanded=\"true\"><span>O que é a ReadingStone?</span><span class=\"ds-q-i\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\"><path d=\"M12 5v14M5 12h14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span></button><div class=\"ds-q-a\"><div><p>Uma publicação que ensina a ler a IA de perto.</p></div></div></li><li class=\"ds-q\"><button class=\"ds-q-btn\" aria-expanded=\"false\"><span>Quanto custa?</span><span class=\"ds-q-i\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\"><path d=\"M12 5v14M5 12h14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span></button><div class=\"ds-q-a\"><div><p>Resposta de exemplo.</p></div></div></li></ul>",
-      "css": ".ds-q-list{list-style:none;margin:0;padding:0;display:grid;gap:0.5rem;width:30rem;font-family:Onest,system-ui,sans-serif;color:#22201d}.ds-q{border-radius:1.25rem;background:#e8ecf3}.ds-q:nth-child(even){background:#dbe2ee}.ds-q-btn{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;min-height:4.5rem;padding:1rem 1.25rem;border:0;border-radius:1.25rem;background:none;color:inherit;text-align:left;font:600 1.1875rem/1.25 Onest,system-ui,sans-serif;letter-spacing:-0.01em;cursor:pointer}.ds-q-i{display:grid;place-items:center;flex:none;width:2.5rem;height:2.5rem;border-radius:9999px;background:#1c3a6b;color:#f4f6fa;transition:transform 300ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-q-btn:hover .ds-q-i{background:#14264a}.ds-q.open .ds-q-i{transform:rotate(45deg)}.ds-q-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows 300ms cubic-bezier(0.23,1,0.32,1)}.ds-q-a>div{overflow:hidden}.ds-q-a p{margin:0;padding:0 1.25rem 1.5rem;max-width:60ch;opacity:0;transform:translateY(0.375rem);transition:opacity 250ms ease,transform 300ms cubic-bezier(0.23,1,0.32,1)}.ds-q.open .ds-q-a{grid-template-rows:1fr}.ds-q.open .ds-q-a p{opacity:1;transform:none}.ds-q-btn:focus-visible{outline:0.1875rem solid #1c3a6b;outline-offset:-0.1875rem}"
-    },
-    {
-      "name": "Cartão de Founder",
-      "kind": "card",
-      "refersTo": "founder-card",
-      "description": "Cartão azul com foto 4:5 (provisória: iniciais), nome, chips e descrição expansível por grid-rows; LinkedIn só com URL.",
-      "html": "<article class=\"ds-f\"><div class=\"ds-f-photo\"><span class=\"ds-f-ini\">AB</span><span class=\"ds-f-badge\">Foto provisória</span></div><h3 class=\"ds-f-name\">Nome Provisório</h3><div class=\"ds-f-chips\"><span>Cargo</span><span>Descrição provisória</span></div><div class=\"ds-f-more\"><div><p>Descrição provisória do founder.</p></div></div><button class=\"ds-f-btn\" aria-expanded=\"false\">Conhecer +</button></article>",
-      "css": ".ds-f{display:flex;flex-direction:column;gap:1.25rem;width:20rem;border-radius:2rem;background:#1c3a6b;color:#f4f6fa;padding:1.25rem 1.25rem 2rem;font-family:Onest,system-ui,sans-serif;transition:transform 280ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-f:hover{transform:translateY(-0.5rem);background:#14264a}.ds-f-photo{position:relative;aspect-ratio:4/5;display:grid;place-items:center;border-radius:1.25rem;background:#14264a}.ds-f-ini{font-size:5.5rem;font-weight:700;letter-spacing:-0.04em}.ds-f-badge{position:absolute;left:0.875rem;bottom:0.875rem;border-radius:9999px;background:rgba(244,246,250,0.16);padding:0.375rem 0.875rem;font-size:0.9375rem}.ds-f-name{font-size:1.625rem;font-weight:600;letter-spacing:-0.02em;line-height:1.1;margin:0}.ds-f-chips{display:flex;gap:0.5rem;flex-wrap:wrap}.ds-f-chips span{border-radius:9999px;background:rgba(244,246,250,0.14);padding:0.25rem 0.75rem;font-size:0.9375rem}.ds-f-more{display:grid;grid-template-rows:1fr}.ds-f-more>div{overflow:hidden}.ds-f-more p{margin:0;color:#c4d0e5}.ds-f-btn{align-self:flex-start;min-height:2.875rem;padding:0 1.25rem;border:0;border-radius:9999px;background:rgba(244,246,250,0.16);color:#f4f6fa;font:500 1rem Onest,system-ui,sans-serif;cursor:pointer;transition:background-color 200ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-f-btn:hover{background:rgba(244,246,250,0.28)}.ds-f-btn:active{transform:scale(0.97)}.ds-f-btn:focus-visible{outline:0.1875rem solid #f4f6fa;outline-offset:0.1875rem}"
-    },
-    {
-      "name": "Painel de História",
-      "kind": "card",
-      "refersTo": "story-panel",
-      "description": "Painel em papel degrau 1, raio 2rem, que fecha a grade de founders.",
-      "html": "<aside class=\"ds-s\"><h2 class=\"ds-s-h\">A história do jornal</h2><p>Texto provisório da história.</p><p class=\"ds-s-n\"><b>Conteúdo provisório.</b></p></aside>",
-      "css": ".ds-s{display:flex;flex-direction:column;gap:1rem;width:24rem;border-radius:2rem;background:#e8ecf3;color:#22201d;padding:1.75rem;font-family:Onest,system-ui,sans-serif}.ds-s-h{font-size:1.875rem;font-weight:600;letter-spacing:-0.02em;line-height:1.05;margin:0}.ds-s p{margin:0;font-size:1.0625rem;line-height:1.6}.ds-s-n{font-size:1rem}"
+      "name": "Selo de data",
+      "kind": "badge",
+      "refersTo": "seal",
+      "description": "Selo vermelho com a data de cada edição sobre a estampa; azul ou verde conforme o tema.",
+      "html": "<span class=\"ds-seal\">14 out</span>",
+      "css": ".ds-seal{display:inline-block;padding:.3em .55em;background:#d7263d;color:#0b0b0d;font:800 1.5rem \"Shippori Mincho\",serif}"
     }
   ],
   "narrative": {
-    "northStar": "A Prancha Cianótipo",
-    "overview": "A página é uma prancha de herbário impressa em cianótipo: papel azulado, tinta quase preta e campos inteiros de azul profundo onde as pranchas de Anna Atkins (domínio público) se fundem num único tom. O sistema é plano e arredondado: pílulas para ações, cartões de raio grande para blocos de conteúdo, tudo em rem. A hierarquia vem de degraus de tom e de escala tipográfica grande, nunca de filetes, sombras, vidro ou degradês. O tijolo existe apenas como detalhe minúsculo, como um carimbo.\n\nA densidade é arejada e de movimento vivo: título grande em duas linhas, revelações por linha e por palavra, cartões que sobem em hover. A raiz de fonte escala com a largura da janela (grade adaptativa), então toda medida em rem acompanha a tela. Onest é a única família. A assinatura do mundo são duas lentes sobre a mesma ideia: no topo, o cursor pinta uma segunda prancha sobre a primeira; no meio, a \"pedra de leitura\" revela, sobre uma resposta de IA de exemplo, o trecho azul com o que precisa ser conferido.",
+    "northStar": "A Lua em Três Tintas",
+    "overview": "Tsuki quer dizer lua em japonês. A página é uma estampa em papel branco com tinta sumi: a lua aparece preta no papel, branca no escuro e vermelha onde o cursor passa. O símbolo é a cruz de Malta de braços côncavos; a mascote é um leão heráldico rampante, vermelho com garras e língua brancas. O vermelho é o selo; azul e verde são a segunda e a terceira cor de selo.",
     "keyCharacteristics": [
-      "Raiz adaptativa: 16px acima de 1920px; abaixo, max(0.8333vw, 15px) até 1440px, max(1.1111vw, 15px) até 1024px, max(1.5625vw, 16px) até 640px, clamp(15px, 4.4444vw, 19px) no celular.",
-      "Campos de azul profundo em cartões e faixas, com plates em mix-blend-mode: luminosity sobre o azul.",
-      "Quatro raios: pílula, 2rem, 1.25rem e 0.9375rem. Sem sombras, degradês, vidro, filetes finos, eyebrows ou numeração.",
-      "Véus são chapados (azul translúcido uniforme), nunca em degradê.",
-      "Tijolo só em marcas de 0.3125 a 0.625rem, na barra da capa e da frase em destaque e no sublinhado do trecho sinalizado.",
-      "Quatro abas por rota de hash; navegação no cabeçalho (1024px ou mais), fileira de pílulas e barra inferior noite que esconde ao descer."
+      "Papel washi, tinta sumi e vermelho de selo.",
+      "Cantos retos, com um corte diagonal como forma da marca.",
+      "Estampas japonesas de domínio público em placas com recorte em degraus.",
+      "Pilha de seções que se cobrem, com contornos que rolam ao fundo.",
+      "Lua de hoje calculada no navegador."
     ],
     "rules": [
       {
-        "name": "The Brick Stamp Rule",
-        "body": "O tijolo nunca cobre área maior que uma marca de 2.75rem por 0.3125rem; nunca é fundo, botão ou texto corrido.",
+        "name": "The Seal Rule",
+        "body": "O vermelho é um selo, não um fundo de página: marcas, botões, a lua revelada e a borda do rodapé.",
         "section": "colors"
       },
       {
-        "name": "The Tone Step Rule",
-        "body": "Separação entre faixas se faz trocando o tom (paper, step-1, step-2, blue, night) e espaço, nunca com linha.",
+        "name": "The Three Moons Rule",
+        "body": "Preta no papel claro (branca no escuro), vermelha sob o cursor, branca nos painéis escuros.",
         "section": "colors"
-      },
-      {
-        "name": "The One Blue Rule",
-        "body": "Todo plate é filtrado para o azul do campo por luminosity; nenhuma imagem aparece em cor própria.",
-        "section": "colors"
-      },
-      {
-        "name": "The One Family Rule",
-        "body": "Onest em tudo. Hierarquia por peso (400/500/600/700) e escala, não por segunda família.",
-        "section": "typography"
-      },
-      {
-        "name": "The Sentence Case Rule",
-        "body": "Rótulos e títulos em caixa de frase, sem caixa alta e sem tracking positivo. Piso de leitura de 1rem (0.9375rem só em legendas).",
-        "section": "typography"
-      },
-      {
-        "name": "The Flat Plate Rule",
-        "body": "Nenhuma sombra, vidro, filete ou degradê; separar com tom, véu chapado ou espaço.",
-        "section": "elevation"
       }
     ],
     "dos": [
-      "Do usar apenas os tokens de cor listados; texto sobre azul em on-blue, secundário em on-blue-soft; sobre noite, on-night-soft.",
-      "Do dimensionar tudo em rem para que a raiz adaptativa governe a escala; manter 1rem como piso de texto corrido.",
-      "Do escolher o raio entre pílula, 2rem, 1.25rem e 0.9375rem conforme a escala do elemento (ação, cartão, bloco, controle).",
-      "Do separar faixas por troca de tom e espaço; véus sobre imagem são azul chapado a 55 a 70%.",
-      "Do passar todo plate por mix-blend-mode: luminosity sobre fundo azul e creditar a proveniência.",
-      "Do oferecer a lente estática em toque, teclado e movimento reduzido, e manter hover só para ponteiro fino.",
-      "Do rotular a demonstração da lente e o formulário sem endpoint como demonstração, e todo conteúdo de espaço reservado (foto, descrição, capa) como provisório.",
-      "Do manter a barra de abas como a única superfície noite fixa e dar a ela o mesmo vocabulário de pílula; esconder ao descer, mostrar ao subir.",
-      "Do renderizar o botão do LinkedIn só quando há URL.",
-      "Do manter respostas expansíveis fora do fluxo de leitura enquanto fechadas (inert) e animá-las por grid-template-rows, sem medir altura."
+      "Usar o vermelho em marcas pequenas e na lua revelada.",
+      "Medir em rem ou cqw e manter texto corrido em 16px ou mais.",
+      "Dar crédito às estampas no rodapé e em assets/credits.json."
     ],
     "donts": [
-      "Don't usar sombras, degradês, vidro, filetes finos, eyebrows, caixa alta miúda ou numeração.",
-      "Don't usar tijolo como fundo, botão ou texto corrido.",
-      "Don't montar caixa de e-mail central sobre cartões iguais (o template de newsletter recusado pela tese).",
-      "Don't exibir plate em cor original, nem inventar depoimentos, clientes, avaliações ou autoria.",
-      "Don't usar segunda família tipográfica."
+      "Não usar sombras, vidro ou degradês em elementos de interface.",
+      "Não pôr texto sobre uma estampa sem fundo sólido.",
+      "Não inventar fatos de marca; o que for provisório fica marcado."
     ]
   }
 }

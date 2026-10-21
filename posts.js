@@ -1,6 +1,6 @@
 /*
   ==========================================================
-  CONTEÚDO DA READINGSTONE: edite aqui para atualizar o site
+  CONTEÚDO DA TSUKI: edite aqui para atualizar o site
   ==========================================================
   Para publicar uma nova edição, adicione um objeto NO TOPO de POSTS.
   O site ordena por data, então a ordem no arquivo não importa.
@@ -62,7 +62,7 @@ const CONFIG = {
       ]
     },
     {
-      p: "A ReadingStone fala de como usar a IA?",
+      p: "A Tsuki fala de como usar a IA?",
       r: [
         "Sim. Há guias e dicas práticas: como escolher um assistente de IA, como fazer perguntas melhores, como conferir uma resposta, como estudar sem terceirizar o aprendizado e quais dados nunca colar no chat.",
         "Na aba Início, em Todas as edições, filtre por Guias e Dicas."
@@ -88,7 +88,7 @@ const CONFIG = {
       fotoTam: [567, 423],
       linkedin: "",
       confirmado: true,
-      descricao: "Graduando no ITA e medalhista olímpico, com interesse por Dados, Machine Learning, IA e Finanças. Cofundador da ReadingStone e autor, junto com Mateus, de A Máquina Resolve?"
+      descricao: "Graduando no ITA e medalhista olímpico, com interesse por Dados, Machine Learning, IA e Finanças. Cofundador da Tsuki e autor, junto com Mateus, de A Máquina Resolve?"
     },
     {
       nome: "Mateus Costa Medeiros",
@@ -96,15 +96,15 @@ const CONFIG = {
       papel: "Cofundador",
       foto: "",
       linkedin: "",
-      descricao: "Cofundador da ReadingStone. Descrição provisória: aqui entram a formação, os interesses e o que Mateus faz na newsletter e no livro."
+      descricao: "Cofundador da Tsuki. Descrição provisória: aqui entram a formação, os interesses e o que Mateus faz na newsletter e no livro."
     }
   ],
   historia: {
     titulo: "A história do jornal",
     provisorio: "Texto provisório: a história de como o projeto começou, com datas e pessoas, entra aqui.",
     paragrafos: [
-      "A ReadingStone é uma newsletter e um site sobre inteligência artificial, aprendizagem e pensamento crítico, escritos para quem usa IA no estudo e no trabalho e quer entender o que ela faz.",
-      "O nome vem da pedra de leitura, a lente que ampliava as letras na página. A ideia é a mesma: chegar perto da IA, mostrar o que há de sólido nela e deixar a decisão com quem lê.",
+      "A Tsuki é uma newsletter e um site sobre inteligência artificial, aprendizagem e pensamento crítico, escritos para quem usa IA no estudo e no trabalho e quer entender o que ela faz.",
+      "Tsuki quer dizer lua em japonês. A lua muda de fase sem mudar de lugar, e a ideia aqui é parecida: olhar a IA em todas as fases, da novidade ao que pede dúvida, e deixar a decisão com quem lê.",
       "O livro A Máquina Resolve? continua essa conversa, com foco em como a IA muda o jeito de aprender e de saber."
     ]
   },
@@ -119,7 +119,7 @@ const CONFIG = {
   newsletterEndpoint: ""
 };
 
-// Demonstração da "pedra de leitura" na home. É um texto inventado para o exemplo:
+// Demonstração da "lua sobre a resposta" na home. É um texto inventado para o exemplo:
 // cada trecho em "marcas" é uma afirmação que merece ser conferida.
 const DEMO = {
   rotulo: "A resposta e o número foram inventados para esta demonstração; nenhum estudo citado existe.",
@@ -306,7 +306,7 @@ const POSTS = [
         "A conclusão da notícia é a mesma que o estudo afirma?"
       ]},
       { destaque: "“Superou humanos em um teste” quase nunca significa “faz o trabalho de um humano”." },
-      "Na ReadingStone, sempre que resumirmos uma pesquisa, vamos indicar a fonte original e dizer o que ela de fato mostra e o que não mostra."
+      "Na Tsuki, sempre que resumirmos uma pesquisa, vamos indicar a fonte original e dizer o que ela de fato mostra e o que não mostra."
     ]
   },
   {
